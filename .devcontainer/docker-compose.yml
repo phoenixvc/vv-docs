@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  docs:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - node_modules:/workspace/node_modules
+      - demo_node_modules:/workspace/demo-app/node_modules
+    command: sleep infinity
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+
+volumes:
+  node_modules:
+  demo_node_modules:

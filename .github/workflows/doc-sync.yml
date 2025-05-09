@@ -1,0 +1,52 @@
+name: Sync Documentation
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        
+      - name: Set up Git
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          
+      - name: Clone and sync chain-services docs
+        run: |
+          mkdir -p temp/vv-chain-services
+          git clone https://github.com/veritasvault/vv-chain-services.git temp/vv-chain-services
+          mkdir -p docs/chain-services
+          cp -r temp/vv-chain-services/docs/* docs/chain-services/
+          
+      - name: Clone and sync infra docs
+        run: |
+          mkdir -p temp/vv-infra
+          git clone https://github.com/veritasvault/vv-infra.git temp/vv-infra
+          mkdir -p docs/infrastructure
+          cp -r temp/vv-infra/docs/* docs/infrastructure/
+          
+      - name: Clone and sync gamification docs
+        run: |
+          mkdir -p temp/vv-gamification
+          git clone https://github.com/veritasvault/vv-gamification.git temp/vv-gamification
+          mkdir -p docs/gamification
+          cp -r temp/vv-gamification/docs/* docs/gamification/
+          
+      - name: Clone and sync frontend docs
+        run: |
+          mkdir -p temp/vv-frontend
+          git clone https://github.com/veritasvault/vv-frontend.git temp/vv-frontend
+          mkdir -p docs/frontend
+          cp -r temp/vv-frontend/docs/* docs/frontend/
+          
+      - name: Commit changes
+        run: |
+          git add .
+          git diff --quiet && git diff --staged --quiet || git commit -m "Sync documentation from component repositories"
+          git push
+
