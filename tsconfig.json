@@ -2,14 +2,14 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": ["./node_modules/@types", "veritasvault-docs/src/types"],
     "types": ["node", "@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
     "paths": {
       "@theme/*": ["node_modules/@docusaurus/theme-classic/lib/theme/*"],
       "@site/*": ["./*"],
       "@components/*": ["./src/components/*"],
-      "@diagrams/*": ["./src/components/Diagrams/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@diagrams/*": ["veritasvault-docs/src/components/diagrams/*"],
+      "@utils/*": ["veritasvault-docs/src/utils/*"]
     },
     "jsx": "react-jsx",
     "esModuleInterop": true,

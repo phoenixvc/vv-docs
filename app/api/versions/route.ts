@@ -1,5 +1,4 @@
-import { NextResponse } from "next/server"
-import { getVersionMetadata } from "@/lib/version-service"
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {

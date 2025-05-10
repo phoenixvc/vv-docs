@@ -1,7 +1,6 @@
 // docusaurus.config.js
-import type * as Preset from "@docusaurus/preset-classic"
-import type { Config } from "@docusaurus/types"
-import { themes as prismThemes } from "prism-react-renderer"
+import type * as Preset from "@docusaurus/preset-classic";
+import type { Config } from "@docusaurus/types";
 
 const config: Config = {
   title: "VeritasVault Documentation",
@@ -195,7 +194,16 @@ const config: Config = {
   // Add plugins
   plugins: [
     // Your existing plugins
-  ],
+  ],  
+  webpack: {
+    configure: (webpackConfig) => {
+      webpackConfig.resolve.alias = {
+        ...webpackConfig.resolve.alias,
+        '@': path.resolve(__dirname, './src'),
+      };
+      return webpackConfig;
+    },
+  },
 }
 
 export default config

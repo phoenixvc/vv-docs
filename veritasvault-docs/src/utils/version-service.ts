@@ -1,6 +1,6 @@
-import redis, { testRedisConnection } from "./redis"
-import type { DocumentVersion, SectionVersion, VersionMetadata } from "@/types/version"
 import { v4 as uuidv4 } from "uuid"
+import type { DocumentVersion, SectionVersion, VersionMetadata } from "../types/version"
+import redis, { testRedisConnection } from "./redis"
 
 const VERSION_METADATA_KEY = "version:metadata"
 const DOCUMENT_VERSIONS_KEY = "document:versions"

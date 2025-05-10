@@ -1,6 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { getAllSectionVersions, getSectionVersionsByVersion, createSectionVersion } from "@/lib/version-service"
-import type { SectionVersion } from "@/types/version"
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {

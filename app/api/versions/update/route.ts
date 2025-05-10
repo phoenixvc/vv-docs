@@ -1,6 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { updateVersionMetadata, getVersionMetadata } from "@/lib/version-service"
-import type { VersionMetadata } from "@/types/version"
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {

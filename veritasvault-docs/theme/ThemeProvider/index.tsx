@@ -1,9 +1,8 @@
 "use client"
 
+import { createThemeContext, useThemeConfig } from "@docusaurus/theme-common"
 import { type ReactNode, useEffect, useState } from "react"
-import { createThemeContext } from "@docusaurus/theme-common"
-import { useThemeConfig } from "@docusaurus/theme-common"
-import { type EnhancedThemeConfig, DEFAULT_THEME_CONFIG } from "../../theme"
+import { type EnhancedThemeConfig, DEFAULT_THEME_CONFIG } from ".."
 
 type ThemeContextValue = {
   isDarkTheme: boolean
