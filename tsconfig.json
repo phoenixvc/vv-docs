@@ -2,10 +2,33 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types", "./src"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node", "@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
     "paths": {
       "@theme/*": ["node_modules/@docusaurus/theme-classic/lib/theme/*"],
-      "@site/*": ["./*"]
-    }
-  }
+      "@site/*": ["./*"],
+      "@components/*": ["./src/components/*"],
+      "@diagrams/*": ["./src/components/Diagrams/*"],
+      "@utils/*": ["./src/utils/*"]
+    },
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/**/*",
+    "docusaurus.config.ts",
+    "sidebars.ts",
+    "veritasvault-docs/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    ".docusaurus",
+    "**/*.spec.ts"
+  ]
 }
