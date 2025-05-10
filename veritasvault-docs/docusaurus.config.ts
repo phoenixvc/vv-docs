@@ -183,8 +183,14 @@ const config: Config = {
     primaryColor: "#4a90e2", // Light blue accent
     secondaryColor: "#f5a623", // Gold/amber
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: {
+        plain: { color: "#393A34", backgroundColor: "#f6f8fa" },
+        styles: [/* theme styles */],
+      },
+      darkTheme: {
+        plain: { color: "#f8f8f2", backgroundColor: "#282a36" },
+        styles: [/* dark theme styles */],
+      },
     },
   } satisfies Preset.ThemeConfig,
 
@@ -196,13 +202,13 @@ const config: Config = {
     // Your existing plugins
   ],  
   webpack: {
-    configure: (webpackConfig) => {
-      webpackConfig.resolve.alias = {
-        ...webpackConfig.resolve.alias,
-        '@': path.resolve(__dirname, './src'),
-      };
-      return webpackConfig;
-    },
+    jsLoader: (isServer) => ({
+      loader: require.resolve('esbuild-loader'),
+      options: {
+        loader: 'tsx',
+        target: isServer ? 'node12' : 'es2017',
+      },
+    }),
   },
 }
 
