@@ -1,0 +1,145 @@
+.versionDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.versionDropdownButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.versionDropdownButton:hover {
+  background-color: var(--bg-hover);
+}
+
+.versionDropdownLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.versionDropdownCurrent {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.versionLabel {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.dropdownIcon {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.dropdownIconOpen {
+  transform: rotate(180deg);
+}
+
+.versionDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  min-width: 100%;
+  margin-top: 0.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.versionDropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.75rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.versionDropdownItem:hover {
+  background-color: var(--bg-hover);
+  text-decoration: none;
+}
+
+.active {
+  background-color: var(--bg-active);
+  font-weight: 600;
+}
+
+.versionDropdownItemVersion {
+  flex-grow: 1;
+}
+
+/* Dark mode adjustments */
+.dark-theme .versionDropdownButton {
+  background-color: var(--dark-bg-secondary);
+  border-color: var(--dark-border-color);
+}
+
+.dark-theme .versionDropdownButton:hover {
+  background-color: var(--dark-bg-hover);
+}
+
+.dark-theme .versionDropdownLabel {
+  color: var(--dark-text-secondary);
+}
+
+.dark-theme .versionLabel {
+  background-color: var(--dark-primary-color);
+}
+
+.dark-theme .versionDropdownMenu {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.dark-theme .versionDropdownItem {
+  color: var(--dark-text-primary);
+}
+
+.dark-theme .versionDropdownItem:hover {
+  background-color: var(--dark-bg-hover);
+}
+
+.dark-theme .active {
+  background-color: var(--dark-bg-active);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .versionDropdownButton {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  .versionLabel {
+    font-size: 0.625rem;
+    padding: 0.0625rem 0.25rem;
+  }
+
+  .versionDropdownItem {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.75rem;
+  }
+}

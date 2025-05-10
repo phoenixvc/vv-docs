@@ -1,0 +1,401 @@
+/* Print styles */
+@media print {
+  /* Hide non-printable elements */
+  .print-controls,
+  .header,
+  .footer,
+  .sidebar,
+  .scroll-progress,
+  .scroll-to-top,
+  .sidebar-toggle,
+  nav,
+  button:not(.print-button) {
+    display: none !important;
+  }
+
+  /* Basic page setup */
+  @page {
+    size: A4;
+    margin: 2cm;
+  }
+
+  /* First page (cover) has no header or footer */
+  @page :first {
+    @top-center {
+      content: normal;
+    }
+    @bottom-center {
+      content: normal;
+    }
+  }
+
+  /* Add page numbers to all pages except the first */
+  @page :not(:first) {
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+    }
+  }
+
+  /* Add header with document title to all pages except the first */
+  @page :not(:first) {
+    @top-center {
+      content: "VeritasVault.ai Whitepaper";
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+      font-weight: bold;
+    }
+  }
+
+  /* Add footer with copyright and date to all pages except the first */
+  @page :not(:first) {
+    @bottom-left {
+      content: "© 2023 VeritasVault.ai";
+      font-family: Arial, sans-serif;
+      font-size: 8pt;
+    }
+  
+    @bottom-right {
+      content: "Confidential";
+      font-family: Arial, sans-serif;
+      font-size: 8pt;
+    }
+  }
+
+  /* Basic document styling */
+  html,
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000 !important;
+    background: #fff !important;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Force black text on white background for all elements */
+  * {
+    color: #000 !important;
+    background-color: transparent !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  /* Container styling */
+  .pdf-preview-container,
+  .main-content,
+  .content-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Typography */
+  h1 {
+    font-size: 24pt;
+    margin-top: 2cm;
+    margin-bottom: 1cm;
+    page-break-before: always;
+    page-break-after: avoid;
+  }
+
+  h1:first-of-type {
+    page-break-before: avoid;
+  }
+
+  h2 {
+    font-size: 18pt;
+    margin-top: 1cm;
+    margin-bottom: 0.5cm;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14pt;
+    margin-top: 0.8cm;
+    margin-bottom: 0.3cm;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 12pt;
+    margin-top: 0.5cm;
+    margin-bottom: 0.2cm;
+    page-break-after: avoid;
+  }
+
+  p,
+  ul,
+  ol,
+  dl,
+  table {
+    margin-bottom: 0.5cm;
+    page-break-inside: avoid;
+  }
+
+  /* Avoid orphans and widows */
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1cm 0;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid #000 !important;
+  }
+
+  th,
+  td {
+    padding: 0.3cm;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2 !important;
+    font-weight: bold;
+  }
+
+  /* Image handling */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Link styling */
+  a {
+    text-decoration: none;
+    color: #000 !important;
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+    color: #444 !important;
+  }
+
+  /* Code blocks */
+  pre,
+  code {
+    font-family: monospace;
+    background-color: #f5f5f5 !important;
+    border: 1px solid #000 !important;
+    padding: 0.2cm;
+    page-break-inside: avoid;
+  }
+
+  /* Table of contents styling */
+  .table-of-contents {
+    page-break-after: always;
+  }
+
+  .table-of-contents h2 {
+    font-size: 18pt;
+    margin-bottom: 0.5cm;
+  }
+
+  .table-of-contents ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .table-of-contents li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.5cm;
+    position: relative;
+  }
+
+  .table-of-contents .dots {
+    flex: 1;
+    margin: 0 0.3cm;
+    border-bottom: 1px dotted #000;
+    height: 1px;
+  }
+
+  .table-of-contents .page-ref {
+    text-align: right;
+    min-width: 1cm;
+  }
+
+  /* Section breaks */
+  .section-break {
+    page-break-before: always;
+    margin-top: 2cm;
+  }
+
+  /* Cover page */
+  .pdf-cover-page {
+    page-break-after: always;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pdf-cover-page h1 {
+    font-size: 28pt;
+    margin-bottom: 1cm;
+  }
+
+  .pdf-cover-page .subtitle {
+    font-size: 16pt;
+    margin-bottom: 2cm;
+  }
+
+  /* Metadata page styling */
+  .pdf-metadata-page {
+    page-break-after: always;
+  }
+
+  .metadata-section {
+    margin-bottom: 1cm;
+  }
+
+  .metadata-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.5cm;
+  }
+
+  .metadata-table td,
+  .metadata-table th {
+    border: 1px solid #000;
+    padding: 0.2cm;
+    text-align: left;
+  }
+
+  .metadata-table th {
+    background-color: #f2f2f2 !important;
+    font-weight: bold;
+  }
+
+  /* Document metadata for headers and footers */
+  .pdf-document-meta {
+    display: none;
+  }
+
+  /* Page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Headers and footers */
+  .running-head {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 10pt;
+  }
+
+  .running-foot {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 10pt;
+  }
+
+  /* Force each section to start on a new page */
+  section {
+    page-break-before: always !important;
+  }
+
+  /* First section after cover page should have a page break */
+  .pdf-content-wrapper > section:first-of-type {
+    page-break-before: always !important;
+  }
+
+  /* Make sure all tabs are visible in print mode */
+  .tabs-content [role="tabpanel"] {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    opacity: 1 !important;
+    position: relative !important;
+    page-break-before: always !important;
+  }
+
+  /* Add a heading for each tab panel when printing */
+  .tabs-content [role="tabpanel"]::before {
+    content: attr(aria-label);
+    display: block;
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 1cm;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5cm;
+  }
+
+  /* Hide tab buttons in print mode */
+  [role="tablist"] {
+    display: none !important;
+  }
+
+  /* Make sure all tokenomics tabs print */
+  .tokenomics-section,
+  #token-distribution,
+  #token-utility,
+  #token-governance,
+  #token-economics,
+  #token-burn-mechanism,
+  #token-vesting-schedule {
+    display: block !important;
+    visibility: visible !important;
+    page-break-before: always !important;
+  }
+
+  /* Make sure all architecture tabs print */
+  .architecture-section,
+  #high-level-architecture,
+  #layered-architecture,
+  #cloud-infrastructure,
+  #blockchain-integration,
+  #data-flow {
+    display: block !important;
+    visibility: visible !important;
+    page-break-before: always !important;
+  }
+
+  /* Make sure all finance model tabs print */
+  .finance-section,
+  #monte-carlo-simulation,
+  #factor-models,
+  #black-litterman-model,
+  #defi-yield-optimization,
+  #neural-networks {
+    display: block !important;
+    visibility: visible !important;
+    page-break-before: always !important;
+  }
+
+  /* Make sure all integration tabs print */
+  .integration-section,
+  #data-providers,
+  #wallet-integrations,
+  #blockchain-integrations,
+  #risk-management {
+    display: block !important;
+    visibility: visible !important;
+    page-break-before: always !important;
+  }
+
+  /* Add space between the cover page and first content section */
+  .pdf-cover-page + .pdf-content-wrapper {
+    margin-top: 2cm !important;
+  }
+}

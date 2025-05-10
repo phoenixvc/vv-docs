@@ -1,0 +1,57 @@
+.interactiveBlock {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.interactiveHeader {
+  margin-bottom: 1rem;
+}
+
+.collapsible {
+  cursor: pointer;
+  user-select: none;
+}
+
+.interactiveTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collapseIcon {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.collapsed {
+  transform: rotate(0deg);
+}
+
+.interactiveDescription {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.interactiveContent {
+  padding: 1rem 0;
+}
+
+/* Dark mode adjustments */
+.dark-theme .interactiveDescription {
+  color: var(--dark-text-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .interactiveContent {
+    padding: 0.5rem 0;
+  }
+
+  .interactiveTitle {
+    font-size: 1.1rem;
+  }
+}

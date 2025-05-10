@@ -1,0 +1,151 @@
+@media print {
+  /* Basic page setup */
+  @page {
+    size: A4;
+    margin: 2cm;
+  }
+
+  /* Hide UI elements */
+  header,
+  nav,
+  button,
+  .print:hidden {
+    display: none !important;
+  }
+
+  /* Hide elements that shouldn't be printed */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Reset page margins */
+  @page {
+    margin: 0.5cm;
+  }
+
+  /* Ensure the content takes up the full page */
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* Make sure text is black for printing */
+  * {
+    color: black !important;
+    background-color: transparent !important;
+  }
+
+  /* Ensure images are properly sized */
+  img {
+    max-width: 100% !important;
+  }
+
+  /* Add page breaks before major sections */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  /* Avoid page breaks inside elements */
+  .no-page-break {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure tables print properly */
+  table {
+    page-break-inside: avoid;
+  }
+
+  /* Make links visible */
+  a {
+    text-decoration: underline;
+  }
+
+  /* Ensure proper page breaks */
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure proper font sizes */
+  body {
+    font-size: 12pt;
+  }
+
+  h1 {
+    font-size: 24pt;
+  }
+
+  h2 {
+    font-size: 18pt;
+  }
+
+  h3 {
+    font-size: 14pt;
+  }
+
+  /* Force cover page to be on its own page */
+  .pdf-cover-page {
+    page-break-after: always !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Force each section to start on a new page */
+  section {
+    page-break-before: always !important;
+  }
+
+  /* First section should not have a page break before it */
+  section:first-of-type {
+    page-break-before: auto !important;
+  }
+
+  /* Force all tab content to be visible */
+  [role="tabpanel"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+  }
+
+  /* Hide tab buttons */
+  [role="tablist"] {
+    display: none !important;
+  }
+
+  /* Add headings for tab panels */
+  [role="tabpanel"]::before {
+    content: attr(aria-label);
+    display: block;
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 1cm;
+  }
+
+  /* Force page breaks between tab panels */
+  [role="tabpanel"] {
+    page-break-before: always !important;
+  }
+
+  /* Ensure all content is visible */
+  .hidden,
+  [hidden],
+  [style*="display: none"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+  }
+}

@@ -1,0 +1,111 @@
+---
+title: Architecture Overview
+description: High-level overview of the system architecture
+---
+
+import { DiagramBlock } from '@/components/section-templates/diagram-block';
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { SectionAnchor } from '@/components/section-anchor';
+
+# Architecture Overview
+
+<ContentBlock>
+  This document provides a high-level overview of our system architecture, explaining the main components and how they interact.
+  
+  Our architecture follows modern best practices for distributed systems, with a focus on scalability, resilience, and maintainability.
+</ContentBlock>
+
+<SectionAnchor id="high-level-architecture" />
+
+## High-Level Architecture
+
+<DiagramBlock title="High-Level System Architecture">
+  \```mermaid
+  graph TD
+    A[Client Applications] --> B[API Gateway]
+    B --> C[Authentication Service]
+    B --> D[Transaction Service]
+    B --> E[Analytics Service]
+    D --> F[Blockchain Adapters]
+    F --> G[Multiple Blockchains]
+    E --> H[Data Warehouse]
+  \```
+</DiagramBlock>
+
+The architecture consists of several key components:
+
+- **Client Applications**: Web, mobile, and desktop interfaces
+- **API Gateway**: Central entry point for all client requests
+- **Microservices**: Specialized services for authentication, transactions, and analytics
+- **Blockchain Adapters**: Interfaces to various blockchain networks
+- **Data Warehouse**: Centralized repository for analytics and reporting
+
+<SectionAnchor id="key-components" />
+
+## Key Components
+
+### API Gateway
+
+The API Gateway serves as the entry point for all client requests, handling:
+
+- Request routing
+- Authentication and authorization
+- Rate limiting
+- Request/response transformation
+- API documentation
+
+### Microservices
+
+Our system is built on a microservices architecture, with services including:
+
+- **Authentication Service**: Handles user authentication and authorization
+- **Transaction Service**: Processes financial transactions
+- **Analytics Service**: Collects and analyzes system data
+
+### Blockchain Integration
+
+Our platform integrates with multiple blockchain networks through specialized adapters that:
+
+- Abstract blockchain-specific details
+- Handle transaction signing and verification
+- Manage blockchain state synchronization
+- Implement retry and fallback mechanisms
+
+<SectionAnchor id="data-flow" />
+
+## Data Flow
+
+<DiagramBlock title="System Data Flow">
+  \```mermaid
+  sequenceDiagram
+    participant User
+    participant Gateway
+    participant Service
+    participant Blockchain
+    
+    User->>Gateway: Request
+    Gateway->>Service: Forward Request
+    Service->>Blockchain: Submit Transaction
+    Blockchain-->>Service: Confirmation
+    Service-->>Gateway: Response
+    Gateway-->>User: Result
+  \```
+</DiagramBlock>
+
+The typical data flow through the system follows these steps:
+
+1. User initiates a request through a client application
+2. API Gateway authenticates and routes the request
+3. Appropriate microservice processes the request
+4. If needed, the service interacts with blockchain adapters
+5. Results are returned through the API Gateway to the client
+
+<SectionAnchor id="next-steps" />
+
+## Next Steps
+
+For more detailed information about our architecture, please explore:
+
+- [Layered Architecture](/architecture/layers)
+- [Architecture Diagrams](/architecture/diagrams)
+- [Architecture Comparison](/architecture/comparison)

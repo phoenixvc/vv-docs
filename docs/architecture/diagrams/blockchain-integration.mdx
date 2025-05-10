@@ -1,0 +1,177 @@
+---
+title: Blockchain Integration Diagram
+description: How our system integrates with blockchain networks
+---
+
+import { DiagramBlock } from '@/components/section-templates/diagram-block';
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { SectionAnchor } from '@/components/section-anchor';
+
+# Blockchain Integration Diagram
+
+<ContentBlock>
+  This diagram illustrates how our system integrates with various blockchain networks, showing the components involved and their interactions.
+</ContentBlock>
+
+<SectionAnchor id="integration-overview" />
+
+## Integration Overview
+
+<DiagramBlock title="Blockchain Integration Architecture">
+  \```mermaid
+  graph TD
+    A[Application Services] --> B[Blockchain Service]
+    B --> C[Blockchain Adapter Interface]
+    
+    C --> D[Ethereum Adapter]
+    C --> E[Solana Adapter]
+    C --> F[Polygon Adapter]
+    C --> G[Other Chain Adapters]
+    
+    D --> H[Ethereum RPC Nodes]
+    E --> I[Solana RPC Nodes]
+    F --> J[Polygon RPC Nodes]
+    G --> K[Other Blockchain Nodes]
+    
+    B --> L[Transaction Manager]
+    L --> M[Transaction Queue]
+    M --> N[Transaction Processor]
+    N --> C
+    
+    B --> O[State Synchronizer]
+    O --> P[Blockchain State Cache]
+    P --> B
+    
+    classDef service fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef adapter fill:#e6f7ff,stroke:#333,stroke-width:2px;
+    classDef blockchain fill:#f0f0f0,stroke:#333,stroke-width:2px;
+    classDef manager fill:#f5f5dc,stroke:#333,stroke-width:2px;
+    
+    class A,B service;
+    class C,D,E,F,G adapter;
+    class H,I,J,K blockchain;
+    class L,M,N,O,P manager;
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="integration-components" />
+
+## Integration Components
+
+### Blockchain Service
+
+The central service that coordinates blockchain interactions:
+
+- Exposes a unified API for blockchain operations
+- Manages transaction lifecycle
+- Handles blockchain state synchronization
+- Implements retry and fallback mechanisms
+
+### Blockchain Adapter Interface
+
+A common interface implemented by all blockchain adapters:
+
+- Defines standard methods for blockchain interactions
+- Abstracts blockchain-specific details
+- Enables easy addition of new blockchain support
+- Provides consistent error handling
+
+### Blockchain Adapters
+
+Specialized components for each supported blockchain:
+
+- **Ethereum Adapter**: Interacts with Ethereum networks
+- **Solana Adapter**: Interacts with Solana networks
+- **Polygon Adapter**: Interacts with Polygon networks
+- **Other Chain Adapters**: Support for additional blockchains
+
+### Transaction Manager
+
+Manages the lifecycle of blockchain transactions:
+
+- Queues transactions for processing
+- Monitors transaction status
+- Handles transaction retries
+- Provides transaction history
+
+### State Synchronizer
+
+Keeps the system's view of blockchain state up-to-date:
+
+- Listens for blockchain events
+- Updates local state cache
+- Handles chain reorganizations
+- Provides consistent state views
+
+<SectionAnchor id="transaction-flow" />
+
+## Transaction Flow
+
+<DiagramBlock title="Blockchain Transaction Flow">
+  \```mermaid
+  sequenceDiagram
+    participant App as Application
+    participant BS as Blockchain Service
+    participant TM as Transaction Manager
+    participant BA as Blockchain Adapter
+    participant BC as Blockchain
+    
+    App->>BS: Submit Transaction
+    BS->>TM: Queue Transaction
+    TM->>BA: Prepare Transaction
+    BA->>BC: Submit to Blockchain
+    BC-->>BA: Transaction Hash
+    BA-->>TM: Update Status (Pending)
+    TM-->>BS: Transaction Submitted
+    BS-->>App: Transaction Receipt
+    
+    Note over BC: Transaction Processing
+    
+    BC-->>BA: Transaction Confirmation
+    BA-->>TM: Update Status (Confirmed)
+    TM-->>BS: Transaction Completed
+    BS-->>App: Transaction Success
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="state-synchronization" />
+
+## State Synchronization
+
+<DiagramBlock title="Blockchain State Synchronization">
+  \```mermaid
+  sequenceDiagram
+    participant BC as Blockchain
+    participant SS as State Synchronizer
+    participant SC as State Cache
+    participant BS as Blockchain Service
+    participant App as Application
+    
+    BC->>SS: New Block Event
+    SS->>SC: Update State Cache
+    
+    App->>BS: Request State
+    BS->>SC: Get Cached State
+    SC-->>BS: Current State
+    BS-->>App: State Response
+    
+    Note over BC: Chain Reorganization
+    
+    BC->>SS: Reorg Event
+    SS->>SC: Revert Affected Blocks
+    SS->>SC: Apply New Chain State
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="related-diagrams" />
+
+## Related Diagrams
+
+For more detailed views of specific aspects of our architecture, see:
+
+- [High-Level Architecture](/architecture/diagrams/high-level-architecture)
+- [Layered Architecture](/architecture/diagrams/layered-architecture)
+- [Cloud Infrastructure](/architecture/diagrams/cloud-infrastructure)
+- [Data Flow](/architecture/diagrams/data-flow)
+
+Or return to the [Architecture Diagrams](/architecture/diagrams) overview.

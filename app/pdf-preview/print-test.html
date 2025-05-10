@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Print Test</title>
+  <style>
+    /* Print-specific styles */
+    @media print {
+      @page {
+        size: A4;
+        margin: 2cm;
+      }
+      
+      .cover-page {
+        page-break-after: always;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      
+      section {
+        page-break-before: always;
+      }
+      
+      h1 {
+        font-size: 24pt;
+      }
+      
+      h2 {
+        font-size: 18pt;
+      }
+    }
+    
+    /* Regular styles */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .cover-page {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    section {
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    h1 {
+      margin-bottom: 1rem;
+    }
+    
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-page">
+    <h1>VeritasVault.ai Whitepaper</h1>
+    <p>Multi-Chain Architecture</p>
+    <div style="margin-top: 2rem;">
+      <p>Prepared by: VeritasVault Research Team</p>
+      <p>Contact: research@veritasvault.ai</p>
+      <p>Version: 1.0</p>
+      <p>May 8, 2023</p>
+    </div>
+  </div>
+  
+  <section>
+    <h2>Project Overview</h2>
+    <p>VeritasVault.ai is a pioneering multi-chain architecture designed to revolutionize portfolio management in the decentralized finance space. Our platform leverages the unique capabilities of multiple blockchain networks to create a secure, efficient, and transparent system for managing digital assets.</p>
+    <p>At its core, VeritasVault.ai addresses the critical challenges faced by DeFi users today: fragmented liquidity across chains, complex cross-chain operations, security vulnerabilities, and limited risk management tools. By building a unified interface that seamlessly connects to multiple blockchains, we enable users to manage their entire portfolio from a single dashboard while maintaining the highest standards of security and transparency.</p>
+  </section>
+  
+  <section>
+    <h2>Key Benefits</h2>
+    <p>VeritasVault.ai offers several key benefits to users:</p>
+    <ul>
+      <li>Unified Portfolio Management: Manage assets across multiple blockchain networks from a single interface</li>
+      <li>Enhanced Security: Multi-layered security architecture with advanced risk management</li>
+      <li>Optimized Performance: Intelligent routing and cross-chain operations for maximum efficiency</li>
+      <li>Comprehensive Analytics: Real-time data and insights across all connected chains</li>
+      <li>Regulatory Compliance: Built-in compliance tools and transparent reporting</li>
+    </ul>
+  </section>
+  
+  <section>
+    <h2>Architecture</h2>
+    <p>The VeritasVault.ai architecture consists of several key components:</p>
+    <ul>
+      <li>Cross-Chain Communication Layer</li>
+      <li>Security and Risk Management Module</li>
+      <li>Portfolio Optimization Engine</li>
+      <li>Data Analytics Platform</li>
+      <li>User Interface Layer</li>
+    </ul>
+  </section>
+</body>
+</html>

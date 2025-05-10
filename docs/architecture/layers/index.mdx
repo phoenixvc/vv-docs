@@ -1,0 +1,159 @@
+---
+title: Layered Architecture
+description: Detailed explanation of our layered architectural approach
+---
+
+import { DiagramBlock } from '@/components/section-templates/diagram-block';
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { SectionAnchor } from '@/components/section-anchor';
+import { TableBlock } from '@/components/section-templates/table-block';
+
+# Layered Architecture
+
+<ContentBlock>
+  Our system uses a layered architecture approach to organize components and establish clear separation of concerns.
+  Each layer has specific responsibilities and communicates with adjacent layers through well-defined interfaces.
+</ContentBlock>
+
+<SectionAnchor id="architecture-layers" />
+
+## Architecture Layers
+
+<DiagramBlock title="Layered Architecture Overview">
+  \```mermaid
+  graph TD
+    A[Presentation Layer] --> B[API Layer]
+    B --> C[Service Layer]
+    C --> D[Data Access Layer]
+    D --> E[Storage Layer]
+    C --> F[Integration Layer]
+    F --> G[External Services]
+    
+    classDef layer fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G layer;
+  \```
+</DiagramBlock>
+
+Our architecture consists of the following layers:
+
+### Presentation Layer
+
+The presentation layer is responsible for:
+
+- User interface components
+- Client-side validation
+- State management
+- User experience
+
+### API Layer
+
+The API layer serves as the entry point for all client requests:
+
+- Request routing
+- Authentication and authorization
+- Input validation
+- Rate limiting
+- API documentation
+
+### Service Layer
+
+The service layer contains the core business logic:
+
+- Business rules implementation
+- Transaction management
+- Domain-specific operations
+- Service orchestration
+
+### Data Access Layer
+
+The data access layer handles interactions with data storage:
+
+- Database operations
+- Data mapping
+- Query optimization
+- Caching strategies
+
+### Storage Layer
+
+The storage layer represents the actual data storage systems:
+
+- Relational databases
+- NoSQL databases
+- Blockchain storage
+- File storage
+
+### Integration Layer
+
+The integration layer manages interactions with external systems:
+
+- API clients
+- Blockchain adapters
+- Message queues
+- Event processing
+
+<SectionAnchor id="layer-responsibilities" />
+
+## Layer Responsibilities
+
+<TableBlock title="Layer Responsibilities">
+| Layer | Primary Responsibility | Key Components |
+|-------|------------------------|----------------|
+| Presentation | User interface and experience | Web UI, Mobile UI, Admin Dashboard |
+| API | Request handling and routing | API Gateway, Controllers, Middleware |
+| Service | Business logic implementation | Service Classes, Domain Models, Validators |
+| Data Access | Data storage interactions | Repositories, ORM, Query Builders |
+| Storage | Physical data storage | Databases, Blockchain, File Systems |
+| Integration | External system communication | API Clients, Adapters, Event Handlers |
+</TableBlock>
+
+<SectionAnchor id="communication-patterns" />
+
+## Communication Patterns
+
+Communication between layers follows these patterns:
+
+### Request-Response
+
+The most common pattern, where:
+
+- Upper layer makes a request to a lower layer
+- Lower layer processes the request and returns a response
+- Synchronous communication
+
+### Event-Driven
+
+Used for asynchronous operations:
+
+- Layer publishes events when state changes
+- Interested layers subscribe to relevant events
+- Decouples components and improves scalability
+
+### Dependency Injection
+
+Used to manage dependencies between layers:
+
+- Dependencies are provided to components rather than created
+- Improves testability and flexibility
+- Reduces tight coupling between layers
+
+<SectionAnchor id="benefits" />
+
+## Benefits of Layered Architecture
+
+Our layered approach provides several key benefits:
+
+- **Separation of Concerns**: Each layer has a specific responsibility
+- **Maintainability**: Changes in one layer have minimal impact on others
+- **Testability**: Layers can be tested in isolation
+- **Scalability**: Layers can be scaled independently
+- **Flexibility**: Components can be replaced without affecting the entire system
+
+<SectionAnchor id="next-steps" />
+
+## Next Steps
+
+For more information about our architecture, please explore:
+
+- [Architecture Overview](/architecture/overview)
+- [Architecture Diagrams](/architecture/diagrams)
+- [Architecture Comparison](/architecture/comparison)

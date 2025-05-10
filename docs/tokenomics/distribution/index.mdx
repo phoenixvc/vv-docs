@@ -1,0 +1,264 @@
+---
+id: token-distribution
+title: Token Distribution
+description: Detailed breakdown of VVAI token allocation across stakeholders
+sidebar_label: Token Distribution
+keywords:
+  - tokenomics
+  - distribution
+  - allocation
+  - token supply
+tags:
+  - tokenomics
+  - token
+  - distribution
+last_update:
+  date: 2025-05-06
+  author: Tokenomics Team
+pagination_next: tokenomics/utility
+pagination_prev: tokenomics/index
+---
+
+import { SectionLevelOne, SectionLevelTwo } from '@site/src/components/docs';
+import { ContentBlock, DiagramBlock, TableBlock } from '@site/src/components/docs';
+import { PieChart } from '@site/src/components/docs/charts';
+
+<SectionLevelOne
+  id="token-distribution"
+  title="Token Distribution"
+  description="Detailed breakdown of VVAI token allocation across stakeholders"
+  sectionNumber="5.1"
+>
+
+<ContentBlock title="Overview">
+
+The VVAI token has a fixed maximum supply of 1 billion tokens, distributed across various stakeholder groups to ensure balanced governance, sustainable development, and ecosystem growth. The distribution model is designed to align incentives among all participants in the VeritasVault.ai ecosystem while preventing concentration of ownership.
+
+This section provides a detailed breakdown of the token allocation, including the rationale behind each allocation category, vesting schedules, and the strategic considerations that informed the distribution design.
+
+</ContentBlock>
+
+<DiagramBlock
+  title="Token Distribution Overview"
+  description="Visual representation of the VVAI token allocation"
+  imageSrc="/img/tokenomics/token-distribution-pie-chart.png"
+  imageAlt="Pie chart showing the percentage allocation of VVAI tokens across different stakeholder groups"
+  caption="Figure 5.1: VVAI token distribution by stakeholder category"
+/>
+
+<SectionLevelTwo
+  id="allocation-breakdown"
+  title="Allocation Breakdown"
+  sectionNumber="5.1.1"
+>
+
+<ContentBlock title="Detailed Token Allocation">
+
+The 1 billion VVAI tokens are allocated across the following categories:
+
+1. **Community Treasury (40%)**: 400 million tokens allocated to the community treasury, controlled by DAO governance for ecosystem development, grants, and community initiatives.
+
+2. **Team and Advisors (15%)**: 150 million tokens allocated to the founding team, employees, and advisors who contribute to the development and growth of the platform.
+
+3. **Investors (20%)**: 200 million tokens allocated to early investors who provided the capital necessary for initial development and growth.
+
+4. **Ecosystem Development (15%)**: 150 million tokens allocated for partnerships, integrations, and incentives to grow the ecosystem.
+
+5. **Liquidity Provision (5%)**: 50 million tokens allocated to ensure sufficient liquidity across decentralized exchanges.
+
+6. **Protocol Insurance Fund (5%)**: 50 million tokens reserved as an insurance fund to protect users against potential protocol risks.
+
+This balanced distribution ensures that no single group has disproportionate control over the token supply while providing sufficient resources for all key aspects of the ecosystem.
+
+</ContentBlock>
+
+<TableBlock
+  title="Token Allocation Details"
+  description="Comprehensive breakdown of token allocation with vesting schedules"
+  columns={[
+    { header: "Category", accessorKey: "category" },
+    { header: "Allocation", accessorKey: "allocation" },
+    { header: "Tokens (millions)", accessorKey: "tokens" },
+    { header: "Vesting Period", accessorKey: "vesting" },
+    { header: "Cliff", accessorKey: "cliff" },
+    { header: "Purpose", accessorKey: "purpose" }
+  ]}
+  data={[
+    { 
+      category: "Community Treasury", 
+      allocation: "40%", 
+      tokens: "400", 
+      vesting: "10 years", 
+      cliff: "None", 
+      purpose: "Ecosystem development, grants, community initiatives" 
+    },
+    { 
+      category: "Team and Advisors", 
+      allocation: "15%", 
+      tokens: "150", 
+      vesting: "4 years", 
+      cliff: "1 year", 
+      purpose: "Compensate team members and advisors" 
+    },
+    { 
+      category: "Investors", 
+      allocation: "20%", 
+      tokens: "200", 
+      vesting: "3 years", 
+      cliff: "6 months", 
+      purpose: "Seed, private, and public sale investors" 
+    },
+    { 
+      category: "Ecosystem Development", 
+      allocation: "15%", 
+      tokens: "150", 
+      vesting: "5 years", 
+      cliff: "None", 
+      purpose: "Partnerships, integrations, and growth incentives" 
+    },
+    { 
+      category: "Liquidity Provision", 
+      allocation: "5%", 
+      tokens: "50", 
+      vesting: "2 years", 
+      cliff: "None", 
+      purpose: "Ensure sufficient DEX liquidity" 
+    },
+    { 
+      category: "Protocol Insurance Fund", 
+      allocation: "5%", 
+      tokens: "50", 
+      vesting: "5 years", 
+      cliff: "1 year", 
+      purpose: "Protection against protocol risks" 
+    }
+  ]}
+/>
+
+</SectionLevelTwo>
+
+<SectionLevelTwo
+  id="vesting-schedules"
+  title="Vesting Schedules"
+  sectionNumber="5.1.2"
+>
+
+<ContentBlock title="Token Release Timeline">
+
+Vesting schedules are designed to ensure long-term alignment of incentives and prevent market disruption from sudden token releases. Each category has a carefully designed vesting schedule:
+
+1. **Community Treasury**: 10-year linear vesting, with tokens released monthly to the DAO treasury. This ensures sustainable funding for ecosystem development over the long term.
+
+2. **Team and Advisors**: 4-year linear vesting with a 1-year cliff. No tokens are released during the first year, after which they vest monthly over the remaining 3 years.
+
+3. **Investors**: 3-year linear vesting with a 6-month cliff, with different schedules based on investment round (seed, private, public).
+
+4. **Ecosystem Development**: 5-year linear vesting with no cliff, allowing for immediate but controlled use of tokens for ecosystem growth.
+
+5. **Liquidity Provision**: 2-year linear vesting with no cliff, ensuring sustained liquidity support during the critical early phase.
+
+6. **Protocol Insurance Fund**: 5-year linear vesting with a 1-year cliff, building up the insurance reserve gradually as the protocol matures.
+
+These vesting schedules are enforced through smart contracts, ensuring transparent and trustless token release.
+
+</ContentBlock>
+
+<DiagramBlock
+  title="Token Vesting Timeline"
+  description="Visual representation of token release over time"
+  imageSrc="/img/tokenomics/token-vesting-timeline.png"
+  imageAlt="Graph showing the cumulative token release over time for each allocation category"
+  caption="Figure 5.2: VVAI token vesting schedule over 10 years"
+/>
+
+</SectionLevelTwo>
+
+<SectionLevelTwo
+  id="distribution-rationale"
+  title="Distribution Rationale"
+  sectionNumber="5.1.3"
+>
+
+<ContentBlock title="Strategic Considerations">
+
+The token distribution model was designed based on several key strategic considerations:
+
+1. **Community-First Approach**: The largest allocation (40%) goes to the community treasury, emphasizing the project's commitment to decentralized governance and community ownership.
+
+2. **Sustainable Development**: Team and investor allocations (35% combined) ensure sufficient resources for long-term development while preventing excessive concentration.
+
+3. **Ecosystem Growth**: Dedicated allocations for ecosystem development and liquidity (20% combined) provide the resources needed to grow the platform's adoption and utility.
+
+4. **Risk Mitigation**: The protocol insurance fund (5%) creates a safety net for users, enhancing trust and security.
+
+5. **Long-Term Alignment**: Extended vesting periods with cliffs ensure all stakeholders are aligned with the long-term success of the platform.
+
+6. **Gradual Decentralization**: The vesting schedule is designed to increase decentralization over time as team and investor tokens are released and community governance matures.
+
+This balanced approach ensures that the token distribution supports the project's long-term vision while addressing the immediate needs for development, adoption, and security.
+
+</ContentBlock>
+
+</SectionLevelTwo>
+
+<SectionLevelTwo
+  id="token-supply-dynamics"
+  title="Token Supply Dynamics"
+  sectionNumber="5.1.4"
+>
+
+<ContentBlock title="Circulating Supply Evolution">
+
+The circulating supply of VVAI tokens will evolve over time based on the vesting schedules and token utility mechanisms:
+
+1. **Initial Circulating Supply**: At launch, approximately 5% of the total supply will be in circulation, primarily from the public sale and initial liquidity provision.
+
+2. **Year 1**: By the end of the first year, approximately 15% of the total supply will be in circulation, as early investor tokens begin to vest and ecosystem development tokens are utilized.
+
+3. **Year 3**: By the end of the third year, approximately 45% of the total supply will be in circulation, with most investor tokens fully vested and team tokens partially vested.
+
+4. **Year 5**: By the end of the fifth year, approximately 70% of the total supply will be in circulation, with only the community treasury continuing significant vesting.
+
+5. **Year 10**: By the end of the tenth year, 100% of the token supply will be fully vested and in circulation.
+
+The gradual increase in circulating supply aligns with the expected growth of the platform, ensuring that token supply expansion corresponds with increasing utility and adoption.
+
+</ContentBlock>
+
+<DiagramBlock
+  title="Circulating Supply Projection"
+  description="Projected evolution of VVAI circulating supply over time"
+  imageSrc="/img/tokenomics/circulating-supply-projection.png"
+  imageAlt="Line graph showing the projected circulating supply of VVAI tokens over 10 years"
+  caption="Figure 5.3: Projected VVAI circulating supply over 10 years"
+/>
+
+</SectionLevelTwo>
+
+<SectionLevelTwo
+  id="token-lockups"
+  title="Token Lockups and Restrictions"
+  sectionNumber="5.1.5"
+>
+
+<ContentBlock title="Additional Security Measures">
+
+Beyond the vesting schedules, additional lockup mechanisms and restrictions are implemented to enhance security and stability:
+
+1. **Team Selling Restrictions**: Team members are subject to additional selling restrictions beyond their vesting schedule, limiting the amount they can sell in any given month to prevent market disruption.
+
+2. **Strategic Partner Lockups**: Strategic partners receiving tokens from the ecosystem development allocation are subject to custom lockup agreements based on partnership milestones.
+
+3. **Validator Staking Requirements**: Network validators must maintain a minimum stake of VVAI tokens, which are locked while the validator is active.
+
+4. **Governance Lockups**: Tokens used for governance voting are locked during the voting period to prevent manipulation.
+
+5. **Insurance Fund Utilization Rules**: Strict rules govern the use of the insurance fund tokens, requiring multiple levels of approval before tokens can be deployed.
+
+These additional measures provide further protection against potential market manipulation and ensure that token holders with significant allocations act in the long-term interest of the ecosystem.
+
+</ContentBlock>
+
+</SectionLevelTwo>
+
+</SectionLevelOne>

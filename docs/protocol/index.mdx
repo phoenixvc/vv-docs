@@ -1,0 +1,130 @@
+---
+title: Protocol Overview
+description: Technical details of the multi-chain protocol implementation, including messaging, consensus, and security mechanisms.
+sidebar_label: Protocol Overview
+sidebar_position: 3
+keywords: ['protocol', 'technical', 'messaging', 'consensus', 'security']
+last_update: '2025-05-03'
+authors: [{ name: 'Architecture Team', title: 'Core Contributors' }]
+custom_related_docs: ['project-overview', 'architecture', 'security']
+custom_status: 'published'
+custom_complexity: 'intermediate'
+custom_prerequisites: ['project-overview']
+custom_assets: []
+custom_interactive: false
+custom_reading_time: 7
+custom_audience: ['developers', 'technical users', 'security researchers']
+custom_doc_type: 'reference'
+---
+
+import { SectionLevelOne } from '@site/src/components/docs';
+import { ContentBlock } from '@site/src/components/docs';
+import { CodeBlock } from '@site/src/components/docs';
+import { DiagramBlock } from '@site/src/components/docs';
+
+<SectionLevelOne id="protocol-overview" title="Protocol Overview">
+  <ContentBlock>
+    ## Protocol Architecture
+
+    The multi-chain protocol is designed as a layered architecture with distinct components handling different aspects of cross-chain communication and coordination:
+
+    1. **Transport Layer**: Handles the secure transmission of messages between chains
+    2. **Verification Layer**: Ensures the authenticity and integrity of cross-chain messages
+    3. **Execution Layer**: Processes and executes cross-chain instructions
+    4. **Application Layer**: Provides interfaces for developers to build on the protocol
+
+    Each layer is designed to be modular, allowing for component upgrades without disrupting the entire system.
+
+    ## Cross-Chain Messaging Protocol
+
+    At the core of our architecture is the Cross-Chain Messaging Protocol (CCMP), which enables secure and verifiable communication between different blockchain networks.
+
+    ### Message Structure
+
+    Each cross-chain message contains the following components:
+
+    - **Source Chain Identifier**: Unique identifier of the originating chain
+    - **Destination Chain Identifier**: Unique identifier of the target chain
+    - **Nonce**: Monotonically increasing sequence number to prevent replay attacks
+    - **Payload**: The actual data or instructions being transmitted
+    - **Verification Proof**: Cryptographic proof of the message's authenticity
+    - **Metadata**: Additional information for routing and processing
+
+    <CodeBlock language="typescript">
+    {`interface CrossChainMessage {
+      sourceChainId: string;
+      destinationChainId: string;
+      nonce: bigint;
+      payload: Uint8Array;
+      proof: VerificationProof;
+      metadata: MessageMetadata;
+    }`}
+    </CodeBlock>
+
+    ### Message Verification
+
+    Messages are verified using a combination of techniques depending on the chains involved:
+
+    - **Light Client Verification**: For chains with compatible consensus mechanisms
+    - **Threshold Signature Schemes**: For chains requiring validator consensus
+    - **Zero-Knowledge Proofs**: For privacy-preserving verification
+    - **Optimistic Verification**: For high-throughput, non-critical applications
+
+    ## Consensus Mechanism
+
+    The protocol employs a hybrid consensus mechanism that adapts to the security requirements of different cross-chain operations:
+
+    - **Safety-Critical Operations**: Use a Byzantine Fault Tolerant (BFT) consensus with a high threshold
+    - **Standard Operations**: Use a more efficient consensus with lower latency
+    - **Data Availability**: Employ data availability committees for efficient storage
+
+    ## Security Model
+
+    Our security model is built on several key principles:
+
+    1. **Defense in Depth**: Multiple layers of security controls
+    2. **Economic Security**: Aligned incentives for all participants
+    3. **Formal Verification**: Mathematical proofs of critical protocol components
+    4. **Gradual Security**: Security measures proportional to transaction value
+    5. **Failure Isolation**: Containing security breaches to minimize impact
+
+    ## State Synchronization
+
+    The protocol maintains consistent state across chains through:
+
+    - **State Merkle Trees**: Efficient representation of cross-chain state
+    - **Incremental Updates**: Minimizing data transfer for state changes
+    - **Conflict Resolution**: Deterministic rules for resolving conflicting updates
+    - **Recovery Mechanisms**: Procedures for recovering from chain reorganizations
+
+    ## Developer Interfaces
+
+    Developers interact with the protocol through several standardized interfaces:
+
+    <CodeBlock language="typescript">
+    {`// Cross-chain transaction submission
+    function sendCrossChainTransaction(
+      destinationChain: ChainId,
+      target: Address,
+      calldata: Bytes,
+      options: TransactionOptions
+    ): Promise<TransactionReceipt>;
+
+    // Cross-chain query execution
+    function queryCrossChain(
+      sourceChain: ChainId,
+      target: Address,
+      calldata: Bytes
+    ): Promise<QueryResult>;
+
+    // Cross-chain event subscription
+    function subscribeCrossChainEvents(
+      sourceChains: ChainId[],
+      eventFilter: EventFilter,
+      callback: (event: CrossChainEvent) => void
+    ): Subscription;`}
+    </CodeBlock>
+
+    These interfaces abstract the complexity of cross-chain operations, providing a seamless experience for developers building multi-chain applications.
+  </ContentBlock>
+</SectionLevelOne>

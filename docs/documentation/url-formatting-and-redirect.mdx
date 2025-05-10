@@ -1,0 +1,183 @@
+---
+title: URL Structure and Redirects
+description: Documentation of the URL structure and redirect strategy for the Docusaurus migration
+---
+
+# URL Structure and Redirects
+
+This document outlines our URL structure and redirect strategy for the Docusaurus migration.
+
+## URL Structure Principles
+
+Our URL structure follows these key principles:
+
+1. **Consistency**: All documentation URLs follow a consistent pattern
+2. **Semantics**: URLs reflect the content hierarchy and meaning
+3. **Simplicity**: URLs are kept as simple and readable as possible
+4. **Permanence**: Once published, URLs should not change
+
+## Base URL Pattern
+
+All documentation pages follow a standard pattern with the following components:
+
+- A `/docs/` prefix (Docusaurus standard)
+- A section identifier (main category)
+- An optional subsection identifier
+- An optional page name (defaults to index)
+
+## Section URL Mapping
+
+| Section | Pattern Description |
+|---------|---------------------|
+| Overview | Main overview section |
+| Architecture | Architecture documentation with subsections |
+| Tokenomics | Tokenomics documentation with subsections |
+| Security | Security documentation with subsections |
+| Finance Models | Finance models documentation with subsections |
+| Technical Infrastructure | Technical documentation with subsections |
+| Integrations | Integration documentation with type subsections |
+| Governance Framework | Governance documentation with subsections |
+| Implementation Roadmap | Roadmap documentation with phase subsections |
+| Gaming Technologies | Gaming documentation with subsections |
+
+## Subsection Examples
+
+**Architecture subsections:**
+- Overview
+- Layers
+- Diagrams
+
+**Tokenomics subsections:**
+- Distribution
+- Utility
+- Economics
+- Governance
+
+## Special Pages
+
+Some pages have special URL patterns:
+
+- PDF Preview
+- Version Information
+- Admin Pages
+
+## Redirect Strategy
+
+To maintain backward compatibility, we've implemented redirects from the old Next.js URL structure to the new Docusaurus structure.
+
+### Redirect Mapping
+
+| Old Path (Next.js) | New Path Description |
+|-------------------|----------------------|
+| Home page | Overview documentation |
+| Architecture | Architecture documentation |
+| Architecture overview | Architecture overview subsection |
+| Architecture layers | Architecture layers subsection |
+| Tokenomics | Tokenomics documentation |
+| Tokenomics distribution | Tokenomics distribution subsection |
+| Tokenomics utility | Tokenomics utility subsection |
+| Security | Security documentation |
+| Finance models | Finance documentation |
+| Technical infrastructure | Technical documentation |
+| Integrations | Integrations documentation |
+| Integrations data providers | Integrations data subsection |
+| Integrations wallet | Integrations wallets subsection |
+| Integrations blockchain | Integrations blockchain subsection |
+| Integrations risk management | Integrations risk subsection |
+| Governance framework | Governance documentation |
+| Implementation roadmap | Roadmap documentation |
+| Gaming technologies | Gaming documentation |
+| PDF preview | PDF documentation |
+| Tokenomics download | Tokenomics download subsection |
+| Document versions | Versions documentation |
+
+### Implementation
+
+Redirects are implemented using Docusaurus's built-in redirect functionality in the configuration file. This ensures that:
+
+1. Users following old links will be automatically redirected to the correct page
+2. Search engines will update their indexes to the new URLs
+3. No "404 Not Found" errors will occur for previously shared links
+
+## URL Best Practices
+
+When creating new content or linking to existing content:
+
+1. Always use relative links within the documentation
+2. For absolute links, use the full path including the prefix
+3. Avoid linking to URLs that might change in the future
+4. Use descriptive link text that indicates the destination
+
+## Handling Legacy URLs
+
+For any legacy URLs not covered by the standard redirect mapping, we've implemented a fallback strategy:
+
+1. Custom 404 page with helpful navigation
+2. Analytics tracking of 404 errors to identify missing redirects
+3. Periodic review and addition of new redirects as needed
+
+## Versioned Documentation URLs
+
+For versioned documentation, URLs include:
+- A version identifier
+- The standard section pattern
+- Subsection and page identifiers as needed
+
+The latest version is always available at the root path without a version prefix.
+
+## URL Parameters and Fragments
+
+Our URLs support parameters and fragments:
+
+- Parameters: For view modes and filters
+- Fragments: For section navigation
+
+These are preserved when redirecting from old URLs.
+
+## Localized URLs
+
+For internationalized content, URLs include:
+- A locale identifier
+- The standard documentation path
+
+The default locale (English) doesn't include a locale prefix.
+
+## API Documentation URLs
+
+API documentation follows a slightly different pattern:
+- An API identifier
+- An optional version
+- The endpoint identifier
+
+## Search Engine Optimization
+
+Our URL structure is designed with SEO in mind:
+
+1. URLs are descriptive and keyword-rich
+2. We use hyphens to separate words in URLs
+3. URLs are kept reasonably short
+4. We avoid URL parameters for core content pages
+5. Canonical URLs are specified for all pages
+
+## Monitoring and Maintenance
+
+We regularly monitor our URL structure and redirects:
+
+1. Automated tests verify all redirects are working
+2. Analytics track 404 errors and redirect usage
+3. Periodic reviews ensure the URL structure remains optimal
+4. New redirects are added as needed
+
+## Migration Process
+
+During the migration from Next.js to Docusaurus, we followed these steps:
+
+1. Mapped all existing URLs to their new equivalents
+2. Implemented redirects in the Docusaurus configuration
+3. Updated internal links to use the new URL structure
+4. Verified all redirects with automated tests
+5. Monitored analytics after launch to catch any missed redirects
+
+## Conclusion
+
+Our URL structure and redirect strategy ensures a seamless transition from the previous platform to Docusaurus while maintaining SEO value and providing a consistent user experience.

@@ -1,0 +1,54 @@
+---
+title: Architecture
+description: Overview of the system architecture and its components
+---
+
+# Architecture
+
+This section provides a comprehensive overview of our system architecture, explaining how different components work together to create a robust and scalable platform.
+
+## Contents
+
+- [Overview](/architecture/overview) - High-level architectural overview
+- [Layered Architecture](/architecture/layers) - Detailed explanation of our layered approach
+- [Architecture Diagrams](/architecture/diagrams) - Visual representations of system components
+- [Architecture Comparison](/architecture/comparison) - How our architecture compares to alternatives
+
+## Key Architectural Principles
+
+Our architecture is built on several key principles:
+
+- **Modularity**: Components are designed to be self-contained and reusable
+- **Scalability**: The system can grow to handle increased load
+- **Security**: Security is built into every layer
+- **Resilience**: The system can recover from failures
+- **Maintainability**: Code and components are designed for long-term maintenance
+
+## Architecture Overview
+
+Our system uses a layered architecture approach with clear separation of concerns:
+
+\```mermaid
+graph TD
+    A[Client Layer] --> B[API Gateway]
+    B --> C[Service Layer]
+    C --> D[Data Access Layer]
+    D --> E[Storage Layer]
+    C --> F[Integration Layer]
+    F --> G[External Services]
+\```
+
+Each layer has specific responsibilities and communicates with adjacent layers through well-defined interfaces.
+
+import { SectionAnchor } from '@/components/section-anchor';
+
+<SectionAnchor id="next-steps" />
+
+## Next Steps
+
+Explore the detailed sections to learn more about specific aspects of our architecture:
+
+- [Architecture Overview](/architecture/overview)
+- [Layered Architecture](/architecture/layers)
+- [Architecture Diagrams](/architecture/diagrams)
+- [Architecture Comparison](/architecture/comparison)

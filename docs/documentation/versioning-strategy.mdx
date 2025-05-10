@@ -1,0 +1,289 @@
+---
+id: versioning-strategy
+title: Documentation Versioning Strategy
+sidebar_label: Versioning Strategy
+description: A comprehensive approach to managing documentation versions for multi-chain architecture
+keywords:
+  - documentation
+  - versioning
+  - version management
+  - docusaurus
+  - documentation lifecycle
+---
+
+import { ContentBlock } from '@site/src/components/docs/ContentBlock';
+import { DiagramBlock } from '@site/src/components/docs/DiagramBlock';
+import { Admonition } from '@site/src/components/docs/Admonition';
+import { SectionLevelOne } from '@site/src/components/docs/SectionLevel';
+import { SectionLevelTwo } from '@site/src/components/docs/SectionLevel';
+import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
+
+<SectionLevelOne id="introduction" title="Introduction">
+  <ContentBlock>
+    A well-defined versioning strategy ensures that users can access documentation relevant to their specific version while allowing the documentation team to evolve content alongside the product. This document outlines a comprehensive versioning strategy for the Multi-chain Architecture documentation.
+    
+    Effective documentation versioning provides several benefits:
+    
+    - Users can find information specific to their version
+    - Historical documentation remains accessible for legacy users
+    - Documentation can evolve alongside the product
+    - Breaking changes can be clearly communicated
+    - Multiple versions can be maintained simultaneously
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="version-creation-guidelines" title="Version Creation Guidelines">
+  <SectionLevelTwo id="when-to-create" title="When to Create a New Version">
+    <ContentBlock>
+      Create a new documentation version when:
+      
+      - A major release of the platform occurs (e.g., 1.0.0, 2.0.0)
+      - Significant architectural changes are introduced
+      - Breaking changes affect user workflows or integration points
+      - Long-term support (LTS) versions are released
+      
+      Avoid creating versions for minor updates or patch releases unless they contain critical changes that affect documentation.
+    </ContentBlock>
+    
+    <Admonition type="tip">
+      Not every code release requires a documentation version. Focus on creating versions when there are significant changes that users need to be aware of.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="naming-convention" title="Version Naming Convention">
+    <ContentBlock>
+      Follow semantic versioning principles:
+      
+      - Use `X.Y.Z` format (Major.Minor.Patch)
+      - Documentation versions should align with product versions
+      - For pre-releases, use suffixes like `-alpha.1`, `-beta.2`, `-rc.1`
+      
+      This approach ensures clarity and consistency across your documentation and product releases.
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="version-management-workflow" title="Version Management Workflow">
+  <SectionLevelTwo id="initial-setup" title="Initial Setup">
+    <ContentBlock>
+      1. Begin with all documentation in the `docs/` directory (unversioned)
+      2. Develop and refine documentation until ready for first release
+      3. Create first version snapshot when ready for release
+      
+      This approach allows you to focus on content development before introducing the complexity of versioning.
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="ongoing-development" title="Ongoing Development">
+    <ContentBlock>
+      **Current/Next Version**:
+      
+      - All active development happens in the `docs/` directory
+      - This represents the "next" or unreleased version
+      - Changes here will be included in the next version snapshot
+      
+      **Released Versions**:
+      
+      - Stored in `versioned_docs/version-X.Y.Z/`
+      - Only critical fixes should be made to released versions
+      - Avoid adding new features to released versions
+    </ContentBlock>
+    
+    <Admonition type="warning">
+      Be cautious when modifying released versions. Changes should be limited to fixing errors or clarifying existing content, not adding new features.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="version-lifecycle" title="Version Lifecycle">
+    <ContentBlock>
+      Define clear lifecycle stages for documentation versions:
+      
+      1. **Active** - Current version, fully supported
+      2. **Maintained** - Previous versions still supported (typically last 1-2 major versions)
+      3. **Legacy** - Older versions with limited support (security fixes only)
+      4. **Archived** - No longer maintained, kept for historical reference
+      
+      Clearly communicate the lifecycle stage of each version to users.
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="version-specific-content" title="Version-Specific Content">
+  <SectionLevelTwo id="version-conditionals" title="Using Version Conditionals">
+    <ContentBlock>
+      Leverage version detection to display version-specific content. This allows you to show different information based on the version the user is viewing.
+      
+      For example, you might show:
+      
+      - "Coming soon" notices in the current/next version
+      - Version-specific implementation details
+      - Deprecated feature warnings in older versions
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="version-badges" title="Version Badges">
+    <ContentBlock>
+      Add version badges to indicate when features were introduced or deprecated. These visual indicators help users quickly understand feature availability across versions.
+      
+      Examples:
+      
+      - "Added in v1.2.0"
+      - "Deprecated in v2.0.0"
+      - "Changed in v1.5.0"
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="migration-guides" title="Migration Guides">
+  <SectionLevelTwo id="creating-guides" title="Creating Migration Guides">
+    <ContentBlock>
+      For each major version transition, create dedicated migration guides:
+      
+      - Place in `docs/migration/` directory
+      - Include step-by-step instructions for upgrading
+      - Highlight breaking changes and new features
+      - Provide code examples showing before/after changes
+      
+      Migration guides are essential for helping users transition between versions smoothly.
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="version-banners" title="Version Banners">
+    <ContentBlock>
+      Use version banners to indicate deprecated or upcoming versions. These banners appear at the top of documentation pages and provide important context about the version status.
+      
+      Banner types:
+      
+      - **Unreleased** - For current/next version
+      - **Unmaintained** - For legacy versions
+      - **Warning** - For versions with known issues
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="version-pruning" title="Version Pruning Strategy">
+  <ContentBlock>
+    As the project evolves, implement a version pruning strategy:
+    
+    1. Maintain the last 2-3 major versions as fully documented
+    2. For older versions, consider:
+       - Removing from the version dropdown but keeping the files
+       - Creating an "archive" section for legacy documentation
+       - Consolidating multiple older versions into a single "legacy" version
+    
+    To remove a version:
+    1. Remove it from the versions configuration
+    2. Update version dropdown configuration
+    3. Optionally delete the corresponding directories
+    
+    A good pruning strategy balances historical documentation access with maintainability.
+  </ContentBlock>
+  
+  <Admonition type="note">
+    Even when removing versions from the main navigation, consider keeping the files accessible via direct URLs for users who still need them.
+  </Admonition>
+</SectionLevelOne>
+
+<SectionLevelOne id="implementation-plan" title="Implementation Plan">
+  <SectionLevelTwo id="phase-1" title="Phase 1: Initial Setup">
+    <ContentBlock>
+      - Configure documentation system for versioning
+      - Define version naming conventions
+      - Create version selection UI components
+      - Establish version lifecycle policies
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="phase-2" title="Phase 2: First Version Release">
+    <ContentBlock>
+      - Complete documentation for v1.0.0
+      - Create first version snapshot
+      - Implement version dropdown
+      - Create versions landing page
+      - Test version navigation
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="phase-3" title="Phase 3: Ongoing Maintenance">
+    <ContentBlock>
+      - Develop documentation for next version in main directory
+      - Create new version snapshots for each major release
+      - Maintain migration guides between versions
+      - Periodically review and prune older versions
+      - Collect user feedback on version-specific documentation
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="best-practices" title="Versioning Best Practices">
+  <ContentBlock>
+    1. **Consistency**: Maintain consistent structure across versions
+    2. **Clear Labeling**: Clearly label version-specific features
+    3. **Migration Paths**: Always provide clear upgrade paths
+    4. **Minimal Duplication**: Reference common concepts across versions
+    5. **Version Testing**: Test all versions before release
+    6. **User Feedback**: Collect feedback on version-specific documentation
+    7. **Version-Specific Assets**: Maintain separate assets for each version when necessary
+    8. **Automation**: Automate version creation and testing where possible
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="version-landing-page" title="Custom Version Landing Page">
+  <ContentBlock>
+    Create a custom versions landing page that:
+    
+    - Lists all available documentation versions
+    - Clearly identifies the current/next version
+    - Provides direct links to each version
+    - Indicates the status of each version (active, maintained, legacy, archived)
+    - Includes recommended upgrade paths
+    
+    This landing page serves as a central hub for users to find the appropriate documentation version.
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="version-specific-sidebars" title="Version-Specific Sidebars">
+  <ContentBlock>
+    For complex documentation structures, you may need version-specific sidebars:
+    
+    - Each version can have its own navigation structure
+    - New sections can be added to newer versions
+    - Deprecated sections can be removed from newer versions
+    - Sidebar organization can evolve over time
+    
+    Version-specific sidebars allow the documentation structure to evolve alongside the product.
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="handling-assets" title="Handling Version-Specific Assets">
+  <ContentBlock>
+    For version-specific images, diagrams, and other assets:
+    
+    1. Create version-specific asset directories
+    2. Reference assets with version-specific paths
+    3. Update assets when creating new versions
+    
+    This approach ensures that each version displays the correct visual assets.
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="versioning-automation" title="Versioning Automation">
+  <ContentBlock>
+    Consider implementing automation to streamline versioning:
+    
+    1. **Pre-version Checks**: Verify documentation quality before creating a version
+    2. **Post-version Updates**: Automatically update references and links
+    3. **Version Announcement**: Generate release notes and announcements
+    4. **Broken Link Detection**: Verify all links work across versions
+    
+    Automation reduces the manual effort required to maintain versioned documentation.
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="conclusion" title="Conclusion">
+  <ContentBlock>
+    This versioning strategy provides a comprehensive framework for managing documentation across multiple versions of the Multi-chain Architecture platform. By following these guidelines, you'll ensure that users always have access to accurate, version-appropriate documentation while maintaining a sustainable workflow for your documentation team.
+    
+    Remember that documentation versioning is an ongoing process that requires regular attention and maintenance. As your product evolves, your versioning strategy may need to adapt as well.
+  </ContentBlock>
+</SectionLevelOne>

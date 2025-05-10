@@ -1,0 +1,130 @@
+---
+title: Architecture Comparison
+description: How our architecture compares to alternatives
+---
+
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { TableBlock } from '@/components/section-templates/table-block';
+import { SectionAnchor } from '@/components/section-anchor';
+
+# Architecture Comparison
+
+<ContentBlock>
+  This section compares our architecture with alternative approaches, highlighting the strengths and trade-offs of each option.
+</ContentBlock>
+
+<SectionAnchor id="architecture-approaches" />
+
+## Architecture Approaches
+
+We evaluated several architectural approaches before selecting our current design:
+
+### Microservices Architecture
+
+Our chosen approach, with services organized around business capabilities.
+
+### Monolithic Architecture
+
+A single, unified codebase containing all functionality.
+
+### Serverless Architecture
+
+Function-based architecture with no server management.
+
+### Service-Oriented Architecture (SOA)
+
+Services organized around shared enterprise services.
+
+<SectionAnchor id="comparison-table" />
+
+## Comparison Table
+
+<TableBlock title="Architecture Comparison">
+| Feature | Our Microservices | Monolithic | Serverless | SOA |
+|---------|-------------------|------------|------------|-----|
+| Scalability | High (per service) | Limited | Very High | Moderate |
+| Development Speed | Moderate | Initially Fast | Fast | Slow |
+| Deployment Complexity | Moderate | Low | Very Low | High |
+| Team Organization | Service-Aligned | Centralized | Function-Aligned | Domain-Aligned |
+| Technology Flexibility | High | Low | Moderate | Moderate |
+| Operational Complexity | High | Low | Low | High |
+| Testing Complexity | High | Moderate | High | High |
+| Performance | High | Very High | Variable | Moderate |
+| Cost Efficiency | Moderate | High | Pay-per-use | Moderate |
+| Blockchain Integration | Specialized Services | Centralized | Function-Based | Enterprise Services |
+</TableBlock>
+
+<SectionAnchor id="key-considerations" />
+
+## Key Considerations
+
+### Scalability
+
+- **Our Microservices**: Each service can scale independently based on demand
+- **Monolithic**: Entire application must scale together, leading to resource inefficiency
+- **Serverless**: Automatic scaling with no management, but with cold start penalties
+- **SOA**: Services can scale independently but often have shared resources
+
+### Development Speed
+
+- **Our Microservices**: Initial overhead but faster long-term development
+- **Monolithic**: Fast initial development but slows as complexity increases
+- **Serverless**: Rapid development with minimal infrastructure concerns
+- **SOA**: Slower development due to service contract negotiations
+
+### Technology Flexibility
+
+- **Our Microservices**: Different services can use different technologies
+- **Monolithic**: Single technology stack for the entire application
+- **Serverless**: Limited by cloud provider offerings
+- **SOA**: Some flexibility but often constrained by enterprise standards
+
+<SectionAnchor id="blockchain-considerations" />
+
+## Blockchain Integration Considerations
+
+### Our Microservices Approach
+
+- Dedicated blockchain integration services
+- Abstraction layers for multiple blockchain support
+- Specialized scaling for blockchain operations
+- Isolated failure domains
+
+### Alternative Approaches
+
+- **Monolithic**: Blockchain integration embedded in the main application
+- **Serverless**: Blockchain operations as functions with potential timeout issues
+- **SOA**: Blockchain as an enterprise service with standardized interfaces
+
+<SectionAnchor id="why-we-chose-microservices" />
+
+## Why We Chose Microservices
+
+We selected a microservices architecture for several key reasons:
+
+1. **Scalability**: Ability to scale services independently based on demand
+2. **Resilience**: Isolated failure domains prevent system-wide outages
+3. **Technology Flexibility**: Freedom to use the best technology for each service
+4. **Team Organization**: Allows teams to own and develop services independently
+5. **Blockchain Integration**: Better support for specialized blockchain services
+
+<SectionAnchor id="architecture-evolution" />
+
+## Architecture Evolution
+
+Our architecture has evolved over time:
+
+1. **Initial Prototype**: Monolithic application for rapid development
+2. **First Production**: Core services extracted into microservices
+3. **Current Architecture**: Full microservices with specialized blockchain services
+4. **Future Direction**: Hybrid approach with some serverless components
+
+<SectionAnchor id="next-steps" />
+
+## Next Steps
+
+For more information about our architecture, please explore:
+
+- [Architecture Overview](/architecture/overview)
+- [Layered Architecture](/architecture/layers)
+- [Architecture Diagrams](/architecture/diagrams)

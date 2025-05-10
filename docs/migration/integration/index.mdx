@@ -1,0 +1,607 @@
+---
+title: Docusaurus Integration Guide
+description: Comprehensive guide for integrating the multi-chain architecture documentation with Docusaurus.
+sidebar_label: Integration Guide
+sidebar_position: 1
+keywords: ['docusaurus', 'integration', 'documentation', 'migration']
+last_update: '2025-05-13'
+authors: [{ name: 'Documentation Team', title: 'Core Contributors' }]
+custom_related_docs: ['migration/checklist', 'migration/setup', 'migration/organization', 'migration/workflow']
+custom_status: 'published'
+custom_complexity: 'intermediate'
+custom_prerequisites: []
+custom_assets: []
+custom_interactive: false
+custom_reading_time: 10
+custom_audience: ['documentation team', 'developers', 'technical writers']
+custom_doc_type: 'guide'
+---
+
+import { SectionLevelOne } from '@site/src/components/docs';
+import { ContentBlock } from '@site/src/components/docs';
+import { CodeBlock } from '@site/src/components/docs';
+import { Admonition } from '@site/src/components/docs';
+
+<SectionLevelOne id="docusaurus-integration-guide" title="Docusaurus Integration Guide">
+  <ContentBlock>
+    ## Introduction
+
+    This guide provides comprehensive instructions for integrating the multi-chain architecture documentation with Docusaurus. It covers the setup process, configuration options, and best practices for a successful integration.
+
+    <Admonition type="info">
+      Docusaurus is a modern static website generator that builds optimized documentation sites with React. It provides features like versioning, search, and internationalization out of the box.
+    </Admonition>
+
+    ## Prerequisites
+
+    Before beginning the integration process, ensure you have:
+
+    - Node.js 16.14 or higher installed
+    - Yarn package manager (recommended) or npm
+    - Git for version control
+    - Basic knowledge of React and Markdown
+    - Access to the documentation repository
+
+    ## Installation Process
+
+    ### Step 1: Create a New Docusaurus Project
+
+    Start by creating a new Docusaurus project:
+
+    <CodeBlock language="bash">
+    {`npx create-docusaurus@latest multi-chain-docs classic --typescript`}
+    </CodeBlock>
+
+    This command creates a new Docusaurus project with the classic template and TypeScript support.
+
+    ### Step 2: Configure Project Structure
+
+    Navigate to the project directory and configure the basic structure:
+
+    <CodeBlock language="bash">
+    {`cd multi-chain-docs
+mkdir -p docs/overview docs/architecture docs/finance docs/tokenomics
+mkdir -p src/components/docs src/components/common`}
+    </CodeBlock>
+
+    ### Step 3: Configure Docusaurus
+
+    Update the `docusaurus.config.js` file with the appropriate configuration:
+
+    <CodeBlock language="javascript">
+    {`module  file with the appropriate configuration:
+
+    <CodeBlock language="javascript">
+    {`module.exports = {
+  title: 'Multi-Chain Architecture',
+  tagline: 'Documentation for the multi-chain architecture project',
+  url: 'https://docs.veritasvault.ai',
+  baseUrl: '/',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+  favicon: 'img/favicon.ico',
+  organizationName: 'veritasvault',
+  projectName: 'multi-chain-docs',
+  
+  presets: [
+    [
+      'classic',
+      {
+        docs: {
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/veritasvault/multi-chain-docs/edit/main/',
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
+        },
+        theme: {
+          customCss: require.resolve('./src/css/custom.css'),
+        },
+      },
+    ],
+  ],
+  
+  themeConfig: {
+    navbar: {
+      title: 'Multi-Chain Architecture',
+      logo: {
+        alt: 'VeritasVault Logo',
+        src: 'img/logo.svg',
+      },
+      items: [
+        {
+          type: 'doc',
+          docId: 'overview/index',
+          position: 'left',
+          label: 'Documentation',
+        },
+        {
+          type: 'dropdown',
+          label: 'Resources',
+          position: 'left',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/veritasvault/multi-chain-architecture',
+            },
+            {
+              label: 'Community',
+              href: 'https://discord.gg/veritasvault',
+            },
+          ],
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
+        {
+          type: 'search',
+          position: 'right',
+        },
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: 'Docs',
+          items: [
+            {
+              label: 'Overview',
+              to: '/docs/overview',
+            },
+            {
+              label: 'Architecture',
+              to: '/docs/architecture',
+            },
+            {
+              label: 'Tokenomics',
+              to: '/docs/tokenomics',
+            },
+          ],
+        },
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'Discord',
+              href: 'https://discord.gg/veritasvault',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/veritasvault',
+            },
+            {
+              label: 'Forum',
+              href: 'https://forum.veritasvault.ai',
+            },
+          ],
+        },
+        {
+          title: 'More',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/veritasvault/multi-chain-architecture',
+            },
+            {
+              label: 'Blog',
+              href: 'https://blog.veritasvault.ai',
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} VeritasVault. Built with Docusaurus.`,
+    },
+  },
+  
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'community',
+        path: 'community',
+        routeBasePath: 'community',
+        sidebarPath: require.resolve('./sidebarsCommunity.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-ideal-image',
+      {
+        quality: 70,
+        max: 1030,
+        min: 640,
+        steps: 2,
+      },
+    ],
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        debug: false,
+        offlineModeActivationStrategies: ['appInstalled', 'standalone', 'queryString'],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: '/img/logo.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: '/manifest.json',
+          },
+          {
+            tagName: 'meta',
+            name: 'theme-color',
+            content: '#3578e5',
+          },
+        ],
+      },
+    ],
+  ],
+}`}
+    </CodeBlock>
+
+    ### Step 4: Configure Sidebars
+
+    Create a `sidebars.js` file to define the documentation structure:
+
+    <CodeBlock language="javascript">
+    {`module.exports = {
+  docs: [
+    {
+      type: 'category',
+      label: 'Getting Started',
+      items: ['overview/index', 'benefits/index', 'summary/index', 'protocol/index'],
+    },
+    {
+      type: 'category',
+      label: 'Architecture',
+      items: ['architecture/index', 'architecture/overview', 'architecture/layers', 'architecture/diagrams'],
+    },
+    {
+      type: 'category',
+      label: 'Finance Models',
+      items: ['finance/index', 'finance/monte-carlo', 'finance/factors', 'finance/black-litterman', 'finance/yield'],
+    },
+    {
+      type: 'category',
+      label: 'Tokenomics',
+      items: ['tokenomics/index', 'tokenomics/distribution', 'tokenomics/utility', 'tokenomics/economics', 'tokenomics/governance'],
+    },
+    {
+      type: 'category',
+      label: 'Security',
+      items: ['security/index', 'security/threat-modeling', 'security/protocols', 'security/audit-framework'],
+    },
+    {
+      type: 'category',
+      label: 'Governance',
+      items: ['governance-framework/index', 'governance-framework/structure', 'governance-framework/voting', 'governance-framework/communication'],
+    },
+    {
+      type: 'category',
+      label: 'Implementation',
+      items: ['roadmap/index'],
+    },
+    {
+      type: 'category',
+      label: 'Contributing',
+      items: ['contributing/style/index', 'contributing/templates/index', 'contributing/review/index', 'contributing/numbering/index', 'contributing/hierarchy/index'],
+    },
+    {
+      type: 'category',
+      label: 'Migration',
+      items: ['migration/integration/index', 'migration/checklist/index', 'migration/setup/index', 'migration/theme/index', 'migration/organization/index', 'migration/audit/index', 'migration/deployment/index', 'migration/workflow/index', 'migration/components/index'],
+    },
+  ],
+}`}
+    </CodeBlock>
+
+    ## Component Migration
+
+    ### Step 1: Create Base Components
+
+    Create the base components in the `src/components/docs` directory:
+
+    <CodeBlock language="typescript">
+    {`// src/components/docs/SectionLevelOne.tsx
+import React, { ReactNode } from 'react';
+import styles from './styles.module.css';
+
+interface SectionLevelOneProps {
+  id: string;
+  title: string;
+  children: ReactNode;
+}
+
+export function SectionLevelOne({ id, title, children }: SectionLevelOneProps) {
+  return (
+    <section id={id} className={styles.sectionLevelOne}>
+      <h1 className={styles.sectionTitle}>{title}</h1>
+      <div className={styles.sectionContent}>{children}</div>
+    </section>
+  );
+}`}
+    </CodeBlock>
+
+    ### Step 2: Create Content Components
+
+    Create the content components in the same directory:
+
+    <CodeBlock language="typescript">
+    {`// src/components/docs/ContentBlock.tsx
+import React, { ReactNode } from 'react';
+import styles from './styles.module.css';
+
+interface ContentBlockProps {
+  children: ReactNode;
+}
+
+export function ContentBlock({ children }: ContentBlockProps) {
+  return (
+    <div className={styles.contentBlock}>
+      {children}
+    </div>
+  );
+}`}
+    </CodeBlock>
+
+    ### Step 3: Create Utility Components
+
+    Create utility components for diagrams, code blocks, etc.:
+
+    <CodeBlock language="typescript">
+    {`// src/components/docs/DiagramBlock.tsx
+import React, { ReactNode } from 'react';
+import styles from './styles.module.css';
+
+interface DiagramBlockProps {
+  children: ReactNode;
+  caption?: string;
+  id?: string;
+}
+
+export function DiagramBlock({ children, caption, id }: DiagramBlockProps) {
+  return (
+    <figure id={id} className={styles.diagramBlock}>
+      <div className={styles.diagramContent}>{children}</div>
+      {caption && <figcaption className={styles.diagramCaption}>{caption}</figcaption>}
+    </figure>
+  );
+}`}
+    </CodeBlock>
+
+    ## Content Migration
+
+    ### Step 1: Convert TSX to MDX
+
+    Convert existing TSX components to MDX format:
+
+    1. Extract content from TSX components
+    2. Create corresponding MDX files
+    3. Add appropriate frontmatter
+    4. Import and use the Docusaurus components
+
+    ### Step 2: Migrate Images and Assets
+
+    Move images and assets to the `static` directory:
+
+    <CodeBlock language="bash">
+    {`mkdir -p static/img/diagrams static/img/icons
+cp -r public/diagrams/* static/img/diagrams/
+cp -r public/*.png static/img/`}
+    </CodeBlock>
+
+    Update image references in MDX files:
+
+    <CodeBlock language="markdown">
+    {`// Before
+<img src="/diagrams/network-topology.png" alt="Network Topology" />
+
+// After
+<img src="/img/diagrams/network-topology.png" alt="Network Topology" />`}
+    </CodeBlock>
+
+    ### Step 3: Configure Metadata
+
+    Add appropriate frontmatter to all MDX files:
+
+    <CodeBlock language="markdown">
+    {`---
+title: Document Title
+description: Document description for SEO
+sidebar_label: Shorter Title for Sidebar
+sidebar_position: 1
+keywords: ['keyword1', 'keyword2']
+---`}
+    </CodeBlock>
+
+    ## Theme Customization
+
+    ### Step 1: Create Custom CSS
+
+    Create a custom CSS file at `src/css/custom.css`:
+
+    <CodeBlock language="css">
+    {`:root {
+  --ifm-color-primary: #3578e5;
+  --ifm-color-primary-dark: #1d68e1;
+  --ifm-color-primary-darker: #1b62d4;
+  --ifm-color-primary-darkest: #1751af;
+  --ifm-color-primary-light: #4e89e8;
+  --ifm-color-primary-lighter: #5a91ea;
+  --ifm-color-primary-lightest: #80aaef;
+  
+  --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+/* Dark mode adjustments */
+html[data-theme='dark'] {
+  --ifm-color-primary: #4e89e8;
+  --ifm-color-primary-dark: #3578e5;
+  --ifm-color-primary-darker: #1d68e1;
+  --ifm-color-primary-darkest: #1b62d4;
+  --ifm-color-primary-light: #5a91ea;
+  --ifm-color-primary-lighter: #80aaef;
+  --ifm-color-primary-lightest: #a6c4f4;
+  --ifm-background-color: #1e2125;
+}`}
+    </CodeBlock>
+
+    ### Step 2: Create Component Styles
+
+    Create a styles file for components at `src/components/docs/styles.module.css`:
+
+    <CodeBlock language="css">
+    {`.sectionLevelOne {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.sectionContent {
+  margin-bottom: 2rem;
+}
+
+.contentBlock {
+  margin-bottom: 2rem;
+}
+
+.diagramBlock {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.diagramContent {
+  margin-bottom: 1rem;
+}
+
+.diagramCaption {
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+}`}
+    </CodeBlock>
+
+    ## Plugin Configuration
+
+    ### Search Configuration
+
+    Configure the search plugin for optimal documentation search:
+
+    <CodeBlock language="javascript">
+    {`// In docusaurus.config.js
+themeConfig: {
+  // ...
+  algolia: {
+    appId: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
+    indexName: 'multi-chain-architecture',
+    contextualSearch: true,
+    searchParameters: {},
+  },
+}`}
+    </CodeBlock>
+
+    ### Versioning Configuration
+
+    Set up versioning for documentation:
+
+    <CodeBlock language="bash">
+    {`yarn docusaurus docs:version 1.0.0`}
+    </CodeBlock>
+
+    Configure versioning in `docusaurus.config.js`:
+
+    <CodeBlock language="javascript">
+    {`// In docusaurus.config.js
+themeConfig: {
+  // ...
+  versions: {
+    current: {
+      label: 'Current',
+      path: '',
+    },
+  },
+}`}
+    </CodeBlock>
+
+    ## Deployment Configuration
+
+    ### GitHub Pages Deployment
+
+    Configure for GitHub Pages deployment:
+
+    <CodeBlock language="javascript">
+    {`// In docusaurus.config.js
+module.exports = {
+  // ...
+  url: 'https://veritasvault.github.io',
+  baseUrl: '/multi-chain-docs/',
+  organizationName: 'veritasvault',
+  projectName: 'multi-chain-docs',
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
+}`}
+    </CodeBlock>
+
+    ### Vercel Deployment
+
+    Configure for Vercel deployment:
+
+    1. Create a `vercel.json` file in the project root:
+
+    <CodeBlock language="json">
+    {`{
+  "buildCommand": "yarn build",
+  "outputDirectory": "build",
+  "framework": "docusaurus",
+  "github": {
+    "silent": true
+  }
+}`}
+    </CodeBlock>
+
+    ## Testing and Validation
+
+    ### Local Testing
+
+    Test the documentation locally:
+
+    <CodeBlock language="bash">
+    {`yarn start`}
+    </CodeBlock>
+
+    ### Build Validation
+
+    Validate the production build:
+
+    <CodeBlock language="bash">
+    {`yarn build
+yarn serve`}
+    </CodeBlock>
+
+    ### Link Validation
+
+    Check for broken links:
+
+    <CodeBlock language="bash">
+    {`yarn docusaurus doctor`}
+    </CodeBlock>
+
+    ## Conclusion
+
+    Following this integration guide will help you successfully migrate the multi-chain architecture documentation to Docusaurus. The resulting documentation site will be modern, searchable, and user-friendly, providing an excellent experience for developers and users.
+
+    <Admonition type="tip">
+      For ongoing maintenance, consider setting up a CI/CD pipeline to automatically build and deploy the documentation site when changes are pushed to the repository.
+    </Admonition>
+  </ContentBlock>
+</SectionLevelOne>

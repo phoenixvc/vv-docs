@@ -1,0 +1,157 @@
+/* Visual Hierarchy CSS Classes */
+
+/* Section Level Indicators */
+.section-level-1 {
+  @apply scroll-mt-20 mb-10;
+}
+
+.section-level-2 {
+  @apply scroll-mt-20 mb-8;
+}
+
+.section-level-3 {
+  @apply scroll-mt-20 mb-6 ml-4;
+}
+
+.section-level-4 {
+  @apply scroll-mt-20 mb-4 ml-8;
+}
+
+/* Section Headers */
+.section-header-1 {
+  @apply flex items-center mb-4;
+}
+
+.section-header-2 {
+  @apply flex items-center mb-3;
+}
+
+.section-header-3 {
+  @apply flex items-center mb-2;
+}
+
+/* Section Badges */
+.section-badge-1 {
+  @apply mr-3 text-base font-normal px-3 py-1 border-primary/30;
+}
+
+.section-badge-2 {
+  @apply mr-3 text-sm font-normal px-2 py-0.5 border-secondary/50;
+}
+
+.section-badge-3 {
+  @apply mr-2 text-xs font-normal px-1.5 py-0.5 border-muted-foreground/30;
+}
+
+/* Section Titles */
+.section-title-1 {
+  @apply text-4xl font-bold text-primary group flex items-center;
+}
+
+.section-title-2 {
+  @apply text-2xl font-bold group flex items-center;
+}
+
+.section-title-3 {
+  @apply text-xl font-semibold group flex items-center;
+}
+
+/* Section Descriptions */
+.section-description-1 {
+  @apply mb-6 text-xl text-muted-foreground;
+}
+
+.section-description-2 {
+  @apply mb-4 text-lg text-muted-foreground;
+}
+
+.section-description-3 {
+  @apply mb-3 text-base text-muted-foreground;
+}
+
+/* Section Containers */
+.section-container-1 {
+  @apply border-l-4 border-l-primary;
+}
+
+.section-container-2 {
+  @apply border-l-2 border-l-secondary;
+}
+
+.section-container-3 {
+  @apply border-l border-l-muted-foreground/30;
+}
+
+/* Navigation Indicators */
+.nav-item-active {
+  @apply bg-primary/10 text-primary font-medium sidebar-active-item;
+}
+
+.nav-item-parent-active {
+  @apply bg-primary/5 text-primary/80;
+}
+
+.nav-item-normal {
+  @apply text-muted-foreground hover:text-foreground;
+}
+
+/* Nested Navigation */
+.nav-level-1 {
+  @apply w-full justify-start;
+}
+
+.nav-level-2 {
+  @apply w-full justify-start ml-4;
+}
+
+.nav-level-3 {
+  @apply w-full justify-start ml-8;
+}
+
+.nav-level-4 {
+  @apply w-full justify-start ml-12;
+}
+
+/* Content Type Indicators */
+.content-text {
+  @apply prose prose-slate dark:prose-invert max-w-none;
+}
+
+.content-code {
+  @apply bg-muted/50 rounded-md p-4 font-mono text-sm;
+}
+
+.content-diagram {
+  @apply border rounded-md p-2 bg-background;
+}
+
+.content-table {
+  @apply w-full border-collapse;
+}
+
+.content-interactive {
+  @apply border rounded-md p-4 bg-muted/20;
+}
+
+/* Active State Indicators */
+.active-indicator {
+  @apply border-l-2 border-primary pl-1;
+}
+
+.active-background {
+  @apply bg-primary/10 -mx-2 px-2;
+}
+
+/* Hierarchy Borders for Nested Content */
+.hierarchy-border-1 {
+  @apply border-l-2 border-muted/30 ml-3 pl-2;
+}
+
+.hierarchy-border-2 {
+  @apply border-l border-muted/20 ml-6 pl-2;
+}
+
+/* Focus States */
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+}

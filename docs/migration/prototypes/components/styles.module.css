@@ -1,0 +1,30 @@
+/* docs/migration/prototypes/components/styles.module.css */
+.sectionLevelOne {
+  margin-bottom: 2.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.sectionLevelTwo {
+  margin-bottom: 2rem;
+  scroll-margin-top: 5rem;
+}
+
+.sectionLevelThree {
+  margin-bottom: 1.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.sectionContent {
+  border-left-width: 4px;
+  border-left-color: var(--ifm-color-primary);
+  border-radius: 0.5rem;
+  background-color: var(--ifm-card-background-color);
+  box-shadow: var(--ifm-shadow-sm);
+  padding: 1.5rem;
+}

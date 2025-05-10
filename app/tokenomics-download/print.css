@@ -1,0 +1,54 @@
+@media print {
+  @page {
+    margin: 1cm;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background-color: #fff;
+  }
+
+  h1 {
+    font-size: 24pt;
+    margin-bottom: 1cm;
+  }
+
+  h2 {
+    font-size: 20pt;
+    margin-top: 1cm;
+    margin-bottom: 0.5cm;
+  }
+
+  h3 {
+    font-size: 16pt;
+    margin-top: 0.8cm;
+    margin-bottom: 0.4cm;
+  }
+
+  p,
+  ul,
+  li {
+    page-break-inside: avoid;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  .card {
+    border: 1px solid #ddd;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}
+
+.print-only {
+  display: none;
+}

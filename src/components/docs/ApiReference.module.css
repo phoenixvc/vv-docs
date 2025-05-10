@@ -1,0 +1,290 @@
+.apiReference {
+  margin: 2rem 0;
+}
+
+.apiTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.apiDescription {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.baseUrl {
+  background-color: var(--bg-secondary);
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.baseUrlLabel {
+  font-weight: 500;
+}
+
+.baseUrlCode {
+  font-family: var(--font-mono);
+  background-color: var(--code-inline-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.endpointCard {
+  margin-bottom: 1.5rem;
+}
+
+.endpointHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
+}
+
+.methodBadge {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.methodGet {
+  background-color: #e3f2fd;
+  color: #0277bd;
+}
+
+.methodPost {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.methodPut {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.methodDelete {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.methodPatch {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+.methodDefault {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+.endpointPath {
+  font-size: 1rem;
+}
+
+.endpointPath code {
+  font-family: var(--font-mono);
+  background-color: var(--code-inline-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.endpointDescription {
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.parametersSection,
+.requestBodySection,
+.responsesSection,
+.examplesSection {
+  margin-bottom: 1.5rem;
+}
+
+.parametersTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.parametersTable th,
+.parametersTable td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.parametersTable th {
+  font-weight: 600;
+  background-color: var(--bg-secondary);
+}
+
+.parametersTable code {
+  font-family: var(--font-mono);
+  background-color: var(--code-inline-bg);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.requestBodyDescription {
+  margin-bottom: 1rem;
+}
+
+.responseItem {
+  margin-bottom: 1.5rem;
+}
+
+.responseHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.statusBadge {
+  font-weight: 600;
+}
+
+.statusSuccess {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.statusRedirect {
+  background-color: #e3f2fd;
+  color: #0277bd;
+}
+
+.statusClientError {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.statusServerError {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.statusDefault {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+.responseDescription {
+  font-size: 0.875rem;
+}
+
+/* Dark mode adjustments */
+.dark-theme .apiDescription {
+  color: var(--dark-text-secondary);
+}
+
+.dark-theme .baseUrl {
+  background-color: var(--dark-bg-secondary);
+}
+
+.dark-theme .baseUrlCode {
+  background-color: var(--dark-code-inline-bg);
+}
+
+.dark-theme .endpointPath code {
+  background-color: var(--dark-code-inline-bg);
+}
+
+.dark-theme .sectionTitle {
+  border-bottom-color: var(--dark-border-color);
+}
+
+.dark-theme .parametersTable th,
+.dark-theme .parametersTable td {
+  border-bottom-color: var(--dark-border-color);
+}
+
+.dark-theme .parametersTable th {
+  background-color: var(--dark-bg-secondary);
+}
+
+.dark-theme .parametersTable code {
+  background-color: var(--dark-code-inline-bg);
+}
+
+/* Method colors for dark theme */
+.dark-theme .methodGet {
+  background-color: rgba(2, 119, 189, 0.2);
+  color: #64b5f6;
+}
+
+.dark-theme .methodPost {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #81c784;
+}
+
+.dark-theme .methodPut {
+  background-color: rgba(255, 143, 0, 0.2);
+  color: #ffb74d;
+}
+
+.dark-theme .methodDelete {
+  background-color: rgba(198, 40, 40, 0.2);
+  color: #e57373;
+}
+
+.dark-theme .methodPatch {
+  background-color: rgba(0, 131, 143, 0.2);
+  color: #4dd0e1;
+}
+
+.dark-theme .methodDefault {
+  background-color: rgba(97, 97, 97, 0.2);
+  color: #bdbdbd;
+}
+
+/* Status colors for dark theme */
+.dark-theme .statusSuccess {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #81c784;
+}
+
+.dark-theme .statusRedirect {
+  background-color: rgba(2, 119, 189, 0.2);
+  color: #64b5f6;
+}
+
+.dark-theme .statusClientError {
+  background-color: rgba(255, 143, 0, 0.2);
+  color: #ffb74d;
+}
+
+.dark-theme .statusServerError {
+  background-color: rgba(198, 40, 40, 0.2);
+  color: #e57373;
+}
+
+.dark-theme .statusDefault {
+  background-color: rgba(97, 97, 97, 0.2);
+  color: #bdbdbd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .endpointHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .parametersTable {
+    display: block;
+    overflow-x: auto;
+  }
+}

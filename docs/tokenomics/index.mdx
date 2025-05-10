@@ -1,0 +1,188 @@
+---
+title: Tokenomics Overview
+description: Comprehensive overview of the token economics, distribution, utility, and governance mechanisms in the multi-chain architecture.
+sidebar_label: Tokenomics
+sidebar_position: 6
+keywords: ['tokenomics', 'token', 'economics', 'distribution', 'utility', 'governance']
+last_update: '2025-05-06'
+authors: [{ name: 'Tokenomics Team', title: 'Core Contributors' }]
+custom_related_docs: ['token-distribution', 'token-utility', 'token-economics', 'token-governance', 'token-staking']
+custom_status: 'published'
+custom_complexity: 'intermediate'
+custom_prerequisites: ['project-overview']
+custom_assets: []
+custom_interactive: true
+custom_reading_time: 10
+custom_audience: ['investors', 'token holders', 'developers', 'analysts']
+custom_doc_type: 'reference'
+---
+
+import { SectionLevelOne } from '@site/src/components/docs';
+import { ContentBlock } from '@site/src/components/docs';
+import { DocCard } from '@site/src/components/docs';
+import { PieChart } from '@site/src/components/docs/charts';
+import { TokenDistributionChart } from '@site/src/components/docs/charts';
+
+<SectionLevelOne id="tokenomics-overview" title="Tokenomics Overview">
+  <ContentBlock>
+    ## Introduction to Tokenomics
+
+    The multi-chain architecture is powered by a dual-token system designed to align incentives, enable governance, and create sustainable economic value. Our tokenomics model is built on sound economic principles adapted for the unique requirements of a multi-chain ecosystem.
+
+    ## Token System
+
+    Our architecture employs two complementary tokens:
+
+    ### VVAI (VeritasVault.ai) Token
+
+    The VVAI token is the primary governance token of the ecosystem with the following characteristics:
+
+    - **Type**: Governance and utility token
+    - **Supply**: 100,000,000 VVAI (fixed supply)
+    - **Standard**: ERC-20 compatible, deployed on multiple chains
+    - **Utility**: Governance voting, staking, fee discounts, protocol access
+
+    ### VV-X (VeritasVault Utility) Token
+
+    The VV-X token is the utility token used for network operations:
+
+    - **Type**: Utility and work token
+    - **Supply**: Dynamic supply with controlled inflation
+    - **Standard**: Multi-chain native token
+    - **Utility**: Transaction fees, validator rewards, cross-chain operations
+
+    ## Token Distribution
+
+    The initial distribution of VVAI tokens is designed to ensure broad participation and aligned incentives:
+
+    <TokenDistributionChart
+      data={{
+        labels: ['Community Treasury', 'Team and Advisors', 'Investors', 'Ecosystem Development', 'Public Sale'],
+        datasets: [{
+          data: [40, 15, 20, 15, 10],
+          backgroundColor: [
+            '#3B82F6',
+            '#10B981',
+            '#F59E0B',
+            '#6366F1',
+            '#EC4899'
+          ]
+        }]
+      }}
+      height={300}
+    />
+
+    - **Community Treasury (40%)**: Controlled by DAO governance for ecosystem growth
+    - **Team and Advisors (15%)**: 4-year vesting with 1-year cliff
+    - **Investors (20%)**: Strategic and seed investors with vesting schedules
+    - **Ecosystem Development (15%)**: Grants, hackathons, and developer incentives
+    - **Public Sale (10%)**: Initial token offering to the public
+
+    ## Token Utility
+
+    The VVAI token provides multiple utilities within the ecosystem:
+
+    ### Governance
+
+    Token holders can participate in governance by:
+
+    - Proposing protocol upgrades and parameter changes
+    - Voting on improvement proposals
+    - Delegating voting power to trusted representatives
+    - Participating in specialized governance committees
+
+    ### Staking
+
+    Staking VVAI tokens provides several benefits:
+
+    - Earning a share of protocol fees
+    - Boosting yields in DeFi protocols
+    - Accessing premium features and services
+    - Reducing transaction fees across the network
+
+    ### Protocol Access
+
+    VVAI tokens enable access to premium protocol features:
+
+    - Priority transaction processing
+    - Advanced analytics and market data
+    - Higher transaction limits
+    - Access to beta features and tools
+
+    ## Economic Model
+
+    Our economic model is designed for long-term sustainability:
+
+    ### Fee Structure
+
+    The protocol generates revenue through several fee types:
+
+    - **Transaction Fees**: Fees for cross-chain transactions
+    - **Bridge Fees**: Fees for asset transfers between chains
+    - **Service Fees**: Fees for specialized services
+    - **Subscription Fees**: Recurring fees for premium features
+
+    ### Fee Distribution
+
+    Collected fees are distributed as follows:
+
+    - **Stakers (50%)**: Distributed to VVAI stakers
+    - **Treasury (30%)**: Added to the community treasury
+    - **Burn Mechanism (10%)**: Tokens burned to reduce supply
+    - **Development Fund (10%)**: Allocated for ongoing development
+
+    ### Token Burn Mechanism
+
+    The protocol implements a systematic token burn mechanism:
+
+    - A percentage of transaction fees are used to buy back and burn VVAI
+    - Tokens are burned based on network usage and growth
+    - Burn rate adjusts dynamically based on market conditions
+    - Quarterly burn events with transparent reporting
+
+    ## Governance Framework
+
+    The governance system evolves through three phases:
+
+    ### Phase 1: Foundation Governance
+
+    - Core team maintains admin keys with community oversight
+    - Major decisions require community approval
+    - Transparent governance process with public discussions
+
+    ### Phase 2: Hybrid Governance
+
+    - Introduction of on-chain governance for key parameters
+    - Formation of specialized governance committees
+    - Gradual transition of authority to the DAO
+
+    ### Phase 3: Full DAO Governance
+
+    - Complete transition to on-chain governance
+    - Tiered governance system for different decision types
+    - Cross-chain governance coordination
+  </ContentBlock>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+    <DocCard
+      title="Token Distribution"
+      description="Detailed breakdown of token allocation and vesting schedules."
+      to="/docs/tokenomics/distribution"
+    />
+    <DocCard
+      title="Token Utility"
+      description="In-depth explanation of token utility and use cases."
+      to="/docs/tokenomics/utility"
+    />
+    <DocCard
+      title="Token Economics"
+      description="Analysis of the economic model and value accrual mechanisms."
+      to="/docs/tokenomics/economics"
+    />
+    <DocCard
+      title="Token Governance"
+      description="Details of the governance system and voting mechanisms."
+      to="/docs/tokenomics/governance"
+    />
+  </div>
+</SectionLevelOne>

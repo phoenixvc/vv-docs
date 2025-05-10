@@ -1,0 +1,103 @@
+---
+title: High-Level Architecture Diagram
+description: Overview diagram of the main system components
+---
+
+import { DiagramBlock } from '@/components/section-templates/diagram-block';
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { SectionAnchor } from '@/components/section-anchor';
+
+# High-Level Architecture Diagram
+
+<ContentBlock>
+  This diagram provides a high-level overview of our system architecture, showing the main components and their relationships.
+</ContentBlock>
+
+<SectionAnchor id="system-overview" />
+
+## System Overview
+
+<DiagramBlock title="High-Level System Architecture">
+  \```mermaid
+  graph TD
+    A[Client Applications] --> B[API Gateway]
+    B --> C[Authentication Service]
+    B --> D[Transaction Service]
+    B --> E[Analytics Service]
+    D --> F[Blockchain Adapters]
+    F --> G[Multiple Blockchains]
+    E --> H[Data Warehouse]
+    
+    classDef client fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef service fill:#e6f7ff,stroke:#333,stroke-width:2px;
+    classDef storage fill:#f0f0f0,stroke:#333,stroke-width:2px;
+    classDef blockchain fill:#f5f5dc,stroke:#333,stroke-width:2px;
+    
+    class A client;
+    class B,C,D,E service;
+    class H storage;
+    class F,G blockchain;
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="component-descriptions" />
+
+## Component Descriptions
+
+### Client Applications
+
+The entry points for users to interact with our system:
+
+- Web applications
+- Mobile applications
+- Desktop clients
+- Third-party integrations
+
+### API Gateway
+
+The central entry point for all client requests:
+
+- Request routing
+- Authentication and authorization
+- Rate limiting
+- Request/response transformation
+- API documentation
+
+### Core Services
+
+Our system includes several core microservices:
+
+- **Authentication Service**: Handles user authentication and authorization
+- **Transaction Service**: Processes financial transactions
+- **Analytics Service**: Collects and analyzes system data
+
+### Blockchain Adapters
+
+Specialized components that interface with blockchain networks:
+
+- Abstract blockchain-specific details
+- Handle transaction signing and verification
+- Manage blockchain state synchronization
+- Implement retry and fallback mechanisms
+
+### Data Storage
+
+Various data storage systems used by our services:
+
+- Relational databases for structured data
+- NoSQL databases for flexible schema data
+- Data warehouse for analytics
+- Blockchain for immutable records
+
+<SectionAnchor id="related-diagrams" />
+
+## Related Diagrams
+
+For more detailed views of specific aspects of our architecture, see:
+
+- [Layered Architecture](/architecture/diagrams/layered-architecture)
+- [Cloud Infrastructure](/architecture/diagrams/cloud-infrastructure)
+- [Blockchain Integration](/architecture/diagrams/blockchain-integration)
+- [Data Flow](/architecture/diagrams/data-flow)
+
+Or return to the [Architecture Diagrams](/architecture/diagrams) overview.

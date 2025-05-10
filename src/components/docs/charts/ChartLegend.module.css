@@ -1,0 +1,73 @@
+.legend {
+  width: 100%;
+  font-size: 0.75rem;
+}
+
+.top,
+.bottom {
+  margin: 0.5rem 0;
+}
+
+.left,
+.right {
+  margin: 0 0.5rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.left .list,
+.right .list {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.item:hover {
+  opacity: 0.8;
+}
+
+.hidden {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  margin-right: 0.25rem;
+  flex-shrink: 0;
+}
+
+.label {
+  color: var(--legend-label-color, #4a5568);
+}
+
+.value {
+  margin-left: 0.25rem;
+  font-weight: 500;
+  color: var(--legend-value-color, #2d3748);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .label {
+    --legend-label-color: #cbd5e0;
+  }
+
+  .value {
+    --legend-value-color: #e2e8f0;
+  }
+}

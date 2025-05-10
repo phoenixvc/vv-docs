@@ -1,0 +1,148 @@
+.container {
+  background-color: var(--bg-surface);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+.chainSelector {
+  margin-bottom: 1.5rem;
+}
+
+.checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  margin: 0;
+}
+
+.riskIndicator {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.riskPill {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.low {
+  background-color: rgba(53, 162, 235, 0.2);
+  color: #1e70b8;
+}
+
+.medium {
+  background-color: rgba(255, 159, 64, 0.2);
+  color: #b86e1e;
+}
+
+.high {
+  background-color: rgba(255, 99, 132, 0.2);
+  color: #b81e4b;
+}
+
+.chartContainer {
+  margin-bottom: 2rem;
+  height: 400px;
+}
+
+.resultsTable {
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--bg-subtle);
+}
+
+.table tr:nth-child(even) {
+  background-color: var(--bg-subtle);
+}
+
+.alert {
+  margin-bottom: 1.5rem;
+}
+
+.disclaimer {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+  }
+
+  .checkboxes {
+    flex-direction: column;
+  }
+}

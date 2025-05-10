@@ -1,0 +1,318 @@
+---
+id: search-optimization
+title: Search Optimization Guide
+sidebar_label: Search Optimization
+description: Best practices for optimizing your documentation for search engines and internal search tools
+keywords:
+  - search
+  - SEO
+  - DocSearch
+  - Algolia
+  - indexing
+---
+
+import { ContentBlock } from '@site/src/components/docs/ContentBlock';
+import { DiagramBlock } from '@site/src/components/docs/DiagramBlock';
+import { CodeExampleBlock } from '@site/src/components/docs/CodeExampleBlock';
+import { Admonition } from '@site/src/components/docs/Admonition';
+import { SectionLevelOne } from '@site/src/components/docs/SectionLevel';
+import { SectionLevelTwo } from '@site/src/components/docs/SectionLevel';
+import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
+
+<SectionLevelOne id="introduction" title="Introduction">
+  <ContentBlock>
+    Search is a critical component of any documentation site. Users rely on search to quickly find the information they need, and optimizing your documentation for search can significantly improve the user experience. This guide focuses on best practices for optimizing your documentation for both internal search tools like Algolia DocSearch and external search engines.
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="algolia-docsearch" title="Algolia DocSearch Optimization">
+  <ContentBlock>
+    Algolia DocSearch is a powerful search solution specifically designed for documentation websites. It provides relevant search results by understanding the structure of your documentation. To get the most out of DocSearch, follow these optimization tips.
+  </ContentBlock>
+  
+  <SectionLevelTwo id="sitemap-xml" title="Use a sitemap.xml">
+    <ContentBlock>
+      If you provide a sitemap in your configuration, DocSearch will use it to directly browse the pages to index. Pages are still crawled which means we extract every compliant link.
+      
+      We highly recommend you add a `sitemap.xml` to your website if you don't have one already. This will not only make the indexing faster, but also provide you more control over which pages to index.
+      
+      Sitemaps are also considered good practice for other aspects, including SEO.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="xml" title="Example sitemap.xml">
+      {`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/docs/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://example.com/docs/getting-started</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Additional URLs -->
+</urlset>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      Most modern documentation frameworks like Docusaurus automatically generate a sitemap.xml file for you.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="hierarchy-information" title="Structure the Hierarchy of Information">
+    <ContentBlock>
+      DocSearch works better on structured documentation. Relevance of results is based on the structural hierarchy of content. In simpler terms, it means that we read the `<h1>`, ..., `<h6>` headings of your page to guess the hierarchy of information. This hierarchy brings contextual information to your records.
+      
+      Documentation starts by explaining generic concepts first and then goes deeper into specifics. This is represented in your HTML markup by the hierarchy of headings you're using. For example, concepts discussed under a `<h4>` are more specific than concepts discussed under a `<h2>` in the same page. The sooner the information comes up within the page, the higher it is ranked.
+      
+      DocSearch uses this structure to fine-tune the relevance of results as well as to provide potential filtering. Documentations that follow this pattern often have better relevance in their search results.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Proper Heading Structure">
+      {`<!-- Main topic of the page -->
+<h1>Multi-Chain Architecture</h1>
+
+<!-- Major section -->
+<h2>Cross-Chain Communication</h2>
+
+<!-- Sub-section -->
+<h3>Message Passing Protocol</h3>
+
+<!-- Detailed component -->
+<h4>Serialization Format</h4>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      Finding the right depth of your documentation tree is one of the most complex tasks. For large documentation sites, we recommend having 3-4 levels of headings (from h1 to h3/h4). Try to maintain at least three different heading levels for proper content organization.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="unique-content-class" title="Set a Unique Class to the Element Holding the Content">
+    <ContentBlock>
+      To help DocSearch identify your main content, add a unique CSS class to the element that contains your documentation content. This helps distinguish the main content from navigation, footers, and other page elements.
+      
+      In your DocSearch configuration, you can specify this class as the content selector to ensure only relevant content is indexed.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Adding a Unique Content Class">
+      {`<div class="main-content">
+  <h1>Getting Started</h1>
+  <p>This guide will help you set up the system...</p>
+  <!-- Rest of your documentation content -->
+</div>`}
+    </CodeExampleBlock>
+    
+    <CodeExampleBlock language="json" title="DocSearch Configuration">
+      {`{
+  "index_name": "your_index_name",
+  "start_urls": ["https://your-website.com/docs"],
+  "selectors": {
+    "lvl0": ".main-content h1",
+    "lvl1": ".main-content h2",
+    "lvl2": ".main-content h3",
+    "lvl3": ".main-content h4",
+    "lvl4": ".main-content h5",
+    "lvl5": ".main-content h6",
+    "text": ".main-content p, .main-content li"
+  }
+}`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="add-anchors" title="Add Anchors to Headings">
+    <ContentBlock>
+      Adding anchor links to headings allows DocSearch to create more granular search results, directing users to the exact section they're looking for rather than just the page.
+      
+      These anchors also improve the user experience by allowing direct navigation to specific sections of your documentation.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Adding Anchors to Headings">
+      {`<h2 id="installation">Installation</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<h3 id="step-by-step">Step-by-Step Guide</h3>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      Most documentation frameworks like Docusaurus automatically add anchor IDs to headings. Make sure these IDs are descriptive and consistent.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="active-pages" title="Mark the Active Page(s) in the Navigation">
+    <ContentBlock>
+      Clearly indicating the current page in your navigation helps DocSearch understand the structure of your documentation. This improves the relevance of search results by providing context about the current content's place in the overall documentation.
+      
+      Use CSS classes like `active` or `current` to highlight the current page in navigation menus and breadcrumbs.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Marking Active Navigation Items">
+      {`<nav>
+  <ul>
+    <li><a href="/docs/intro">Introduction</a></li>
+    <li><a href="/docs/setup" class="active">Setup Guide</a></li>
+    <li><a href="/docs/api">API Reference</a></li>
+  </ul>
+</nav>`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="content-consistency" title="Consistency of Content">
+    <ContentBlock>
+      Maintain consistent terminology, formatting, and structure throughout your documentation. Consistency helps DocSearch build better relationships between content and improves the relevance of search results.
+      
+      Create and follow a style guide that defines terminology and naming conventions to ensure consistency across your documentation.
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="avoid-duplicates" title="Avoid Duplicates by Promoting Unicity">
+    <ContentBlock>
+      Duplicate content confuses DocSearch and can lead to suboptimal search results. Each piece of information should exist in only one place in your documentation. Instead of repeating information, use cross-references to link to the canonical source.
+    </ContentBlock>
+    
+    <Admonition type="warning">
+      When DocSearch finds duplicate content, it may arbitrarily choose which version to index, potentially ignoring your preferred canonical version.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="conciseness" title="Conciseness">
+    <ContentBlock>
+      Write clear, concise documentation that focuses on providing essential information. Concise content is easier for DocSearch to index and for users to scan and understand.
+      
+      Tips for concise writing:
+      
+      - Use active voice
+      - Eliminate redundant phrases
+      - Break complex concepts into digestible chunks
+      - Use lists and tables for structured information
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="general-seo" title="General SEO Best Practices">
+  <SectionLevelTwo id="metadata" title="Include Proper Metadata">
+    <ContentBlock>
+      Add descriptive metadata to your documentation pages to improve search engine optimization:
+      
+      - Title tags: Concise, descriptive page titles
+      - Meta descriptions: Brief summaries of page content
+      - Keywords: Relevant terms related to the page content
+      - Open Graph tags: For better social media sharing
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Example Metadata">
+      {`<head>
+  <title>Getting Started with Multi-Chain Architecture</title>
+  <meta name="description" content="Learn how to set up and configure a multi-chain architecture for cross-chain communication and asset transfers." />
+  <meta name="keywords" content="blockchain, multi-chain, architecture, cross-chain, integration" />
+  <meta property="og:title" content="Getting Started with Multi-Chain Architecture" />
+  <meta property="og:description" content="Learn how to set up and configure a multi-chain architecture for cross-chain communication and asset transfers." />
+  <meta property="og:type" content="article" />
+</head>`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="semantic-html" title="Use Semantic HTML">
+    <ContentBlock>
+      Semantic HTML improves SEO by providing context and meaning to search engines. Use appropriate HTML elements for their intended purpose:
+      
+      - `<nav>` for navigation
+      - `<main>` for main content
+      - `<section>` for distinct sections
+      - `<article>` for self-contained content
+      - `<aside>` for tangentially related content
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="mobile-friendly" title="Ensure Mobile-Friendliness">
+    <ContentBlock>
+      Search engines prioritize mobile-friendly websites in their rankings. Ensure your documentation is responsive and provides a good experience on mobile devices:
+      
+      - Use responsive design principles
+      - Test on various device sizes
+      - Ensure touch targets are large enough
+      - Optimize images for mobile
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="page-speed" title="Optimize Page Speed">
+    <ContentBlock>
+      Page speed is a ranking factor for search engines. Optimize your documentation site for fast loading:
+      
+      - Minimize and compress CSS and JavaScript
+      - Optimize and lazy-load images
+      - Use browser caching
+      - Consider a content delivery network (CDN)
+      - Implement server-side rendering or static site generation
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="internal-linking" title="Implement Strategic Internal Linking">
+    <ContentBlock>
+      Internal links help search engines understand the structure and hierarchy of your documentation. They also help users navigate between related topics:
+      
+      - Link to related content within your documentation
+      - Use descriptive anchor text that includes relevant keywords
+      - Create a logical link structure that reflects your content hierarchy
+      - Consider adding a "Related Topics" section at the end of each page
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="implementation" title="Implementation Guide">
+  <SectionLevelTwo id="docsearch-implementation" title="Implementing Algolia DocSearch">
+    <ContentBlock>
+      To implement Algolia DocSearch in your documentation:
+      
+      1. Apply for DocSearch at [docsearch.algolia.com/apply](https://docsearch.algolia.com/apply/)
+      2. Once approved, you'll receive a configuration file and API keys
+      3. Add the DocSearch script and stylesheet to your website
+      4. Initialize DocSearch with your configuration
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="DocSearch Implementation">
+      {`<!-- Add DocSearch CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+
+<!-- Add DocSearch JS -->
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<!-- Initialize DocSearch -->
+<script>
+  docsearch({
+    container: '#docsearch',
+    appId: 'YOUR_APP_ID',
+    indexName: 'YOUR_INDEX_NAME',
+    apiKey: 'YOUR_SEARCH_API_KEY'
+  });
+</script>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="note">
+      If you're using a documentation framework like Docusaurus, it may have built-in support for DocSearch that simplifies the implementation process.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="monitoring-search" title="Monitoring Search Performance">
+    <ContentBlock>
+      After implementing search, monitor its performance to identify areas for improvement:
+      
+      - Track popular search queries
+      - Identify searches with no results
+      - Monitor click-through rates on search results
+      - Collect user feedback on search experience
+      
+      Use this data to refine your content and search configuration for better results.
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="conclusion" title="Conclusion">
+  <ContentBlock>
+    Optimizing your documentation for search is an ongoing process that requires attention to structure, content quality, and technical implementation. By following the best practices outlined in this guide, you can create a search experience that helps users quickly find the information they need.
+    
+    Remember that the ultimate goal is to help users solve their problems efficiently. A well-optimized search function is a key component of achieving this goal.
+  </ContentBlock>
+</SectionLevelOne>

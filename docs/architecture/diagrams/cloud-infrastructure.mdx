@@ -1,0 +1,175 @@
+---
+title: Cloud Infrastructure Diagram
+description: Diagram of our cloud deployment architecture
+---
+
+import { DiagramBlock } from '@/components/section-templates/diagram-block';
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { SectionAnchor } from '@/components/section-anchor';
+
+# Cloud Infrastructure Diagram
+
+<ContentBlock>
+  This diagram illustrates our cloud infrastructure deployment, showing how our system components are deployed across cloud services.
+</ContentBlock>
+
+<SectionAnchor id="cloud-overview" />
+
+## Cloud Overview
+
+<DiagramBlock title="Cloud Infrastructure Architecture">
+  \```mermaid
+  graph TD
+    A[Users] --> B[CDN]
+    B --> C[Load Balancer]
+    C --> D[API Gateway Cluster]
+    D --> E[Service Mesh]
+    E --> F[Microservices Cluster]
+    F --> G[Database Cluster]
+    F --> H[Cache Cluster]
+    F --> I[Message Queue]
+    I --> J[Event Processors]
+    J --> G
+    
+    subgraph "Public Zone"
+      A
+      B
+    end
+    
+    subgraph "DMZ"
+      C
+      D
+    end
+    
+    subgraph "Private Zone"
+      E
+      F
+      G
+      H
+      I
+      J
+    end
+    
+    classDef public fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef dmz fill:#e6f7ff,stroke:#333,stroke-width:2px;
+    classDef private fill:#f0f0f0,stroke:#333,stroke-width:2px;
+    
+    class A,B public;
+    class C,D dmz;
+    class E,F,G,H,I,J private;
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="infrastructure-components" />
+
+## Infrastructure Components
+
+### Content Delivery Network (CDN)
+
+- Distributes static content globally
+- Reduces latency for end users
+- Provides DDoS protection
+- Caches static assets
+
+### Load Balancer
+
+- Distributes traffic across multiple instances
+- Performs health checks
+- Handles SSL termination
+- Provides basic WAF capabilities
+
+### API Gateway Cluster
+
+- Routes requests to appropriate services
+- Handles authentication and authorization
+- Implements rate limiting
+- Provides API documentation
+
+### Service Mesh
+
+- Manages service-to-service communication
+- Implements circuit breaking
+- Provides service discovery
+- Collects metrics and traces
+
+### Microservices Cluster
+
+- Runs containerized microservices
+- Auto-scales based on demand
+- Self-heals failed instances
+- Manages deployment rollouts
+
+### Database Cluster
+
+- Provides persistent storage
+- Implements replication for high availability
+- Handles automatic backups
+- Supports point-in-time recovery
+
+### Cache Cluster
+
+- Improves read performance
+- Reduces database load
+- Provides distributed locking
+- Supports pub/sub messaging
+
+### Message Queue
+
+- Enables asynchronous processing
+- Decouples services
+- Provides guaranteed delivery
+- Supports event-driven architecture
+
+### Event Processors
+
+- Process events from the message queue
+- Update the system state
+- Generate derived events
+- Integrate with external systems
+
+<SectionAnchor id="deployment-regions" />
+
+## Deployment Regions
+
+Our infrastructure is deployed across multiple geographic regions:
+
+- Primary region: US East
+- Secondary regions: EU Central, Asia Pacific
+- Edge locations: Global CDN presence
+
+<DiagramBlock title="Multi-Region Deployment">
+  \```mermaid
+  graph LR
+    A[Global Traffic] --> B[Global Load Balancer]
+    B --> C[US East Region]
+    B --> D[EU Central Region]
+    B --> E[Asia Pacific Region]
+    
+    C --> F[US East Data]
+    D --> G[EU Central Data]
+    E --> H[Asia Pacific Data]
+    
+    F <--> G
+    G <--> H
+    H <--> F
+    
+    classDef region fill:#e6f7ff,stroke:#333,stroke-width:2px;
+    classDef data fill:#f0f0f0,stroke:#333,stroke-width:2px;
+    
+    class C,D,E region;
+    class F,G,H data;
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="related-diagrams" />
+
+## Related Diagrams
+
+For more detailed views of specific aspects of our architecture, see:
+
+- [High-Level Architecture](/architecture/diagrams/high-level-architecture)
+- [Layered Architecture](/architecture/diagrams/layered-architecture)
+- [Blockchain Integration](/architecture/diagrams/blockchain-integration)
+- [Data Flow](/architecture/diagrams/data-flow)
+
+Or return to the [Architecture Diagrams](/architecture/diagrams) overview.

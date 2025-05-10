@@ -1,0 +1,452 @@
+---
+id: documentation-best-practices
+title: Documentation Best Practices
+sidebar_label: Best Practices
+description: Comprehensive guide to creating effective, searchable, and maintainable documentation
+keywords:
+  - documentation
+  - best practices
+  - search optimization
+  - content structure
+  - accessibility
+---
+
+import { ContentBlock } from '@site/src/components/docs/ContentBlock';
+import { DiagramBlock } from '@site/src/components/docs/DiagramBlock';
+import { CodeExampleBlock } from '@site/src/components/docs/CodeExampleBlock';
+import { Admonition } from '@site/src/components/docs/Admonition';
+import { SectionLevelOne } from '@site/src/components/docs/SectionLevel';
+import { SectionLevelTwo } from '@site/src/components/docs/SectionLevel';
+import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
+
+<SectionLevelOne id="introduction" title="Introduction">
+  <ContentBlock>
+    Effective documentation is critical for user adoption, developer productivity, and overall project success. This guide outlines best practices for creating high-quality, searchable, and maintainable documentation that serves your users' needs.
+    
+    Following these guidelines will help ensure your documentation is:
+    
+    - **Discoverable**: Users can find what they need quickly
+    - **Accessible**: Content is available to all users regardless of ability
+    - **Accurate**: Information is correct and up-to-date
+    - **Comprehensive**: All necessary topics are covered
+    - **Consistent**: Style and structure are uniform throughout
+    - **Searchable**: Content is optimized for search engines and internal search
+  </ContentBlock>
+</SectionLevelOne>
+
+<SectionLevelOne id="content-structure" title="Content Structure">
+  <SectionLevelTwo id="hierarchy-information" title="Structure the Hierarchy of Information">
+    <ContentBlock>
+      DocSearch and other search engines work better with structured documentation. Relevance of search results is based on the structural hierarchy of content. In simpler terms, this means using proper heading levels (`<h1>` through `<h6>`) to establish a clear information hierarchy.
+      
+      Documentation should start by explaining generic concepts first and then go deeper into specifics. This is represented in your HTML markup by the hierarchy of headings. For example, concepts discussed under an `<h4>` are more specific than concepts discussed under an `<h2>` on the same page.
+      
+      The sooner information appears within the page, the higher it is ranked in search results. This structure helps fine-tune the relevance of results and provides potential filtering options.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Proper Heading Structure">
+      {`<!-- Main topic of the page -->
+<h1>Multi-Chain Architecture</h1>
+
+<!-- Major section -->
+<h2>Cross-Chain Communication</h2>
+
+<!-- Sub-section -->
+<h3>Message Passing Protocol</h3>
+
+<!-- Detailed component -->
+<h4>Serialization Format</h4>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      Finding the right depth of your documentation tree is one of the most complex tasks. For large documentation sites, we recommend having 3-4 levels of headings (from h1 to h3/h4). Try to maintain at least three different heading levels for proper content organization.
+    </Admonition>
+    
+    <Admonition type="note">
+      You don't have to use `<hx>` tags directly. You can use classes instead (e.g., `<span class="title-xl">`). What matters is the semantic structure of your content.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="unique-content-classes" title="Set a Unique Class to the Element Holding the Content">
+    <ContentBlock>
+      To help search engines identify your main content, add a unique CSS class to the element that contains your documentation content. This helps distinguish the main content from navigation, footers, and other page elements.
+      
+      DocSearch and other search tools can use this class as a selector to focus on indexing the most relevant content while ignoring boilerplate elements.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Adding a Unique Content Class">
+      {`<div class="main-content">
+  <h1>Getting Started</h1>
+  <p>This guide will help you set up the system...</p>
+  <!-- Rest of your documentation content -->
+</div>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      In your DocSearch configuration, you can specify this class as the content selector to ensure only relevant content is indexed.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="add-anchors" title="Add Anchors to Headings">
+    <ContentBlock>
+      Adding anchor links to headings allows users to directly navigate to specific sections of your documentation. This improves the user experience and makes your content more shareable.
+      
+      These anchors also help search engines create more granular search results, directing users to the exact section they're looking for rather than just the page.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Adding Anchors to Headings">
+      {`<h2 id="installation">Installation</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<h3 id="step-by-step">Step-by-Step Guide</h3>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      Most documentation frameworks like Docusaurus automatically add anchor IDs to headings. Make sure these IDs are descriptive and consistent.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="active-pages" title="Mark the Active Page(s) in the Navigation">
+    <ContentBlock>
+      Clearly indicating the current page in your navigation helps users understand where they are in your documentation structure. This improves user orientation and provides context about the current content's place in the overall documentation.
+      
+      Use CSS classes like `active` or `current` to highlight the current page in navigation menus and breadcrumbs.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Marking Active Navigation Items">
+      {`<nav>
+  <ul>
+    <li><a href="/docs/intro">Introduction</a></li>
+    <li><a href="/docs/setup" class="active">Setup Guide</a></li>
+    <li><a href="/docs/api">API Reference</a></li>
+  </ul>
+</nav>`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="content-quality" title="Content Quality">
+  <SectionLevelTwo id="consistency" title="Consistency of Content">
+    <ContentBlock>
+      Maintain consistent terminology, formatting, and structure throughout your documentation. Consistency helps users build mental models of your content and reduces cognitive load when navigating between different sections.
+      
+      Create and follow a style guide that defines:
+      
+      - Terminology and naming conventions
+      - Voice and tone
+      - Formatting standards
+      - Code example styles
+      - Image and diagram guidelines
+    </ContentBlock>
+    
+    <Admonition type="tip">
+      Consider creating a glossary of terms to ensure consistent usage of technical terminology across your documentation.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="avoid-duplicates" title="Avoid Duplicates by Promoting Unicity">
+    <ContentBlock>
+      Duplicate content confuses users and search engines alike. Each piece of information should exist in only one place in your documentation. Instead of repeating information, use cross-references to link to the canonical source.
+      
+      Benefits of content unicity include:
+      
+      - Easier maintenance (update in one place)
+      - Clearer search results (no competing identical pages)
+      - Better user experience (consistent information)
+    </ContentBlock>
+    
+    <Admonition type="warning">
+      When search engines find duplicate content, they may arbitrarily choose which version to index, potentially ignoring your preferred canonical version.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="conciseness" title="Conciseness">
+    <ContentBlock>
+      Write clear, concise documentation that respects your readers' time. Focus on providing the essential information without unnecessary verbosity.
+      
+      Tips for concise writing:
+      
+      - Use active voice
+      - Eliminate redundant phrases
+      - Break complex concepts into digestible chunks
+      - Use lists and tables for structured information
+      - Include only relevant details
+    </ContentBlock>
+    
+    <Admonition type="tip">
+      After writing a section, review it and try to reduce the word count by 10-20% without losing important information.
+    </Admonition>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="search-optimization" title="Search Optimization">
+  <SectionLevelTwo id="sitemap" title="Use a sitemap.xml">
+    <ContentBlock>
+      A sitemap.xml file helps search engines discover and index all pages of your documentation. If you provide a sitemap in your configuration, DocSearch will use it to directly browse the pages to index, extracting every compliant link.
+      
+      Adding a sitemap.xml to your website offers several benefits:
+      
+      - Makes the indexing process faster and more reliable
+      - Provides more control over which pages are indexed
+      - Improves SEO for your documentation
+    </ContentBlock>
+    
+    <CodeExampleBlock language="xml" title="Example sitemap.xml">
+      {`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/docs/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://example.com/docs/getting-started</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Additional URLs -->
+</urlset>`}
+    </CodeExampleBlock>
+    
+    <Admonition type="tip">
+      Most documentation frameworks like Docusaurus can automatically generate a sitemap.xml file for you.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="metadata" title="Include Proper Metadata">
+    <ContentBlock>
+      Add descriptive metadata to your documentation pages to improve search relevance and SEO. Key metadata elements include:
+      
+      - Title tags: Concise, descriptive page titles
+      - Meta descriptions: Brief summaries of page content
+      - Keywords: Relevant terms related to the page content
+      - Open Graph tags: For better social media sharing
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Example Metadata">
+      {`<head>
+  <title>Getting Started with Multi-Chain Architecture</title>
+  <meta name="description" content="Learn how to set up and configure a multi-chain architecture for cross-chain communication and asset transfers." />
+  <meta name="keywords" content="blockchain, multi-chain, architecture, cross-chain, integration" />
+  <meta property="og:title" content="Getting Started with Multi-Chain Architecture" />
+  <meta property="og:description" content="Learn how to set up and configure a multi-chain architecture for cross-chain communication and asset transfers." />
+  <meta property="og:type" content="article" />
+</head>`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="accessibility" title="Accessibility">
+  <SectionLevelTwo id="semantic-markup" title="Use Semantic HTML">
+    <ContentBlock>
+      Semantic HTML improves accessibility by providing context and meaning to screen readers and other assistive technologies. Use appropriate HTML elements for their intended purpose:
+      
+      - `<nav>` for navigation
+      - `<main>` for main content
+      - `<section>` for distinct sections
+      - `<article>` for self-contained content
+      - `<aside>` for tangentially related content
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Semantic HTML Example">
+      {`<main>
+  <article>
+    <header>
+      <h1>API Reference</h1>
+    </header>
+    <section>
+      <h2>Authentication</h2>
+      <p>Details about authentication...</p>
+    </section>
+    <aside>
+      <h3>Related Resources</h3>
+      <ul>
+        <li><a href="/docs/security">Security Guide</a></li>
+      </ul>
+    </aside>
+  </article>
+</main>`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="alt-text" title="Provide Alt Text for Images">
+    <ContentBlock>
+      Always include descriptive alternative text for images to ensure users with visual impairments can understand the content. Good alt text should:
+      
+      - Be concise but descriptive
+      - Convey the purpose and content of the image
+      - Not be redundant with surrounding text
+      - Not include phrases like "image of" or "picture of"
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Alt Text Examples">
+      {`<!-- Good alt text -->
+<img src="/diagrams/architecture.png" alt="Multi-chain architecture with three layers: consensus, execution, and application" />
+
+<!-- Bad alt text -->
+<img src="/diagrams/architecture.png" alt="Architecture diagram" />`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="keyboard-navigation" title="Ensure Keyboard Navigation">
+    <ContentBlock>
+      Make sure all interactive elements in your documentation are accessible via keyboard navigation. This includes:
+      
+      - Ensuring all links and buttons are focusable
+      - Providing visible focus indicators
+      - Maintaining a logical tab order
+      - Implementing proper ARIA attributes where needed
+    </ContentBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="maintenance" title="Documentation Maintenance">
+  <SectionLevelTwo id="versioning" title="Version Your Documentation">
+    <ContentBlock>
+      As your product evolves, maintain versioned documentation to ensure users can access information relevant to the version they're using. Proper versioning:
+      
+      - Helps users find the right information for their version
+      - Preserves historical documentation for legacy users
+      - Allows you to update documentation in sync with product releases
+    </ContentBlock>
+    
+    <Admonition type="tip">
+      Docusaurus provides built-in versioning capabilities that make it easy to maintain multiple versions of your documentation.
+    </Admonition>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="review-process" title="Establish a Review Process">
+    <ContentBlock>
+      Implement a systematic review process to ensure documentation quality and accuracy:
+      
+      1. **Technical review**: Ensure technical accuracy
+      2. **Editorial review**: Check for clarity, consistency, and grammar
+      3. **User testing**: Validate that users can accomplish tasks using the documentation
+      
+      Schedule regular reviews of existing documentation to keep it up-to-date with product changes.
+    </ContentBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="feedback-mechanism" title="Collect User Feedback">
+    <ContentBlock>
+      Provide mechanisms for users to give feedback on your documentation:
+      
+      - Add a feedback widget to documentation pages
+      - Include a "Was this helpful?" prompt
+      - Provide clear contact information for documentation issues
+      - Consider an open GitHub repository for documentation contributions
+      
+      Regularly review and act on user feedback to continuously improve your documentation.
+    </ContentBlock>
+    
+    <CodeExampleBlock language="html" title="Simple Feedback Widget">
+      {`<div class="feedback-widget">
+  <p>Was this page helpful?</p>
+  <button class="feedback-btn" data-value="yes">Yes</button>
+  <button class="feedback-btn" data-value="no">No</button>
+  <div class="feedback-form" style="display: none;">
+    <textarea placeholder="How can we improve this page?"></textarea>
+    <button type="submit">Submit Feedback</button>
+  </div>
+</div>`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="technical-documentation" title="Technical Documentation Best Practices">
+  <SectionLevelTwo id="code-examples" title="Provide Clear Code Examples">
+    <ContentBlock>
+      Effective code examples are crucial for technical documentation:
+      
+      - Include complete, working examples that users can copy and use
+      - Use syntax highlighting for better readability
+      - Explain complex or non-obvious parts of the code
+      - Show both basic and advanced usage patterns
+      - Include expected output where applicable
+    </ContentBlock>
+    
+    <CodeExampleBlock language="javascript" title="Example with Comments">
+      {`// Initialize the client with your API key
+const client = new MultiChainClient({
+  apiKey: process.env.API_KEY, // Store sensitive values in environment variables
+  networks: ['ethereum', 'polygon'], // Specify target networks
+  timeout: 30000 // Increase timeout for cross-chain operations
+});
+
+// Execute a cross-chain transfer
+const result = await client.transfer({
+  sourceChain: 'ethereum',
+  targetChain: 'polygon',
+  asset: 'USDC',
+  amount: '100.00',
+  recipient: '0x1234...5678'
+});
+
+console.log(result.transactionHash); // Output the transaction hash`}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+  
+  <SectionLevelTwo id="api-documentation" title="Standardize API Documentation">
+    <ContentBlock>
+      For API documentation, maintain a consistent structure that includes:
+      
+      - Endpoint description and purpose
+      - Request parameters and their types
+      - Response format and possible status codes
+      - Authentication requirements
+      - Rate limiting information
+      - Example requests and responses
+    </ContentBlock>
+    
+    <CodeExampleBlock language="markdown" title="API Documentation Template">
+      {`## Get User Profile
+
+Retrieves the profile information for a specified user.
+
+### Endpoint
+
+\`GET /api/v1/users/{userId}\`
+
+### Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| userId | string | Yes | The unique identifier of the user |
+
+### Response
+
+\`\`\`json
+{
+  "id": "123456",
+  "username": "johndoe",
+  "email": "john@example.com",
+  "createdAt": "2023-01-15T08:30:00Z"
+}
+\`\`\`
+
+### Status Codes
+
+| Code | Description |
+|------|-------------|
+| 200 | Success |
+| 404 | User not found |
+| 401 | Unauthorized |
+
+### Example
+
+\`\`\`bash
+curl -X GET "https://api.example.com/api/v1/users/123456" \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\``}
+    </CodeExampleBlock>
+  </SectionLevelTwo>
+</SectionLevelOne>
+
+<SectionLevelOne id="conclusion" title="Conclusion">
+  <ContentBlock>
+    Creating effective documentation is an ongoing process that requires attention to structure, content quality, search optimization, accessibility, and maintenance. By following these best practices, you can create documentation that truly serves your users' needs and enhances their experience with your product.
+    
+    Remember that good documentation evolves with your product and your understanding of user needs. Regularly review and refine your documentation strategy based on user feedback and changing requirements.
+  </ContentBlock>
+</SectionLevelOne>

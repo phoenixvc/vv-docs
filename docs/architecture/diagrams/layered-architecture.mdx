@@ -1,0 +1,163 @@
+---
+title: Layered Architecture Diagram
+description: Detailed view of our architectural layers
+---
+
+import { DiagramBlock } from '@/components/section-templates/diagram-block';
+import { ContentBlock } from '@/components/section-templates/content-block';
+import { SectionAnchor } from '@/components/section-anchor';
+
+# Layered Architecture Diagram
+
+<ContentBlock>
+  This diagram illustrates our layered architecture approach, showing how different layers interact and their specific responsibilities.
+</ContentBlock>
+
+<SectionAnchor id="layers-overview" />
+
+## Layers Overview
+
+<DiagramBlock title="Layered Architecture">
+  \```mermaid
+  graph TD
+    A[Presentation Layer] --> B[API Layer]
+    B --> C[Service Layer]
+    C --> D[Data Access Layer]
+    D --> E[Storage Layer]
+    C --> F[Integration Layer]
+    F --> G[External Services]
+    
+    subgraph "Client-Facing Layers"
+      A
+      B
+    end
+    
+    subgraph "Business Logic Layers"
+      C
+      F
+    end
+    
+    subgraph "Data Layers"
+      D
+      E
+    end
+    
+    classDef clientLayer fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef businessLayer fill:#e6f7ff,stroke:#333,stroke-width:2px;
+    classDef dataLayer fill:#f0f0f0,stroke:#333,stroke-width:2px;
+    classDef externalLayer fill:#f5f5dc,stroke:#333,stroke-width:2px;
+    
+    class A,B clientLayer;
+    class C,F businessLayer;
+    class D,E dataLayer;
+    class G externalLayer;
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="layer-details" />
+
+## Layer Details
+
+### Presentation Layer
+
+Components that directly interact with users:
+
+- Web UI components
+- Mobile UI components
+- Admin dashboard
+- Client-side validation
+- State management
+
+### API Layer
+
+The interface between client applications and backend services:
+
+- API Gateway
+- Controllers
+- Middleware
+- Input validation
+- Authentication/Authorization
+
+### Service Layer
+
+Contains the core business logic of the application:
+
+- Service classes
+- Domain models
+- Business rules
+- Validators
+- Orchestrators
+
+### Data Access Layer
+
+Manages interactions with data storage systems:
+
+- Repositories
+- Data mappers
+- Query builders
+- Caching mechanisms
+- Transaction management
+
+### Storage Layer
+
+The actual data storage systems:
+
+- Relational databases
+- NoSQL databases
+- Blockchain storage
+- File storage
+- Cache stores
+
+### Integration Layer
+
+Handles communication with external systems:
+
+- API clients
+- Blockchain adapters
+- Message producers/consumers
+- Event handlers
+- External service proxies
+
+<SectionAnchor id="layer-interactions" />
+
+## Layer Interactions
+
+Interactions between layers follow these principles:
+
+1. Each layer depends only on the layer directly below it
+2. Lower layers have no knowledge of higher layers
+3. Communication happens through well-defined interfaces
+4. Cross-cutting concerns (logging, monitoring, etc.) span multiple layers
+
+<DiagramBlock title="Layer Communication Pattern">
+  \```mermaid
+  sequenceDiagram
+    participant PL as Presentation Layer
+    participant AL as API Layer
+    participant SL as Service Layer
+    participant DAL as Data Access Layer
+    participant STO as Storage Layer
+    
+    PL->>AL: User Request
+    AL->>SL: Validated Request
+    SL->>DAL: Data Operation
+    DAL->>STO: Storage Query
+    STO-->>DAL: Query Result
+    DAL-->>SL: Data Objects
+    SL-->>AL: Business Response
+    AL-->>PL: Formatted Response
+  \```
+</DiagramBlock>
+
+<SectionAnchor id="related-diagrams" />
+
+## Related Diagrams
+
+For more detailed views of specific aspects of our architecture, see:
+
+- [High-Level Architecture](/architecture/diagrams/high-level-architecture)
+- [Cloud Infrastructure](/architecture/diagrams/cloud-infrastructure)
+- [Blockchain Integration](/architecture/diagrams/blockchain-integration)
+- [Data Flow](/architecture/diagrams/data-flow)
+
+Or return to the [Architecture Diagrams](/architecture/diagrams) overview.

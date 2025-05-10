@@ -1,0 +1,91 @@
+.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.radarChart {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.grid {
+  opacity: 0.2;
+}
+
+.gridLevel {
+  fill: none;
+  stroke: var(--chart-grid-color, #718096);
+  stroke-width: 0.5;
+}
+
+.axis {
+  stroke: var(--chart-axis-color, #718096);
+  stroke-width: 0.5;
+}
+
+.dataArea {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.dataArea:hover {
+  opacity: 0.8;
+}
+
+.dataLine {
+  transition: stroke-width 0.2s ease;
+}
+
+.dataLine:hover {
+  stroke-width: 2.5;
+}
+
+.dataPoint {
+  cursor: pointer;
+  transition: r 0.2s ease;
+}
+
+.dataPoint:hover {
+  r: 3;
+}
+
+.axisLabel {
+  font-size: 3px;
+  fill: var(--chart-label-color, #4a5568);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--chart-placeholder-bg, #f7fafc);
+  border-radius: 0.5rem;
+  border: 1px dashed var(--chart-placeholder-border, #cbd5e0);
+}
+
+.placeholder p {
+  color: var(--chart-placeholder-text, #a0aec0);
+  font-size: 0.875rem;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .gridLevel,
+  .axis {
+    --chart-grid-color: #4a5568;
+    --chart-axis-color: #4a5568;
+  }
+
+  .axisLabel {
+    --chart-label-color: #cbd5e0;
+  }
+
+  .placeholder {
+    --chart-placeholder-bg: #2d3748;
+    --chart-placeholder-border: #4a5568;
+    --chart-placeholder-text: #a0aec0;
+  }
+}
