@@ -11,6 +11,9 @@ export default async function handler(
   res: NextApiResponse<VersionMetadata | { error: string }>
 ) {
   try {
+      if (req.method !== 'GET') {  
+      return res.status(405).json({ error: 'Method not allowed' });  
+    }  
     const metadata = await getVersionMetadataWithCache();
     return res.status(200).json(metadata);
   } catch (error: unknown) {
