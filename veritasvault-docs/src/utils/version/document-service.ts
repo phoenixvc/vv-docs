@@ -132,10 +132,8 @@ export async function updateDocumentVersion(
       return null;
     }
 
-    const updatedVersion = {
-      ...allVersions[versionIndex],
-      ...updates,
-    };
+    const { id: _ignoredId, documentType: _ignoredType, ...mutable } = updates
+    const updatedVersion = { ...allVersions[versionIndex], ...mutable }
 
     // If this is marked as latest, update other versions of the same type
     if (updates.isLatest) {
