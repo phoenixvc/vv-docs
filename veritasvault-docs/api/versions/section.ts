@@ -11,6 +11,9 @@ export default async function handler(
     try {
       const version = req.query.version as string | undefined;
       
+      if (version && !version.match(/^\d+\.\d+\.\d+$/)) {
+        return res.status(400).json({ error: 'Invalid version format. Expected: x.y.z' });
+      }
       if (version) {
         const sections = await getSectionVersionsByVersion(version);
         return res.status(200).json(sections);
