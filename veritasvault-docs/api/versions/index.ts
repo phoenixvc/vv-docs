@@ -3,11 +3,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type { VersionMetadata } from "../../src/types/version";
 
 export default async function handler(
-  req: NextApiRequest, 
+  req: NextApiRequest,
   res: NextApiResponse<VersionMetadata | { error: string }>
 ) {
   try {
-    const metadata = await getVersionMetadata();
+    const metadata = await getVersionMetadataWithCache();
     return res.status(200).json(metadata);
   } catch (error: any) {
     console.error("Error fetching version metadata:", error);
