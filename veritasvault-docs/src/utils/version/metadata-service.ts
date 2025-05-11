@@ -1,5 +1,5 @@
 import redis, { testRedisConnection } from "../redis";
-import { VersionMetadata, VERSION_METADATA_KEY } from "./types";
+import { VERSION_METADATA_KEY, VersionMetadata } from "./types";
 
 // Define default metadata constant to avoid duplication
 const DEFAULT_VERSION_METADATA: VersionMetadata = {
@@ -15,6 +15,11 @@ const DEFAULT_VERSION_METADATA: VersionMetadata = {
     "1.0.0": new Date().toISOString(),
   },
 };
+
+// In-memory cache for version metadata
+let metadataCache: VersionMetadata | null = null;
+let lastCacheTime: number = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 // Initialize default metadata if none exists
 async function initializeVersionMetadata(): Promise<VersionMetadata> {
@@ -60,6 +65,37 @@ export async function getVersionMetadata(): Promise<VersionMetadata> {
   }
 }
 
+// Get version metadata with in-memory cache
+export async function getVersionMetadataWithCache(): Promise<VersionMetadata> {
+  try {
+    const currentTime = Date.now();
+    
+    // Return cached data if it's still valid
+    if (metadataCache && (currentTime - lastCacheTime < CACHE_TTL)) {
+      return metadataCache;
+    }
+    
+    // Cache miss or expired, fetch fresh data
+    const metadata = await getVersionMetadata();
+    
+    // Update cache
+    metadataCache = metadata;
+    lastCacheTime = currentTime;
+    
+    return metadata;
+  } catch (error) {
+    console.error("Error getting version metadata with cache:", error);
+    
+    // If we have cached data, return it even if expired in case of error
+    if (metadataCache) {
+      return metadataCache;
+    }
+    
+    // Otherwise, throw the error to be handled by the caller
+    throw error;
+  }
+}
+
 // Update version metadata
 export async function updateVersionMetadata(metadata: VersionMetadata): Promise<void> {
   try {
@@ -69,6 +105,10 @@ export async function updateVersionMetadata(metadata: VersionMetadata): Promise<
     }
 
     await redis.set(VERSION_METADATA_KEY, JSON.stringify(metadata));
+    
+    // Update the cache when metadata is updated
+    metadataCache = metadata;
+    lastCacheTime = Date.now();
   } catch (error) {
     console.error("Error updating version metadata:", error);
     throw error;

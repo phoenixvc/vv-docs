@@ -1,6 +1,6 @@
-import { getVersionMetadata, getVersionMetadataWithCache } from "../../src/utils/version";
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { VersionMetadata } from "../../src/types/version";
+import { getVersionMetadataWithCache } from "../../src/utils/version";
 
 interface VersionError extends Error {
   code?: string;
@@ -13,9 +13,11 @@ export default async function handler(
   try {
     const metadata = await getVersionMetadataWithCache();
     return res.status(200).json(metadata);
-  } catch (error: VersionError) {
+  } catch (error: unknown) {
     console.error("Error fetching version metadata:", error);
-    const statusCode = error.statusCode || 500;
-    return res.status(statusCode).json({ error: error.message });
+    // Type guard to check if error is a VersionError
+    const versionError = error as VersionError;
+    const statusCode = versionError.statusCode || 500;
+    return res.status(statusCode).json({ error: versionError.message });
   }
 }
