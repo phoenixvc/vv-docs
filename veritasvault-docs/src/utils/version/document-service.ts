@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import redis, { testRedisConnection } from "../redis";
-import { DocumentVersion, DOCUMENT_VERSIONS_KEY } from "./types";
 import { getVersionMetadata, updateVersionMetadata } from "./metadata-service";
+import { DOCUMENT_VERSIONS_KEY, DocumentVersion } from "./types";
 
 // Get all document versions
 export async function getAllDocumentVersions(): Promise<DocumentVersion[]> {
@@ -118,6 +118,33 @@ export async function createDocumentVersion(version: Omit<DocumentVersion, "id">
   }
 }
 
+// Helper function to find the highest version of a document type
+function findHighestVersion(versions: DocumentVersion[], documentType: string): DocumentVersion | null {
+  const sameTypeVersions = versions.filter((v) => v.documentType === documentType);
+  if (sameTypeVersions.length === 0) {
+    return null;
+  }
+
+  // Sort by version number (descending)
+  sameTypeVersions.sort((a, b) => {
+    const aParts = a.version.split(".").map(Number);
+    const bParts = b.version.split(".").map(Number);
+
+    for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+      const aPart = aParts[i] || 0;
+      const bPart = bParts[i] || 0;
+
+      if (aPart !== bPart) {
+        return bPart - aPart; // Descending order
+      }
+    }
+
+    return 0;
+  });
+
+  return sameTypeVersions[0];
+}
+
 // Update a document version
 export async function updateDocumentVersion(
   id: string,
@@ -136,25 +163,63 @@ export async function updateDocumentVersion(
       return null;
     }
 
-    const { id: _ignoredId, documentType: _ignoredType, ...mutable } = updates
-    const updatedVersion = { ...allVersions[versionIndex], ...mutable }
+    const originalVersion = allVersions[versionIndex];
+    const wasLatest = originalVersion.isLatest;
+    const documentType = originalVersion.documentType;
 
-    // If this is marked as latest, update other versions of the same type
-    if (updates.isLatest) {
-      allVersions.forEach((v, i) => {
-        if (i !== versionIndex && v.documentType === updatedVersion.documentType) {
-          v.isLatest = false;
+    const { id: _ignoredId, documentType: _ignoredType, ...mutable } = updates;
+    const updatedVersion = { ...originalVersion, ...mutable };
+
+    // Handle isLatest changes
+    if (updates.isLatest !== undefined) {
+      if (updates.isLatest) {
+        // This version is being promoted to latest
+        allVersions.forEach((v, i) => {
+          if (i !== versionIndex && v.documentType === documentType) {
+            v.isLatest = false;
+          }
+        });
+      } else if (wasLatest) {
+        // This version was latest but is being demoted
+        // Find the highest remaining version of the same type to promote
+        const highestVersion = findHighestVersion(
+          allVersions.filter((v, i) => i !== versionIndex && v.documentType === documentType),
+          documentType
+        );
+
+        if (highestVersion) {
+          // Promote the highest version
+          const highestIndex = allVersions.findIndex((v) => v.id === highestVersion.id);
+          allVersions[highestIndex].isLatest = true;
         }
-      });
+      }
     }
 
     allVersions[versionIndex] = updatedVersion;
     await redis.set(DOCUMENT_VERSIONS_KEY, JSON.stringify(allVersions));
 
-    // Update metadata if needed
-    if (updates.isLatest) {
-      const metadata = await getVersionMetadata();
-      metadata.latestVersions[updatedVersion.documentType] = updatedVersion.version;
+    // Update metadata
+    const metadata = await getVersionMetadata();
+    
+    // If isLatest status changed, update metadata
+    if (updates.isLatest !== undefined) {
+      if (updates.isLatest) {
+        // This version became latest
+        metadata.latestVersions[documentType] = updatedVersion.version;
+      } else if (wasLatest) {
+        // This version was demoted from latest
+        const highestVersion = findHighestVersion(
+          allVersions.filter((v) => v.documentType === documentType && v.isLatest),
+          documentType
+        );
+
+        if (highestVersion) {
+          metadata.latestVersions[documentType] = highestVersion.version;
+        } else {
+          metadata.latestVersions[documentType] = "0.0.0"; // No latest version
+        }
+      }
+      
       await updateVersionMetadata(metadata);
     }
 
@@ -181,49 +246,53 @@ export async function deleteDocumentVersion(id: string): Promise<boolean> {
     }
 
     const deletedVersion = allVersions[versionIndex];
+    const wasLatest = deletedVersion.isLatest;
+    const documentType = deletedVersion.documentType;
+    const versionString = deletedVersion.version;
+    
+    // Remove the version from the array
     allVersions.splice(versionIndex, 1);
     await redis.set(DOCUMENT_VERSIONS_KEY, JSON.stringify(allVersions));
 
-    // If this was the latest version, update metadata
-    if (deletedVersion.isLatest) {
-      const metadata = await getVersionMetadata();
+    // Update metadata
+    const metadata = await getVersionMetadata();
+    let metadataChanged = false;
 
+    // If this was the latest version, update metadata.latestVersions
+    if (wasLatest) {
       // Find the next latest version of the same type
-      const sameTypeVersions = allVersions.filter((v) => v.documentType === deletedVersion.documentType);
-      if (sameTypeVersions.length > 0) {
-        // Sort by version number (descending)
-        sameTypeVersions.sort((a, b) => {
-          const aParts = a.version.split(".").map(Number);
-          const bParts = b.version.split(".").map(Number);
+      const highestVersion = findHighestVersion(
+        allVersions.filter((v) => v.documentType === documentType),
+        documentType
+      );
 
-          for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
-            const aPart = aParts[i] || 0;
-            const bPart = bParts[i] || 0;
-
-            if (aPart !== bPart) {
-              return bPart - aPart; // Descending order
-            }
-          }
-
-          return 0;
-        });
-
+      if (highestVersion) {
         // Set the highest remaining version as latest
-        const newLatest = sameTypeVersions[0];
-        newLatest.isLatest = true;
-        metadata.latestVersions[deletedVersion.documentType] = newLatest.version;
-
-        // Update the version in the allVersions array
-        const newLatestIndex = allVersions.findIndex((v) => v.id === newLatest.id);
+        const newLatestIndex = allVersions.findIndex((v) => v.id === highestVersion.id);
         if (newLatestIndex !== -1) {
           allVersions[newLatestIndex].isLatest = true;
           await redis.set(DOCUMENT_VERSIONS_KEY, JSON.stringify(allVersions));
+          metadata.latestVersions[documentType] = highestVersion.version;
         }
       } else {
         // No versions left of this type
-        metadata.latestVersions[deletedVersion.documentType] = "0.0.0";
+        metadata.latestVersions[documentType] = "0.0.0";
       }
+      
+      metadataChanged = true;
+    }
 
+    // Check if this version string is still used by any other document
+    const versionStillInUse = allVersions.some(v => v.version === versionString);
+    
+    if (!versionStillInUse) {
+      // Remove the version from metadata.versions and metadata.releaseDate
+      metadata.versions = metadata.versions.filter(v => v !== versionString);
+      delete metadata.releaseDate[versionString];
+      metadataChanged = true;
+    }
+
+    if (metadataChanged) {
       await updateVersionMetadata(metadata);
     }
 
