@@ -58,7 +58,8 @@ export async function createDocumentVersion(version: Omit<DocumentVersion, "id">
       id: uuidv4(),
     };
 
-    const allVersions = await getAllDocumentVersions();
+    await redis.watch(DOCUMENT_VERSIONS_KEY);
+    const allVersions = JSON.parse((await redis.get(DOCUMENT_VERSIONS_KEY)) ?? "[]");
 
     // If this is marked as latest, update other versions of the same type
     if (newVersion.isLatest) {
@@ -73,7 +74,10 @@ export async function createDocumentVersion(version: Omit<DocumentVersion, "id">
     }
 
     allVersions.push(newVersion);
-    await redis.set(DOCUMENT_VERSIONS_KEY, JSON.stringify(allVersions));
+    await redis
+      .multi()
+      .set(DOCUMENT_VERSIONS_KEY, JSON.stringify(allVersions))
+      .exec();
 
     // Update metadata if needed
     const metadata = await getVersionMetadata();
