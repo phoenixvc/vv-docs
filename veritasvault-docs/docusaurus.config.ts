@@ -1,7 +1,8 @@
 // docusaurus.config.js
-import type * as Preset from "@docusaurus/preset-classic"
-import type { Config } from "@docusaurus/types"
-import { themes as prismThemes } from "prism-react-renderer"
+import type * as Preset from "@docusaurus/preset-classic";
+import type { Config } from "@docusaurus/types";
+import githubTheme from 'prism-react-renderer/themes/github';
+import draculaTheme from 'prism-react-renderer/themes/dracula';
 
 const config: Config = {
   title: "VeritasVault Documentation",
@@ -184,8 +185,8 @@ const config: Config = {
     primaryColor: "#4a90e2", // Light blue accent
     secondaryColor: "#f5a623", // Gold/amber
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: githubTheme,
+      darkTheme: draculaTheme,
     },
   } satisfies Preset.ThemeConfig,
 
@@ -195,7 +196,16 @@ const config: Config = {
   // Add plugins
   plugins: [
     // Your existing plugins
-  ],
+  ],  
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve('esbuild-loader'),
+      options: {
+        loader: 'tsx',
+        target: isServer ? 'node12' : 'es2017',
+      },
+    }),
+  },
 }
 
 export default config

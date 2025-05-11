@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --ifm-color-primary: #4a90e2;
   --ifm-color-primary-dark: #3a80d2;
   --ifm-color-primary-darker: #2a70c2;
@@ -11,13 +11,99 @@
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #f5a623; /* Gold accent for dark mode */
+  --ifm-color-primary: #f5a623;
   --ifm-color-primary-dark: #e59613;
   --ifm-color-primary-darker: #d58603;
   --ifm-color-primary-darkest: #c57603;
   --ifm-color-primary-light: #f6b033;
   --ifm-color-primary-lighter: #f7c043;
   --ifm-color-primary-lightest: #f8d053;
-  --ifm-background-color: #0d1b33; /* Deep navy background */
+  --ifm-background-color: #0d1b33;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+} */
+
+
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well with content-heavy websites.
+ */
+
+/* Import Tailwind CSS */
+@import './tailwind.css';
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #4a90e2;
+  --ifm-color-primary-dark: #3a7bc0;
+  --ifm-color-primary-darker: #2e6ca8;
+  --ifm-color-primary-darkest: #215085;
+  --ifm-color-primary-light: #6ba5e7;
+  --ifm-color-primary-lighter: #8bb9ec;
+  --ifm-color-primary-lightest: #b1d0f2;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #6ba5e7;
+  --ifm-color-primary-dark: #4a90e2;
+  --ifm-color-primary-darker: #3a7bc0;
+  --ifm-color-primary-darkest: #2e6ca8;
+  --ifm-color-primary-light: #8bb9ec;
+  --ifm-color-primary-lighter: #a6c9f0;
+  --ifm-color-primary-lightest: #c7ddf6;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Custom animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Custom styles for documentation */
+.whitepaper-section {
+  border-left: 4px solid var(--ifm-color-primary);
+  padding-left: 1rem;
+  margin: 2rem 0;
+}
+
+.architecture-diagram {
+  max-width: 100%;
+  margin: 2rem auto;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 996px) {
+  .architecture-diagram {
+    margin: 1rem auto;
+  }
 }
