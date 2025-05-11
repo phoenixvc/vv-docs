@@ -68,6 +68,9 @@ export async function createDocumentVersion(version: Omit<DocumentVersion, "id">
         }
       });
     }
+    else if (!allVersions.some(v => v.documentType === newVersion.documentType && v.isLatest)) {
+      newVersion.isLatest = true // promote this one or pick highest semver
+    }
 
     allVersions.push(newVersion);
     await redis.set(DOCUMENT_VERSIONS_KEY, JSON.stringify(allVersions));
