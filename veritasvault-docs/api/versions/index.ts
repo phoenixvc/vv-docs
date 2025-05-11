@@ -1,4 +1,4 @@
-import { getVersionMetadata } from "../../src/utils/version";
+import { getVersionMetadata, getVersionMetadataWithCache } from "../../src/utils/version";
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { VersionMetadata } from "../../src/types/version";
 
