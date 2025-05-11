@@ -27,13 +27,16 @@ export default async function handler(
     }
   } else if (req.method === 'POST') {
     try {
-       if (!apiKey || !process.env.API_KEY || 
-           !timingSafeEqual(
-             Buffer.from(apiKey), 
-             Buffer.from(process.env.API_KEY)
-           )) {
-        return res.status(401).json({ error: "Unauthorized: Invalid API key" });
-      }
+try {
+  const apiKey = req.headers['x-api-key'] as string;
+  if (!apiKey || !process.env.API_KEY || 
+      !timingSafeEqual(
+        Buffer.from(apiKey), 
+        Buffer.from(process.env.API_KEY)
+      )) {
+    return res.status(401).json({ error: "Unauthorized: Invalid API key" });
+  }
+  // … rest of handler logic …
 
       const data = req.body as Omit<SectionVersion, "id">;
       
