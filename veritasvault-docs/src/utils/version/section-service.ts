@@ -57,9 +57,9 @@ export async function createSectionVersion(section: Omit<SectionVersion, "id">):
       id: uuidv4(),
     };
 
-    const allSections = await getAllSectionVersions();
-    allSections.push(newSection);
-    await redis.set(SECTION_VERSIONS_KEY, JSON.stringify(allSections));
+    await redis.multi()
+      .json_arrappend(SECTION_VERSIONS_KEY, '$', JSON.stringify(newSection)) // RedisJSON example
+      .exec();
 
     return newSection;
   } catch (error) {
