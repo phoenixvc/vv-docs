@@ -27,9 +27,11 @@ export default async function handler(
     }
   } else if (req.method === 'POST') {
     try {
-      // Verify API key
-      const apiKey = req.headers['x-api-key'] as string;
-      if (apiKey !== process.env.API_KEY) {
+       if (!apiKey || !process.env.API_KEY || 
+           !timingSafeEqual(
+             Buffer.from(apiKey), 
+             Buffer.from(process.env.API_KEY)
+           )) {
         return res.status(401).json({ error: "Unauthorized: Invalid API key" });
       }
 
