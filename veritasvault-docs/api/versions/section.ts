@@ -1,4 +1,4 @@
-import { getAllSectionVersions, getSectionVersionsByVersion, createSectionVersion } from "../../src/utils/version-service";
+import { getAllSectionVersions, getSectionVersionsByVersion, createSectionVersion } from "../../src/utils/version/section-service";
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { SectionVersion } from "../../src/types/version";
 
