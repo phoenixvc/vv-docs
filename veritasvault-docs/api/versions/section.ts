@@ -30,6 +30,15 @@ export default async function handler(
       }
 
       const data = req.body as Omit<SectionVersion, "id">;
+      
+      // Validate required fields
+      const requiredFields = ['sectionId', 'title', 'path', 'version', 'lastUpdated', 'documentTypes', 'tags'];
+      const missingFields = requiredFields.filter(field => !data[field]);
+      
+      if (missingFields.length > 0) {
+        return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
+      }
+      
       const newSection = await createSectionVersion(data);
 
       return res.status(200).json(newSection);

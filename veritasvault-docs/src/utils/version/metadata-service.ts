@@ -1,21 +1,27 @@
 import redis, { testRedisConnection } from "../redis";
 import { VersionMetadata, VERSION_METADATA_KEY } from "./types";
 
+// Define default metadata constant to avoid duplication
+const DEFAULT_VERSION_METADATA: VersionMetadata = {
+  currentVersion: "1.0.0",
+  versions: ["1.0.0"],
+  latestVersions: {
+    whitepaper: "1.0.0",
+    litepaper: "1.0.0",
+    tokenomics: "1.0.0",
+    executiveSummary: "1.0.0",
+  },
+  releaseDate: {
+    "1.0.0": new Date().toISOString(),
+  },
+};
+
 // Initialize default metadata if none exists
 async function initializeVersionMetadata(): Promise<VersionMetadata> {
-  const defaultMetadata: VersionMetadata = {
-    currentVersion: "1.0.0",
-    versions: ["1.0.0"],
-    latestVersions: {
-      whitepaper: "1.0.0",
-      litepaper: "1.0.0",
-      tokenomics: "1.0.0",
-      executiveSummary: "1.0.0",
-    },
-    releaseDate: {
-      "1.0.0": new Date().toISOString(),
-    },
-  };
+  // Create a deep copy to avoid sharing the object reference
+  const defaultMetadata: VersionMetadata = JSON.parse(JSON.stringify(DEFAULT_VERSION_METADATA));
+  // Update timestamp to current time
+  defaultMetadata.releaseDate["1.0.0"] = new Date().toISOString();
 
   await redis.set(VERSION_METADATA_KEY, JSON.stringify(defaultMetadata));
   return defaultMetadata;

@@ -1,16 +1,31 @@
 // Export all types that were previously in ../types/version
+// Document type enum for improved type safety
+export enum DocumentType {
+  WHITEPAPER = "whitepaper",
+  LITEPAPER = "litepaper",
+  TOKENOMICS = "tokenomics",
+  EXECUTIVE_SUMMARY = "executiveSummary"
+}
+
 export interface VersionMetadata {
   currentVersion: string;
   versions: string[];
   latestVersions: {
-    whitepaper: string;
-    litepaper: string;
-    tokenomics: string;
-    executiveSummary: string;
+    [DocumentType.WHITEPAPER]: string;
+    [DocumentType.LITEPAPER]: string;
+    [DocumentType.TOKENOMICS]: string;
+    [DocumentType.EXECUTIVE_SUMMARY]: string;
   };
   releaseDate: {
     [version: string]: string;
   };
+}
+
+export interface DocumentVersion {
+  id: string;
+  version: string;
+  documentType: DocumentType;
+  // ...other properties
 }
 
 export interface DocumentVersion {

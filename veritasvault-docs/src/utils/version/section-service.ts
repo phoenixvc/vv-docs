@@ -86,9 +86,10 @@ export async function updateSectionVersion(
       return null;
     }
 
-    const updatedSection = {
+    const { id: _ignoredId, sectionId: _ignoredSectionId, ...mutable } = updates; // protect invariants
+    const updatedSection: SectionVersion = {
       ...allSections[sectionIndex],
-      ...updates,
+      ...mutable,
     };
 
     allSections[sectionIndex] = updatedSection;

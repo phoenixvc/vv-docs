@@ -13,10 +13,13 @@ export default async function handler(
   try {
     // Verify API key
     const apiKey = req.headers['x-api-key'] as string;
+    if (!process.env.API_KEY) {
+      console.error("API_KEY environment variable is not configured");
+      return res.status(500).json({ error: "Server configuration error" });
+    }
     if (apiKey !== process.env.API_KEY) {
       return res.status(401).json({ error: "Unauthorized: Invalid API key" });
     }
-
     const data = req.body as Partial<VersionMetadata>;
     // Basic validation of required fields in the incoming data
     if (data.currentVersion && !data.versions?.includes(data.currentVersion)) {

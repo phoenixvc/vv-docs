@@ -14,7 +14,21 @@ export async function seedVersionData(): Promise<void> {
   try {
     const isConnected = await testRedisConnection();
     if (!isConnected) {
-      throw new Error("Redis connection failed");
+      // Implement retry mechanism
+      const maxRetries = 3;
+      for (let i = 0; i < maxRetries; i++) {
+        console.log(`Retrying Redis connection (${i + 1}/${maxRetries})...`);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
+        const retryConnection = await testRedisConnection();
+        if (retryConnection) {
+          console.log("Redis connection successful after retry");
+          break;
+        }
+
+        if (i === maxRetries - 1) {
+          throw new Error("Redis connection failed after maximum retry attempts");
+        }
+      }
     }
 
     // Check if data already exists
