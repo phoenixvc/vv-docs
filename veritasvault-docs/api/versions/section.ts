@@ -26,18 +26,15 @@ export default async function handler(
       return res.status(500).json({ error: "Failed to fetch section versions" });
     }
   } else if (req.method === 'POST') {
-    try {
-try {
-  const apiKey = req.headers['x-api-key'] as string;
-  if (!apiKey || !process.env.API_KEY || 
-      !timingSafeEqual(
-        Buffer.from(apiKey), 
-        Buffer.from(process.env.API_KEY)
-      )) {
-    return res.status(401).json({ error: "Unauthorized: Invalid API key" });
-  }
-  // … rest of handler logic …
-
+      try {
+        const apiKey = req.headers['x-api-key'] as string;
+        if (!apiKey || !process.env.API_KEY || 
+            !timingSafeEqual(
+              Buffer.from(apiKey), 
+              Buffer.from(process.env.API_KEY)
+            )) {
+          return res.status(401).json({ error: "Unauthorized: Invalid API key" });
+        }
       const data = req.body as Omit<SectionVersion, "id">;
       
       // Validate required fields
