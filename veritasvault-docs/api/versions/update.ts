@@ -18,6 +18,13 @@ export default async function handler(
     }
 
     const data = req.body as Partial<VersionMetadata>;
+    // Basic validation of required fields in the incoming data
+    if (data.currentVersion && !data.versions?.includes(data.currentVersion)) {
+      return res.status(400).json({
+        error: "Invalid metadata: currentVersion must exist in versions array"
+      });
+    }
+
     const currentMetadata = await getVersionMetadata();
 
     // Update metadata with new values
