@@ -1,4 +1,4 @@
-import { getVersionMetadata } from "../../src/utils/version-service"
+import { getVersionMetadata } from "../../src/utils/version"
 
 export default async function handler(req, res) {
   try {
