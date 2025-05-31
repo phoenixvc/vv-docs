@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "docusaurus": "docusaurus",
     "start": "docusaurus start veritasvault-docs",
     "build": "docusaurus build veritasvault-docs",
     "swizzle": "docusaurus swizzle veritasvault-docs",
