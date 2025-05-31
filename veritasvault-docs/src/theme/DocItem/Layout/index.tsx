@@ -101,8 +101,8 @@ export default function DocItemLayout({children}: Props): JSX.Element {
                   {frontMatter.reviewers && Array.isArray(frontMatter.reviewers) && (
                     <p><strong>Reviewers:</strong> {frontMatter.reviewers.join(', ')}</p>
                   )}
-                  )}
                 </div>
+              )}
               )}
 
               {/* Technical-specific metadata section */}
