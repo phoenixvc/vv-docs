@@ -217,10 +217,28 @@ const ExecDashboard: React.FC = () => {
   // Only render for executive role
   if (activeRole !== 'exec' && activeRole !== 'tech') { // Allow tech for development/testing
     return (
-      <div className="p-6 bg-gray-50 rounded-lg border border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Executive Dashboard</h2>
-        <p className="text-gray-600">
-          This dashboard is only available to executive stakeholders.
+      <div
+        className="p-6 bg-amber-50 rounded-lg border border-amber-200"
+        role="alert"
+        aria-live="polite"
+      >
+        <div className="flex items-center">
+          <svg
+            className="h-5 w-5 text-amber-400 mr-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <h2 className="text-xl font-semibold text-amber-800">Access Restricted</h2>
+        </div>
+        <p className="text-amber-700 mt-2">
+          This dashboard is only available to executive and technical stakeholders. Current role:{' '}
+          <strong>{getRoleDisplayName()}</strong>
         </p>
       </div>
     );
