@@ -175,9 +175,17 @@ const ExecDashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   
   // In a real implementation, this would fetch data from an API or pre-generated JSON
+const ExecDashboard: React.FC = () => {
+  const { activeRole } = useRole();
+  const [metrics, setMetrics] = useState<DocumentMetrics>(MOCK_METRICS);
+  const [recentActivity, setRecentActivity] = useState<RecentDocumentActivity[]>(MOCK_RECENT_ACTIVITY);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       setIsLoading(true);
+      setError(null);
       try {
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -193,6 +201,7 @@ const ExecDashboard: React.FC = () => {
         setRecentActivity(MOCK_RECENT_ACTIVITY);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
+        setError('Failed to load dashboard data. Please try again.');
       } finally {
         setIsLoading(false);
       }
@@ -200,6 +209,10 @@ const ExecDashboard: React.FC = () => {
     
     fetchDashboardData();
   }, []);
+
+  // ...existing render logic
+  // you can now display `error` to the user when it's non-null
+};
   
   // Only render for executive role
   if (activeRole !== 'exec' && activeRole !== 'tech') { // Allow tech for development/testing
