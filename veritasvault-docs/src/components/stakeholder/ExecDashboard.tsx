@@ -147,6 +147,8 @@ const getPriorityColor = (priority: string): string => {
 // Helper function to format date
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
+  if (isNaN(date.getTime())) return 'Invalid date';
+  
   const now = new Date();
   const diffTime = Math.abs(now.getTime() - date.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
