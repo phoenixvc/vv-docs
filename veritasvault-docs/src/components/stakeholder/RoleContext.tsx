@@ -167,7 +167,7 @@ export function withRoleAccess<P extends object>(
   Component: React.ComponentType<P>,
   requiredClassification: ClassificationLevel = 'internal'
 ): React.FC<P> {
-  return (props: P) => {
+  const WrappedComponent: React.FC<P> = (props: P) => {
     const { canAccessClassification } = useRole();
     
     if (!canAccessClassification(requiredClassification)) {
@@ -176,6 +176,9 @@ export function withRoleAccess<P extends object>(
     
     return <Component {...props} />;
   };
+
+  WrappedComponent.displayName = `withRoleAccess(${Component.displayName || Component.name})`;
+  return WrappedComponent;
 }
 
 /**
