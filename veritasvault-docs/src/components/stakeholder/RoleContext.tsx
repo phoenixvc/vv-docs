@@ -104,7 +104,9 @@ export const RoleProvider: React.FC<RoleProviderProps> = ({
     // Only use localStorage in the browser
     if (typeof window !== 'undefined') {
       const savedRole = localStorage.getItem('vv-docs-role');
-      return (savedRole as StakeholderRole) || initialRole;
+      const isValidRole = (role: string): role is StakeholderRole => 
+        ['exec', 'tech', 'audit', 'partner'].includes(role);
+      return (savedRole && isValidRole(savedRole) ? savedRole : initialRole);
     }
     return initialRole;
   });
@@ -128,9 +130,9 @@ export const RoleProvider: React.FC<RoleProviderProps> = ({
 
   // Check if the current role should see a specific document type
   const isRelevantDocType = (docType: string): boolean => {
-    // If document type is not in the map, make it visible to all roles
+    // If document type is not in the map, restrict access by default
     if (!DOC_TYPE_ROLE_MAP[docType]) {
-      return true;
+      return false;
     }
     return DOC_TYPE_ROLE_MAP[docType]?.includes(activeRole) || false;
   };

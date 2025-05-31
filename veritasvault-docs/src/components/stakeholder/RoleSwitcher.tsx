@@ -124,7 +124,6 @@ const RoleSwitcher: React.FC = () => {
               className="absolute right-0 bottom-full mb-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
               role="menu"
               aria-orientation="vertical"
-              aria-labelledby="role-switcher-button"
             >
               <div className="py-1" role="none">
                 {Object.entries(ROLE_INFO).map(([role, info]) => (
@@ -145,10 +144,7 @@ const RoleSwitcher: React.FC = () => {
                         {info.icon}
                       </div>
                       <div className="ml-3">
-                        <p className="font-medium">{role === 'exec' ? 'Executive Leadership' : 
-                                                  role === 'tech' ? 'Technical Team' : 
-                                                  role === 'audit' ? 'Compliance & Audit' : 
-                                                  'External Partners'}</p>
+                        <p className="font-medium">{getRoleDisplayName(role as StakeholderRole)}</p>
                         <p className="text-xs text-gray-500 mt-1">{info.description}</p>
                       </div>
                       {activeRole === role && (

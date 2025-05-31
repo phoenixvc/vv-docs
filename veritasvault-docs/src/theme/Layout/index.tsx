@@ -15,11 +15,11 @@ export default function Layout(props: Props): JSX.Element {
   // Determine initial role based on URL path (optional enhancement)
   // This allows deep-linking to specific stakeholder views
   const getInitialRoleFromPath = (): 'exec' | 'tech' | 'audit' | 'partner' => {
-    if (location.pathname.startsWith('/exec')) {
+    if (location.pathname === '/exec' || location.pathname.startsWith('/exec/')) {
       return 'exec';
-    } else if (location.pathname.startsWith('/audit')) {
+    } else if (location.pathname === '/audit' || location.pathname.startsWith('/audit/')) {
       return 'audit';
-    } else if (location.pathname.startsWith('/partner')) {
+    } else if (location.pathname === '/partner' || location.pathname.startsWith('/partner/')) {
       return 'partner';
     }
     // Default to technical team view

@@ -6,7 +6,6 @@ import DocItemPaginator from '@theme/DocItem/Paginator';
 import DocVersionBanner from '@theme/DocVersionBanner';
 import DocVersionBadge from '@theme/DocVersionBadge';
 import DocItemFooter from '@theme/DocItem/Footer';
-import DocItemTOCMobile from '@theme/DocItem/TOC/Mobile';
 import DocItemTOCDesktop from '@theme/DocItem/TOC/Desktop';
 import DocItemContent from '@theme/DocItem/Content';
 import DocBreadcrumbs from '@theme/DocBreadcrumbs';
@@ -38,7 +37,7 @@ export default function DocItemLayout({children}: Props): JSX.Element {
     classification = 'internal',
     status = 'draft',
     version = '1.0.0',
-    last_updated = new Date().toISOString().split('T')[0],
+    last_updated,
     priority = 'p2',
     next_review,
     applies_to = []
@@ -95,12 +94,13 @@ export default function DocItemLayout({children}: Props): JSX.Element {
               {showAuditMetadata && (
                 <div className="alert alert--secondary margin-bottom--md">
                   <h4>Compliance Information</h4>
-                  <p><strong>Standards:</strong> {Object.keys(frontMatter.compliance_standards).join(', ')}</p>
+                  <p><strong>Standards:</strong> {frontMatter.compliance_standards ? Object.keys(frontMatter.compliance_standards).join(', ') : 'None'}</p>
                   {frontMatter.next_review && (
                     <p><strong>Next Review Date:</strong> {frontMatter.next_review}</p>
                   )}
-                  {frontMatter.reviewers && (
+                  {frontMatter.reviewers && Array.isArray(frontMatter.reviewers) && (
                     <p><strong>Reviewers:</strong> {frontMatter.reviewers.join(', ')}</p>
+                  )}
                   )}
                 </div>
               )}
