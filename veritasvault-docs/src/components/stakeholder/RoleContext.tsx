@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { environmentService } from '@/services/environmentService';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+
 
 // Define the stakeholder roles
 export type StakeholderRole = 'exec' | 'tech' | 'audit' | 'partner';
@@ -48,7 +50,7 @@ interface RoleProviderProps {
  * Maps document types to relevant stakeholder roles
  * This determines which document types are highlighted or prioritized for each role
  */
-const DOC_TYPE_ROLE_MAP: Record<string, StakeholderRole[]> = {
+const DOC_TYPE_ROLE_MAP: Readonly<Record<string, readonly StakeholderRole[]>> = {
   'architecture': ['tech', 'exec'],
   'domain-overview': ['tech', 'exec', 'partner'],
   'specification': ['tech'],
@@ -63,7 +65,7 @@ const DOC_TYPE_ROLE_MAP: Record<string, StakeholderRole[]> = {
   'navigation-index': ['tech', 'exec', 'audit', 'partner'],
   'overview': ['exec', 'partner', 'tech', 'audit'],
   'redirect': ['tech', 'exec', 'audit', 'partner'],
-};
+} as const;
 
 /**
  * Maps classification levels to roles that can access them
@@ -77,12 +79,22 @@ const CLASSIFICATION_ACCESS_MAP: Record<ClassificationLevel, StakeholderRole[]> 
 /**
  * Display names for each role
  */
-const ROLE_DISPLAY_NAMES: Record<StakeholderRole, string> = {
+const ROLE_DISPLAY_NAMES: Readonly<Record<StakeholderRole, string>> = {
   'exec': 'Executive Leadership',
   'tech': 'Technical Team',
   'audit': 'Compliance & Audit',
   'partner': 'External Partners',
-};
+} as const;
+
+/**
+ * Valid stakeholder roles for efficient validation
+ */
+const VALID_ROLES = new Set<StakeholderRole>(['exec', 'tech', 'audit', 'partner']);
+
+/**
+ * Type guard to check if a string is a valid stakeholder role
+ */
+const isValidRole = (role: string): role is StakeholderRole => VALID_ROLES.has(role as StakeholderRole);
 
 /**
  * Provider component for the role context
@@ -91,21 +103,14 @@ export const RoleProvider: React.FC<RoleProviderProps> = ({
   children, 
   initialRole = 'tech' 
 }) => {
-  // Determine if we're in development mode
-  const isDevelopment = process.env.NODE_ENV === 'development' || 
-                        (typeof window !== 'undefined' && (
-                          window.location.hostname === 'localhost' ||
-                          window.location.hostname.includes('staging') ||
-                          window.location.hostname.includes('preview')
-                        ));
+  // Determine if we're in development mode using the environment service
+  const isDevelopment = environmentService.isDevelopment();
 
   // Initialize state from localStorage or use default
   const [activeRole, setActiveRoleState] = useState<StakeholderRole>(() => {
     // Only use localStorage in the browser
     if (typeof window !== 'undefined') {
       const savedRole = localStorage.getItem('vv-docs-role');
-      const isValidRole = (role: string): role is StakeholderRole => 
-        ['exec', 'tech', 'audit', 'partner'].includes(role);
       return (savedRole && isValidRole(savedRole) ? savedRole : initialRole);
     }
     return initialRole;
@@ -130,9 +135,11 @@ export const RoleProvider: React.FC<RoleProviderProps> = ({
 
   // Check if the current role should see a specific document type
   const isRelevantDocType = (docType: string): boolean => {
-    // If document type is not in the map, restrict access by default
+    // If document type is not in the map, apply default access rules
     if (!DOC_TYPE_ROLE_MAP[docType]) {
-      return false;
+      // Default access: Allow tech and exec roles for unmapped document types
+      // This maintains backward compatibility while being reasonably secure
+      return activeRole === 'tech' || activeRole === 'exec';
     }
     return DOC_TYPE_ROLE_MAP[docType]?.includes(activeRole) || false;
   };

@@ -1,5 +1,5 @@
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 import { useRole } from './RoleContext';
 
 // Define types for the component props based on the frontmatter schema
@@ -56,10 +56,10 @@ const DOC_TYPE_ICONS: Record<string, React.ReactNode> = {
     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
       <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
     </svg>
-  ),
-  guide: (
+    ),
+    guide: (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-      <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+      <path fillRule="evenodd" d="M10 2a1 1 0 01.894.553l7 14A1 1 0 0117 18H3a1 1 0 01-.894-1.447l7-14A1 1 0 0110 2zm0 3.618L5.618 16h8.764L10 5.618zM9 9h2v4H9V9zm0 6h2v2H9v-2z" clipRule="evenodd" />
     </svg>
   ),
   policy: (
@@ -101,6 +101,29 @@ const formatDate = (dateString: string): string => {
   } catch (e) {
     return dateString; // Fallback to original string if parsing fails
   }
+};
+
+/**
+ * Format document type for display (convert kebab-case to Title Case)
+ */
+const formatDocumentType = (type: string): string => {
+  return type.split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+/**
+ * Format status for display (capitalize first letter)
+ */
+const formatStatus = (status: string): string => {
+  return status.charAt(0).toUpperCase() + status.slice(1);
+};
+
+/**
+ * Format classification for display (capitalize first letter)
+ */
+const formatClassification = (classification: string): string => {
+  return classification.charAt(0).toUpperCase() + classification.slice(1);
 };
 
 /**
@@ -159,7 +182,7 @@ export const StatusBadges: React.FC<StatusBadgesProps> = ({
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
         </svg>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
+        {formatStatus(status)}
       </span>
       
       {/* Priority Badge */}
@@ -169,7 +192,7 @@ export const StatusBadges: React.FC<StatusBadgesProps> = ({
         aria-label={`Priority: ${getPriorityLabel(priority)}`}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M8.257 3.099c.366-.756 1.42-.756 1.786 0l6.518 13.455A1 1 0 0115.518 18H4.482a1 1 0 01-.893-1.446L8.257 3.1zM11 14a1 1 0 10-2 0 1 1 0 002 0zm-1-2a1 1 0 01-1-1V9a1 1 0 112 0v2a1 1 0 01-1 1z" clipRule="evenodd" />
         </svg>
         {getPriorityLabel(priority)}
       </span>
@@ -183,7 +206,7 @@ export const StatusBadges: React.FC<StatusBadgesProps> = ({
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
         </svg>
-        {classification.charAt(0).toUpperCase() + classification.slice(1)}
+        {formatClassification(classification)}
       </span>
       
       {/* Document Type Badge */}
@@ -193,7 +216,7 @@ export const StatusBadges: React.FC<StatusBadgesProps> = ({
         aria-label={`Document Type: ${document_type}`}
       >
         {docTypeIcon}
-        {document_type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+        {formatDocumentType(document_type)}
       </span>
       
       {/* Version Badge - only shown if not compact */}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useRole } from './RoleContext';
 import clsx from 'clsx';
+import React, { useEffect, useState } from 'react';
+import { useRole } from './RoleContext';
 
 // Define types for the metrics data
 interface DocumentMetrics {
@@ -164,17 +164,21 @@ const formatDate = (dateString: string): string => {
   });
 };
 
+// Helper function to get role display name
+const getRoleDisplayName = (role: string): string => {
+  switch (role) {
+    case 'exec': return 'Executive';
+    case 'tech': return 'Technical';
+    case 'product': return 'Product';
+    case 'compliance': return 'Compliance';
+    default: return role.charAt(0).toUpperCase() + role.slice(1);
+  }
+};
+
 /**
  * Executive Dashboard Component
  * Displays high-level metrics and KPIs for executive stakeholders
  */
-const ExecDashboard: React.FC = () => {
-  const { activeRole } = useRole();
-  const [metrics, setMetrics] = useState<DocumentMetrics>(MOCK_METRICS);
-  const [recentActivity, setRecentActivity] = useState<RecentDocumentActivity[]>(MOCK_RECENT_ACTIVITY);
-  const [isLoading, setIsLoading] = useState(false);
-  
-  // In a real implementation, this would fetch data from an API or pre-generated JSON
 const ExecDashboard: React.FC = () => {
   const { activeRole } = useRole();
   const [metrics, setMetrics] = useState<DocumentMetrics>(MOCK_METRICS);
@@ -209,10 +213,6 @@ const ExecDashboard: React.FC = () => {
     
     fetchDashboardData();
   }, []);
-
-  // ...existing render logic
-  // you can now display `error` to the user when it's non-null
-};
   
   // Only render for executive role
   if (activeRole !== 'exec' && activeRole !== 'tech') { // Allow tech for development/testing
@@ -238,7 +238,7 @@ const ExecDashboard: React.FC = () => {
         </div>
         <p className="text-amber-700 mt-2">
           This dashboard is only available to executive and technical stakeholders. Current role:{' '}
-          <strong>{getRoleDisplayName()}</strong>
+          <strong>{getRoleDisplayName(activeRole)}</strong>
         </p>
       </div>
     );
@@ -252,6 +252,39 @@ const ExecDashboard: React.FC = () => {
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
         </div>
+      </div>
+    );
+  }
+  
+  // Error state
+  if (error) {
+    return (
+      <div 
+        className="p-6 bg-red-50 rounded-lg border border-red-200"
+        role="alert"
+        aria-live="polite"
+      >
+        <div className="flex items-center">
+          <svg
+            className="h-5 w-5 text-red-400 mr-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <h2 className="text-xl font-semibold text-red-800">Error</h2>
+        </div>
+        <p className="text-red-700 mt-2">{error}</p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-red-100 text-red-800 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+        >
+          Try Again
+        </button>
       </div>
     );
   }

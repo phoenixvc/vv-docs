@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useRole, StakeholderRole } from './RoleContext';
 import clsx from 'clsx';
+import React, { useEffect, useRef, useState } from 'react';
+import { StakeholderRole, useRole } from './RoleContext';
 
 // Define role information with descriptions and icons
 const ROLE_INFO: Record<StakeholderRole, { 
@@ -53,21 +53,36 @@ const ROLE_INFO: Record<StakeholderRole, {
 const RoleSwitcher: React.FC = () => {
   const { activeRole, setActiveRole, isDevelopment, getRoleDisplayName } = useRole();
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Don't render in production
   if (!isDevelopment) {
     return null;
   }
 
-  // Toggle dropdown
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
   // Close dropdown when clicking outside
-  const handleClickOutside = () => {
-    if (isOpen) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setIsOpen(false);
     }
   };
+
+  // Add/remove event listener for outside clicks
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Toggle dropdown
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
   // Change the active role
   const changeRole = (role: StakeholderRole) => {
@@ -76,7 +91,7 @@ const RoleSwitcher: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-4 right-4 z-50" ref={menuRef}>
       {/* Environment indicator */}
       <div className="mb-2 text-xs font-medium text-center bg-amber-100 text-amber-800 px-2 py-1 rounded-md">
         Development Environment
@@ -86,13 +101,14 @@ const RoleSwitcher: React.FC = () => {
       <div className="relative">
         {/* Current role button */}
         <button
+          type="button"
           onClick={toggleDropdown}
           className={clsx(
             "flex items-center space-x-2 px-4 py-2 rounded-md shadow-md",
             "border text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
             ROLE_INFO[activeRole].color
           )}
-          aria-expanded={isOpen}
+          aria-expanded={isOpen ? "true" : "false"}
           aria-haspopup="true"
         >
           <span className="flex items-center">
@@ -104,6 +120,7 @@ const RoleSwitcher: React.FC = () => {
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 20 20" 
             fill="currentColor"
+            aria-hidden="true"
           >
             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
           </svg>
@@ -111,55 +128,45 @@ const RoleSwitcher: React.FC = () => {
         
         {/* Dropdown menu */}
         {isOpen && (
-          <>
-            {/* Overlay to detect clicks outside */}
-            <div 
-              className="fixed inset-0 z-40" 
-              onClick={handleClickOutside}
-              aria-hidden="true"
-            />
-            
-            {/* Dropdown content */}
-            <div 
-              className="absolute right-0 bottom-full mb-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
-              role="menu"
-              aria-orientation="vertical"
-            >
-              <div className="py-1" role="none">
-                {Object.entries(ROLE_INFO).map(([role, info]) => (
-                  <button
-                    key={role}
-                    onClick={() => changeRole(role as StakeholderRole)}
-                    className={clsx(
-                      "w-full text-left px-4 py-3 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none",
-                      activeRole === role ? "bg-gray-50" : ""
-                    )}
-                    role="menuitem"
-                  >
-                    <div className="flex items-center">
-                      <div className={clsx(
-                        "flex-shrink-0 p-1 rounded-full",
-                        info.color
-                      )}>
-                        {info.icon}
-                      </div>
-                      <div className="ml-3">
-                        <p className="font-medium">{getRoleDisplayName(role as StakeholderRole)}</p>
-                        <p className="text-xs text-gray-500 mt-1">{info.description}</p>
-                      </div>
-                      {activeRole === role && (
-                        <div className="ml-auto">
-                          <svg className="h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
+          <div 
+            className="absolute right-0 bottom-full mb-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+            role="menu"
+            aria-orientation="vertical"
+          >
+            <div className="py-1" role="none">
+              {Object.entries(ROLE_INFO).map(([role, info]) => (
+                <button
+                  key={role}
+                  onClick={() => changeRole(role as StakeholderRole)}
+                  className={clsx(
+                    "w-full text-left px-4 py-3 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none",
+                    activeRole === role ? "bg-gray-50" : ""
+                  )}
+                  role="menuitem"
+                >
+                  <div className="flex items-center">
+                    <div className={clsx(
+                      "flex-shrink-0 p-1 rounded-full",
+                      info.color
+                    )}>
+                      {info.icon}
                     </div>
-                  </button>
-                ))}
-              </div>
+                    <div className="ml-3">
+                      <p className="font-medium">{getRoleDisplayName()}</p>
+                      <p className="text-xs text-gray-500 mt-1">{info.description}</p>
+                    </div>
+                    {activeRole === role && (
+                      <div className="ml-auto">
+                        <svg className="h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </button>
+              ))}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
