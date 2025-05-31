@@ -1,0 +1,40 @@
+---
+# ==== REQUIRED VV-SCHEMA FIELDS ====
+document_type: overview
+classification: internal        # internal | public | confidential
+status: approved                # draft | review | approved | archived
+version: 1.0.0                  # semantic version x.y.z
+last_updated: 2025-05-31        # YYYY-MM-DD
+applies_to:
+  - governance
+  - documentation
+reviewers:
+  - "@jurie-smit"
+  - "@docs-team"
+priority: p1                    # p0 | p1 | p2 | p3
+
+# ==== OPTIONAL / CUSTOM FIELDS ====
+executive_summary: >
+  High-level dashboard summarising documentation health, risk and activity
+  for VeritasVault leadership. Metrics are auto-generated from validated
+  front-matter at build time.
+custom_audience:
+  - executives
+  - project-management
+custom_doc_type: reference
+custom_status: published
+keywords:
+  - executive
+  - dashboard
+  - documentation-health
+---
+
+import ExecDashboard from '@site/src/components/stakeholder/ExecDashboard';
+
+# Executive Documentation Dashboard
+
+This page demonstrates **front-matter driven dashboards**:  
+all KPIs, status badges and access controls below are populated directly
+from the YAML front-matter present in every documentation file.
+
+<ExecDashboard />

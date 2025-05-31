@@ -1,45 +1,37 @@
-import clsx from "clsx"
-import ErrorBoundary from "@docusaurus/ErrorBoundary"
-import { PageMetadata, ThemeClassNames } from "@docusaurus/theme-common"
-import { useKeyboardNavigation } from "@docusaurus/theme-common/internal"
-import SkipToContent from "@theme/SkipToContent"
-import AnnouncementBar from "@theme/AnnouncementBar"
-import Navbar from "@theme/Navbar"
-import Footer from "@theme/Footer"
-import LayoutProvider from "@theme/Layout/Provider"
-import { useThemeContext } from "../ThemeProvider"
-import styles from "./styles.module.css"
+import React from 'react';
+import OriginalLayout from '@theme-original/Layout';
+import type {Props} from '@theme/Layout';
+import RoleProvider from '@site/src/components/stakeholder/RoleContext';
+import RoleSwitcher from '@site/src/components/stakeholder/RoleSwitcher';
+import {useLocation} from '@docusaurus/router';
 
-export default function Layout(props) {
-  const { children, noFooter, wrapperClassName, title, description, image, keywords, permalink, pageClassName } = props
-
-  const { enhancedConfig } = useThemeContext()
-
-  useKeyboardNavigation()
+/**
+ * Enhanced Layout component that wraps the original Docusaurus Layout
+ * with the RoleProvider to enable stakeholder-specific presentation formats
+ */
+export default function Layout(props: Props): JSX.Element {
+  const location = useLocation();
+  
+  // Determine initial role based on URL path (optional enhancement)
+  // This allows deep-linking to specific stakeholder views
+  const getInitialRoleFromPath = (): 'exec' | 'tech' | 'audit' | 'partner' => {
+    if (location.pathname.startsWith('/exec')) {
+      return 'exec';
+    } else if (location.pathname.startsWith('/audit')) {
+      return 'audit';
+    } else if (location.pathname.startsWith('/partner')) {
+      return 'partner';
+    }
+    // Default to technical team view
+    return 'tech';
+  };
 
   return (
-    <LayoutProvider>
-      <PageMetadata title={title} description={description} keywords={keywords} image={image} permalink={permalink} />
-
-      <SkipToContent />
-
-      <AnnouncementBar />
-
-      <Navbar />
-
-      <div
-        className={clsx(
-          ThemeClassNames.wrapper.main,
-          styles.mainWrapper,
-          styles.enhancedMainWrapper,
-          wrapperClassName,
-          pageClassName,
-        )}
-      >
-        <ErrorBoundary fallback={(params) => <ErrorBoundary {...params} />}>{children}</ErrorBoundary>
-      </div>
-
-      {!noFooter && <Footer />}
-    </LayoutProvider>
-  )
+    <RoleProvider initialRole={getInitialRoleFromPath()}>
+      <OriginalLayout {...props}>
+        {props.children}
+        <RoleSwitcher />
+      </OriginalLayout>
+    </RoleProvider>
+  );
 }
