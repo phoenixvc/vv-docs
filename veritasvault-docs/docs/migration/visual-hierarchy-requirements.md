@@ -152,7 +152,7 @@ Use the appropriate section template components based on content level:
 
 \`\`\`tsx
 // Level 1 (Main Section)
-<SectionLevelOne
+<SectionLevelOne>
   id="tokenomics"
   title="Tokenomics"
   description="VVAI Token Economics and Governance"
@@ -162,7 +162,7 @@ Use the appropriate section template components based on content level:
 </SectionLevelOne>
 
 // Level 2 (Subsection)
-<SectionLevelTwo
+<SectionLevelTwo>
   id="token-model"
   title="Token Model"
   description="Dual-token system design and distribution"
@@ -172,7 +172,7 @@ Use the appropriate section template components based on content level:
 </SectionLevelTwo>
 
 // Level 3 (Detailed Component)
-<SectionLevelThree
+<SectionLevelThree>
   id="token-distribution"
   title="Token Distribution"
   description="Allocation of tokens across stakeholders"

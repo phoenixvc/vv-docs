@@ -20,16 +20,16 @@ src/
 Import components in your MDX files:
 
 \`\`\`jsx
-import { ContentBlock, LineChart, TokenStakingCalculator } from '@site/src/components';
+import { ContentBlock, LineChart, TokenStakingCalculator } from "@site/src/components";
 
 <ContentBlock variant="info" title="Important Information">
   This is an important note about the documentation.
 </ContentBlock>
 
-<LineChart 
-  data={{
+<LineChart >
+  data={{}}
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    datasets: [{
+    datasets: [{}
       label: 'Token Price',
       data: [10, 15, 13, 20, 25],
       borderColor: '#3b82f6'

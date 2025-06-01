@@ -1,0 +1,54 @@
+const path = require('path');
+
+// @ts-check
+// `@type` JSDoc annotations allow IDE autocompletion and type checking
+// (when paired with the TypeScript declaration file).
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+  // ... your existing Docusaurus configuration ...
+
+  // Add this section to integrate the webpack configuration
+  webpack: {
+    configure: (config, isServer, utils) => {
+      // Add aliases
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': path.resolve(__dirname, 'src'),
+        '@components': path.resolve(__dirname, 'src/components'),
+        '@ui': path.resolve(__dirname, 'src/components/ui'),
+        '@theme': path.resolve(__dirname, 'src/theme'),
+        '@site': path.resolve(__dirname),
+        '@lib': path.resolve(__dirname, 'src/lib'),
+        '@pages': path.resolve(__dirname, 'src/pages'),
+      };
+      
+      return config;
+    }
+  },
+
+  // Tell Docusaurus where to find the theme components
+  themes: [
+    // Your existing themes...
+    {
+      name: 'classic', // or your custom theme name
+      customizations: {
+        // Specify the path to custom theme components
+        components: {
+          'Root': path.resolve(__dirname, 'src/theme/Root'),
+          'SiteMetadata': path.resolve(__dirname, 'src/theme/SiteMetadata'),
+          'Loading': path.resolve(__dirname, 'src/theme/Loading'),
+          'NotFound': path.resolve(__dirname, 'src/theme/NotFound'),
+          'Error': path.resolve(__dirname, 'src/theme/Error'),
+          'MDXComponents': path.resolve(__dirname, 'src/theme/MDXComponents'),
+          'Tabs': path.resolve(__dirname, 'src/theme/Tabs'),
+          'TabItem': path.resolve(__dirname, 'src/theme/TabItem'),
+        }
+      }
+    }
+  ],
+
+  // ... rest of your Docusaurus configuration ...
+};
+
+module.exports = config;

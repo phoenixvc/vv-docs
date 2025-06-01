@@ -1,32 +1,7 @@
-/* Import Tailwind CSS */
+/* 
+ * Minimal tailwind.css to avoid postcss-nested dependency 
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Custom utilities */
-@layer components {
-  .card {
-    @apply rounded-lg shadow-md p-6 bg-white dark:bg-gray-800;
-  }
-  
-  .btn {
-    @apply px-4 py-2 rounded-md transition-colors;
-  }
-  
-  .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-dark;
-  }
-  
-  .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary-dark;
-  }
-  
-  /* Animation classes */
-  .animate-on-scroll {
-    @apply opacity-0;
-  }
-  
-  .animate-on-scroll.visible {
-    @apply animate-fade-in opacity-100;
-  }
-}

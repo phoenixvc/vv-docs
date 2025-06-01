@@ -1,9 +1,9 @@
 import type { ReactNode } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { SectionAnchor } from "@/components/section-anchor"
-import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
-import { getSectionById } from "@/lib/documentation-structure"
+import { Card, CardContent } from "../ui/card"
+import { cn } from "../../lib/utils"
+import { getSectionById } from "../../lib/documentation-structure"
+import SectionAnchor from "../section-anchor"
+import { Badge } from "../ui/badge"
 
 interface SectionLevelTwoProps {
   id: string

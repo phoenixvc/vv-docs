@@ -28,12 +28,12 @@ To navigate seamlessly across versions, add a version dropdown.
 Modify the `docusaurus.config.js` file:
 
 ```js title="docusaurus.config.js"
-export default {
-  themeConfig: {
-    navbar: {
+export default {}}
+  themeConfig: {}}
+    navbar: {}}
       items: [
         // highlight-start
-        {
+        {}}
           type: 'docsVersionDropdown',
         },
         // highlight-end

@@ -73,10 +73,10 @@
 
 - [ ] Set up main navigation in `docusaurus.config.js`
   \`\`\`js
-  themeConfig: {
-    navbar: {
+  themeConfig: {}}
+    navbar: {}}
       title: 'My Site',
-      logo: {
+      logo: {}}
         alt: 'My Site Logo',
         src: 'img/logo.svg',
       },
@@ -92,8 +92,8 @@
 - [ ] Configure table of contents settings
 - [ ] Set up search functionality
   \`\`\`js
-  themeConfig: {
-    algolia: {
+  themeConfig: {}}
+    algolia: {}}
       // Algolia search configuration
     },
   },
@@ -112,8 +112,8 @@
   presets: [
     [
       '@docusaurus/preset-classic',
-      {
-        docs: {
+      {}}
+        docs: {}}
           remarkPlugins: [],
           rehypePlugins: [],
         },

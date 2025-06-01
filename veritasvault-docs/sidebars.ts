@@ -53,7 +53,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Tokenomics',
-      items: ['tokenomics/index', 'tokenomics/distribution/token-distribution', 'tokenomics/utility/token-utility'],
+      items: ['tokenomics/index', 'tokenomics/distribution/index', 'tokenomics/utility/token-utility'],
     },
     {
       type: 'category',
@@ -73,7 +73,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Integration',
-      items: ['integration/overview', 'integration/api-usage', 'integrations/data/data-providers'],
+      items: ['integration/overview', 'integration/api-usage', 'integrations/data/index'],
     },
     {
       type: 'category',
@@ -90,7 +90,7 @@ const sidebars: SidebarsConfig = {
       label: 'Contributing',
       items: [
         'contributing/style/index',
-        'contributing/templates/template-usage-guidelines',
+        'migration/template-usage-guidelines',
         'migration/style-guide',
       ],
     },
