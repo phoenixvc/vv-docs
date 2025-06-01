@@ -1,0 +1,8 @@
+{
+  "label": "Domain Documentation",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Comprehensive domain documentation integrated from the VeritasVault platform."
+  }
+}

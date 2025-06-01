@@ -3,9 +3,9 @@ title: Architecture Comparison
 description: How our architecture compares to alternatives
 ---
 
-import { ContentBlock } from "@/components/section-templates/content-block";
-import { TableBlock } from "@/components/section-templates/table-block";
-import { SectionAnchor } from "@/components/section-anchor";
+import { ContentBlock } from "@site/src/components/docs/ContentBlock";
+import { TableBlock } from "@site/src/components/section-templates/table-block";
+import SectionAnchor from "@site/src/components/section-anchor";
 
 # Architecture Comparison
 
@@ -39,20 +39,28 @@ Services organized around shared enterprise services.
 
 ## Comparison Table
 
-<TableBlock title="Architecture Comparison">
-| Feature | Our Microservices | Monolithic | Serverless | SOA |
-|---------|-------------------|------------|------------|-----|
-| Scalability | High (per service) | Limited | Very High | Moderate |
-| Development Speed | Moderate | Initially Fast | Fast | Slow |
-| Deployment Complexity | Moderate | Low | Very Low | High |
-| Team Organization | Service-Aligned | Centralized | Function-Aligned | Domain-Aligned |
-| Technology Flexibility | High | Low | Moderate | Moderate |
-| Operational Complexity | High | Low | Low | High |
-| Testing Complexity | High | Moderate | High | High |
-| Performance | High | Very High | Variable | Moderate |
-| Cost Efficiency | Moderate | High | Pay-per-use | Moderate |
-| Blockchain Integration | Specialized Services | Centralized | Function-Based | Enterprise Services |
-</TableBlock>
+<TableBlock 
+  title="Architecture Comparison"
+  columns={[
+    { header: "Feature", accessorKey: "feature" },
+    { header: "Our Microservices", accessorKey: "microservices" },
+    { header: "Monolithic", accessorKey: "monolithic" },
+    { header: "Serverless", accessorKey: "serverless" },
+    { header: "SOA", accessorKey: "soa" }
+  ]}
+  data={[
+    { feature: "Scalability", microservices: "High (per service)", monolithic: "Limited", serverless: "Very High", soa: "Moderate" },
+    { feature: "Development Speed", microservices: "Moderate", monolithic: "Initially Fast", serverless: "Fast", soa: "Slow" },
+    { feature: "Deployment Complexity", microservices: "Moderate", monolithic: "Low", serverless: "Very Low", soa: "High" },
+    { feature: "Team Organization", microservices: "Service-Aligned", monolithic: "Centralized", serverless: "Function-Aligned", soa: "Domain-Aligned" },
+    { feature: "Technology Flexibility", microservices: "High", monolithic: "Low", serverless: "Moderate", soa: "Moderate" },
+    { feature: "Operational Complexity", microservices: "High", monolithic: "Low", serverless: "Low", soa: "High" },
+    { feature: "Testing Complexity", microservices: "High", monolithic: "Moderate", serverless: "High", soa: "High" },
+    { feature: "Performance", microservices: "High", monolithic: "Very High", serverless: "Variable", soa: "Moderate" },
+    { feature: "Cost Efficiency", microservices: "Moderate", monolithic: "High", serverless: "Pay-per-use", soa: "Moderate" },
+    { feature: "Blockchain Integration", microservices: "Specialized Services", monolithic: "Centralized", serverless: "Function-Based", soa: "Enterprise Services" }
+  ]}
+/>
 
 <SectionAnchor id="key-considerations" />
 

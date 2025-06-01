@@ -1,0 +1,8 @@
+{
+  "label": "Migration",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "Documentation migration guides and requirements."
+  }
+}

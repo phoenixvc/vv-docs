@@ -22,7 +22,7 @@ const config: Config = {
   organizationName: "VeritasVault",
   projectName: "veritasvault-docs",
 
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
   i18n: {

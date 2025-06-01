@@ -1,4 +1,4 @@
-import React, { JSX, ReactNode } from 'react';
+import * as React from 'react';
 import CodeBlock from '@theme/CodeBlock';
 
 interface CodeExampleBlockProps {
@@ -20,7 +20,7 @@ export default function CodeExampleBlock({
   showLineNumbers = false,
   highlight,
   caption,
-}: CodeExampleBlockProps): JSX.Element {
+}: CodeExampleBlockProps) {
   return (
     <div className="code-example-block">
       {title && <h4 className="code-example-title">{title}</h4>}
