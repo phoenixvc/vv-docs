@@ -37,9 +37,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/veritasvault-docs" # Point to the directory containing the build
+          app_location: "/veritasvault-docs/build" # Point directly to build output
           api_location: "" # No API functions
-          output_location: "build" # Relative to app_location
+          output_location: "" # Empty when skip_app_build is true
           skip_app_build: true # Skip Oryx build since we already built
           config_file_location: "/" # Location of staticwebapp.config.json
 
