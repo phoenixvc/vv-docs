@@ -1,12 +1,21 @@
+---
+sidebar_position: 1
+title: "Financial Modelling: Black-Litterman Framework"
+---
+
 # Financial Modelling: The Black-Litterman Allocation Framework
 
+*Note: BL refers to Black-Litterman throughout this document.*
+
+export const BL = "Black-Litterman";
+
 ## Overview
-The **Veritas Vault** leverages a **Bayesian portfolio optimization framework** — the **Black-Litterman model** — to allocate liquidity across DeFi assets. This model balances **market equilibrium expectations** with **data-driven views**, ensuring both rational priors and adaptive intelligence steer capital.
+The **Veritas Vault** leverages a **Bayesian portfolio optimization framework** — the **Black-Litterman (BL) model** — to allocate liquidity across DeFi assets. This model balances **market equilibrium expectations** with **data-driven views**, ensuring both rational priors and adaptive intelligence steer capital.
 
 The process integrates:
 - **Market data ingestion**
 - **View generation via signals or ML oracles**
-- **Portfolio allocation using Black-Litterman mathematics**
+- **Portfolio allocation using Black-Litterman (BL) mathematics**
 - **Community governance (DAO)**
 - **Vault execution of selected strategies**
 
@@ -14,7 +23,7 @@ The process integrates:
 
 ## Mathematical Framework
 
-The **Black-Litterman model** refines traditional mean-variance optimization by introducing a **Bayesian update** on market expectations.
+The **Black-Litterman (BL) model** refines traditional mean-variance optimization by introducing a **Bayesian update** on market expectations.
 
 ### 1. **Equilibrium Market Returns**
 Implied returns ($\Pi$) are inferred from market cap weights using:
@@ -100,7 +109,7 @@ These power both the prior returns ($\Pi$) and model-generated views ($Q$).
 2. **Views Computed:**  
    Views are computed per asset (e.g., “tzBTC expected to outperform by 2.5%”).
 
-3. **Black-Litterman Posterior Returns:**  
+3. **Black-Litterman (BL) Posterior Returns:**  
    The model combines market priors and views to yield final expected returns and a covariance matrix.
 
 4. **Portfolio Weights Derived:**  
@@ -125,7 +134,7 @@ These power both the prior returns ($\Pi$) and model-generated views ($Q$).
 
 ## Visual Architecture
 
-*Diagram illustrating the flow from Market Data → View Generator (rule-based → ML oracle) → Black-Litterman Model → Proposed Allocations → DAO Vote → Vault Execution → Deployed Liquidity.*
+*Diagram illustrating the flow from Market Data → View Generator (rule-based → ML oracle) → Black-Litterman (BL) Model → Proposed Allocations → DAO Vote → Vault Execution → Deployed Liquidity.*
 
 
 ---
