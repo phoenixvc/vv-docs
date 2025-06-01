@@ -3,10 +3,10 @@ title: Layered Architecture
 description: Detailed explanation of our layered architectural approach
 ---
 
-import { DiagramBlock } from "@/components/section-templates/diagram-block";
-import { ContentBlock } from "@/components/section-templates/content-block";
-import { SectionAnchor } from "@/components/section-anchor";
-import { TableBlock } from "@/components/section-templates/table-block";
+import { DiagramBlock } from "@site/src/components/docs/DiagramBlock";
+import { ContentBlock } from "@site/src/components/docs/ContentBlock";
+import SectionAnchor from "@site/src/components/section-anchor";
+import { TableBlock } from "@site/src/components/section-templates/table-block";
 
 # Layered Architecture
 
@@ -95,16 +95,22 @@ The integration layer manages interactions with external systems:
 
 ## Layer Responsibilities
 
-<TableBlock title="Layer Responsibilities">
-| Layer | Primary Responsibility | Key Components |
-|-------|------------------------|----------------|
-| Presentation | User interface and experience | Web UI, Mobile UI, Admin Dashboard |
-| API | Request handling and routing | API Gateway, Controllers, Middleware |
-| Service | Business logic implementation | Service Classes, Domain Models, Validators |
-| Data Access | Data storage interactions | Repositories, ORM, Query Builders |
-| Storage | Physical data storage | Databases, Blockchain, File Systems |
-| Integration | External system communication | API Clients, Adapters, Event Handlers |
-</TableBlock>
+<TableBlock 
+  title="Layer Responsibilities"
+  columns={[
+    { header: "Layer", accessorKey: "layer" },
+    { header: "Primary Responsibility", accessorKey: "responsibility" },
+    { header: "Key Components", accessorKey: "components" }
+  ]}
+  data={[
+    { layer: "Presentation", responsibility: "User interface and experience", components: "Web UI, Mobile UI, Admin Dashboard" },
+    { layer: "API", responsibility: "Request handling and routing", components: "API Gateway, Controllers, Middleware" },
+    { layer: "Service", responsibility: "Business logic implementation", components: "Service Classes, Domain Models, Validators" },
+    { layer: "Data Access", responsibility: "Data storage interactions", components: "Repositories, ORM, Query Builders" },
+    { layer: "Storage", responsibility: "Physical data storage", components: "Databases, Blockchain, File Systems" },
+    { layer: "Integration", responsibility: "External system communication", components: "API Clients, Adapters, Event Handlers" }
+  ]}
+/>
 
 <SectionAnchor id="communication-patterns" />
 

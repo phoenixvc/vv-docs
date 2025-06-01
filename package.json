@@ -11,7 +11,9 @@
     "serve": "docusaurus serve veritasvault-docs",
     "write-translations": "docusaurus write-translations veritasvault-docs",
     "write-heading-ids": "docusaurus write-heading-ids veritasvault-docs",
-    "typecheck": "tsc -p veritasvault-docs/tsconfig.json"
+    "typecheck": "tsc -p veritasvault-docs/tsconfig.json",
+    "integrate-vv-docs": "node scripts/integrate-vv-domain-docs.js",
+    "prebuild": "npm run integrate-vv-docs"
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",

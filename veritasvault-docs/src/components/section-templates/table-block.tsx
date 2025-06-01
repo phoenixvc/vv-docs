@@ -1,7 +1,6 @@
 import type { ReactNode } from "react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell } from "@/components/ui/table"
-import { cn } from "@/lib/utils"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../ui/card"
+import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell } from "../ui/table"
 
 interface TableColumn {
   header: string
@@ -20,7 +19,7 @@ interface TableBlockProps {
 
 export function TableBlock({ title, description, columns, data, footer, className }: TableBlockProps) {
   return (
-    <Card className={cn("mb-6", className)}>
+    <Card className={`mb-6 ${className || ""}`}>
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">{title}</CardTitle>
         {description && <CardDescription>{description}</CardDescription>}

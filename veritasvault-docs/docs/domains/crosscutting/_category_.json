@@ -1,0 +1,8 @@
+{
+  "label": "Cross-cutting",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "Cross-cutting concerns and shared components."
+  }
+}
