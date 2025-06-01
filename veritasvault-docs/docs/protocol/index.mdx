@@ -18,10 +18,10 @@ custom_audience: ['developers', 'technical users', 'security researchers']
 custom_doc_type: 'reference'
 ---
 
-import { SectionLevelOne } from '@site/src/components/docs';
-import { ContentBlock } from '@site/src/components/docs';
-import { CodeBlock } from '@site/src/components/docs';
-import { DiagramBlock } from '@site/src/components/docs';
+import { SectionLevelOne } from "@site/src/components/docs";
+import { ContentBlock } from "@site/src/components/docs";
+import { CodeBlock } from "@site/src/components/docs";
+import { DiagramBlock } from "@site/src/components/docs";
 
 <SectionLevelOne id="protocol-overview" title="Protocol Overview">
   <ContentBlock>
@@ -52,7 +52,7 @@ import { DiagramBlock } from '@site/src/components/docs';
     - **Metadata**: Additional information for routing and processing
 
     <CodeBlock language="typescript">
-    {`interface CrossChainMessage {
+    {`interface CrossChainMessage {}}}
       sourceChainId: string;
       destinationChainId: string;
       nonce: bigint;
@@ -103,7 +103,7 @@ import { DiagramBlock } from '@site/src/components/docs';
     Developers interact with the protocol through several standardized interfaces:
 
     <CodeBlock language="typescript">
-    {`// Cross-chain transaction submission
+    {`// Cross-chain transaction submission}}
     function sendCrossChainTransaction(
       destinationChain: ChainId,
       target: Address,

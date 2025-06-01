@@ -42,12 +42,12 @@ This is my **first Docusaurus document**!
 It is also possible to create your sidebar explicitly in `sidebars.js`:
 
 ```js title="sidebars.js"
-export default {
+export default {}}
   tutorialSidebar: [
     'intro',
     // highlight-next-line
     'hello',
-    {
+    {}}
       type: 'category',
       label: 'Tutorial',
       items: ['tutorial-basics/create-a-document'],

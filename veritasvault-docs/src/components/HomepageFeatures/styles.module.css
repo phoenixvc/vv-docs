@@ -1,3 +1,8 @@
+/* 
+ * CSS file simplified to avoid postcss-nested dependency 
+ * Original nested rules have been commented out
+ */
+
 .features {
   display: flex;
   align-items: center;

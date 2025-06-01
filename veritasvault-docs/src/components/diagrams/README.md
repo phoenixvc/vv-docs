@@ -58,7 +58,7 @@ npm install docusaurus-diagrams
 Add the plugin to your `docusaurus.config.js`:
 
 \`\`\`javascript
-module.exports = {
+module.exports = {}
   // ... other config
   plugins: [
     // ... other plugins
@@ -70,13 +70,13 @@ module.exports = {
 ### Example Usage
 
 \`\`\`jsx
-import { MermaidDiagram, FlowDiagram, ArchitectureDiagram } from 'docusaurus-diagrams';
+import { MermaidDiagram, FlowDiagram, ArchitectureDiagram } from "docusaurus-diagrams";
 
 // Mermaid diagram example
-<MermaidDiagram
+<MermaidDiagram>
   id="simple-flowchart"
   title="Simple Flowchart"
-  definition={`
+  definition={`}
     graph TD
       A[Start] --> B{Is it working?}
       B -->|Yes| C[Great!]
@@ -86,35 +86,35 @@ import { MermaidDiagram, FlowDiagram, ArchitectureDiagram } from 'docusaurus-dia
 />
 
 // Flow diagram example
-<FlowDiagram
+<FlowDiagram>
   id="data-flow"
   title="Data Flow"
-  nodes={[
+  nodes={[}
     { id: '1', data: { label: 'Input' }, position: { x: 100, y: 100 } },
     { id: '2', data: { label: 'Process' }, position: { x: 300, y: 100 } },
     { id: '3', data: { label: 'Output' }, position: { x: 500, y: 100 } },
   ]}
-  edges={[
+  edges={[}
     { id: 'e1-2', source: '1', target: '2' },
     { id: 'e2-3', source: '2', target: '3' },
   ]}
 />
 
 // Architecture diagram example
-<ArchitectureDiagram
+<ArchitectureDiagram>
   id="system-architecture"
   title="System Architecture"
-  layers={[
+  layers={[}
     { id: 'frontend', label: 'Frontend', order: 1 },
     { id: 'backend', label: 'Backend', order: 2 },
     { id: 'data', label: 'Data Layer', order: 3 },
   ]}
-  components={[
+  components={[}
     { id: 'web', type: 'client', label: 'Web App', layer: 'frontend', position: { x: 100, y: 100 } },
     { id: 'api', type: 'service', label: 'API Service', layer: 'backend', position: { x: 100, y: 250 } },
     { id: 'db', type: 'database', label: 'Database', layer: 'data', position: { x: 100, y: 400 } },
   ]}
-  connections={[
+  connections={[}
     { id: 'conn1', source: 'web', target: 'api', arrow: 'both' },
     { id: 'conn2', source: 'api', target: 'db', arrow: 'both' },
   ]}

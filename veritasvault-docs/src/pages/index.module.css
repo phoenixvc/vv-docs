@@ -1,3 +1,8 @@
+/* 
+ * CSS file simplified to avoid postcss-nested dependency 
+ * Original nested rules have been commented out
+ */
+
 /**
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.

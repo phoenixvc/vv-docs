@@ -11,13 +11,13 @@ keywords:
   - indexing
 ---
 
-import { ContentBlock } from '@site/src/components/docs/ContentBlock';
-import { DiagramBlock } from '@site/src/components/docs/DiagramBlock';
-import { CodeExampleBlock } from '@site/src/components/docs/CodeExampleBlock';
-import { Admonition } from '@site/src/components/docs/Admonition';
-import { SectionLevelOne } from '@site/src/components/docs/SectionLevel';
-import { SectionLevelTwo } from '@site/src/components/docs/SectionLevel';
-import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
+import { ContentBlock } from "@site/src/components/docs/ContentBlock";
+import DiagramBlock from "@site/src/components/docs/DiagramBlock";
+import CodeExampleBlock from "@site/src/components/docs/CodeExampleBlock";
+import { Admonition } from "@site/src/components/docs/Admonition";
+import SectionLevelOne from "@site/src/components/docs/SectionLevelOne";
+import SectionLevelTwo from "@site/src/components/section-templates/section-level-two";
+import SectionLevelThree from "@site/src/components/section-templates/section-level-three";
 
 <SectionLevelOne id="introduction" title="Introduction">
   <ContentBlock>
@@ -40,7 +40,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="xml" title="Example sitemap.xml">
-      {`<?xml version="1.0" encoding="UTF-8"?>
+      {`<?xml version="1.0" encoding="UTF-8"?>}
+}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://example.com/docs/</loc>
@@ -73,7 +74,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="html" title="Proper Heading Structure">
-      {`<!-- Main topic of the page -->
+      {`<!-- Main topic of the page -->}
+}
 <h1>Multi-Chain Architecture</h1>
 
 <!-- Major section -->
@@ -99,7 +101,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="html" title="Adding a Unique Content Class">
-      {`<div class="main-content">
+      {`<div class="main-content">}
+}
   <h1>Getting Started</h1>
   <p>This guide will help you set up the system...</p>
   <!-- Rest of your documentation content -->
@@ -107,10 +110,12 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </CodeExampleBlock>
     
     <CodeExampleBlock language="json" title="DocSearch Configuration">
-      {`{
+      {`{}
+}}
   "index_name": "your_index_name",
   "start_urls": ["https://your-website.com/docs"],
-  "selectors": {
+  "selectors": {}
+}
     "lvl0": ".main-content h1",
     "lvl1": ".main-content h2",
     "lvl2": ".main-content h3",
@@ -131,7 +136,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="html" title="Adding Anchors to Headings">
-      {`<h2 id="installation">Installation</h2>
+      {`<h2 id="installation">Installation</h2>}
+}
 <h3 id="prerequisites">Prerequisites</h3>
 <h3 id="step-by-step">Step-by-Step Guide</h3>`}
     </CodeExampleBlock>
@@ -149,7 +155,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="html" title="Marking Active Navigation Items">
-      {`<nav>
+      {`<nav>}
+}
   <ul>
     <li><a href="/docs/intro">Introduction</a></li>
     <li><a href="/docs/setup" class="active">Setup Guide</a></li>
@@ -203,7 +210,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="html" title="Example Metadata">
-      {`<head>
+      {`<head>}
+}
   <title>Getting Started with Multi-Chain Architecture</title>
   <meta name="description" content="Learn how to set up and configure a multi-chain architecture for cross-chain communication and asset transfers." />
   <meta name="keywords" content="blockchain, multi-chain, architecture, cross-chain, integration" />
@@ -273,7 +281,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
     </ContentBlock>
     
     <CodeExampleBlock language="html" title="DocSearch Implementation">
-      {`<!-- Add DocSearch CSS -->
+      {`<!-- Add DocSearch CSS -->}
+}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
 
 <!-- Add DocSearch JS -->
@@ -281,7 +290,8 @@ import { SectionLevelThree } from '@site/src/components/docs/SectionLevel';
 
 <!-- Initialize DocSearch -->
 <script>
-  docsearch({
+  docsearch({}
+}
     container: '#docsearch',
     appId: 'YOUR_APP_ID',
     indexName: 'YOUR_INDEX_NAME',

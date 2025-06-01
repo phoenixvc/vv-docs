@@ -132,7 +132,7 @@ This style guide establishes standards for creating and maintaining documentatio
 function calculateTokenValue(
   basePrice: number, 
   marketFactor: number
-): number {
+): number {}}
   // Apply market adjustment factor to base price
   const adjustedValue = basePrice * marketFactor;
   
