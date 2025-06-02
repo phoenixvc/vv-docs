@@ -5,6 +5,7 @@
   "scripts": {
     "start": "docusaurus start veritasvault-docs",
     "build": "docusaurus build veritasvault-docs",
+    "build:prod": "node veritasvault-docs/build-production.js",
     "swizzle": "docusaurus swizzle veritasvault-docs",
     "deploy": "docusaurus deploy veritasvault-docs",
     "clear": "docusaurus clear veritasvault-docs",

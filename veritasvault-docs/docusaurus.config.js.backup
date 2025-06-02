@@ -21,8 +21,8 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
-  onBrokenLinks: 'ignore', // Changed from 'warn' to 'ignore' to allow builds with broken links
-  onBrokenMarkdownLinks: 'ignore', // Also changed to 'ignore' for consistency
+  onBrokenLinks: 'warn', // Changed from 'throw' to 'warn'
+  onBrokenMarkdownLinks: 'warn', 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -44,12 +44,6 @@ const config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/', 
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
-          // Disable versioning
-          disableVersioning: true,
-          // Don't include version dropdown
-          includeCurrentVersion: true,
-          // Don't create a separate versions page
-          includeVersionsInPath: false,
         }, 
         blog: { 
           showReadingTime: true, 
@@ -89,7 +83,6 @@ const config = {
             label: 'GitHub', 
             position: 'right', 
           }, 
-          // Remove version dropdown from navbar
         ], 
       }, 
       footer: { 

@@ -37,16 +37,16 @@ Based on the analysis of the existing documentation structure, we've organized c
 
 ### 2.1 Main Sidebar Structure
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js sidebar structure
-{}}
+{
   docs: [
-    {}}
+    {
       type: 'category',
       label: 'Getting Started',
       items: ['introduction', 'key-benefits', 'executive-summary', 'protocol-overview'],
     },
-    {}}
+    {
       type: 'category',
       label: 'Architecture',
       items: [
@@ -56,12 +56,12 @@ Based on the analysis of the existing documentation structure, we've organized c
         'architecture/comparison',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Finance Models',
       items: [
         'finance/overview',
-        {}}
+        {
           type: 'category',
           label: 'Portfolio Optimization',
           items: [
@@ -70,19 +70,19 @@ Based on the analysis of the existing documentation structure, we've organized c
             'finance/portfolio/black-litterman',
           ],
         },
-        {}}
+        {
           type: 'category',
           label: 'Yield Strategies',
           items: ['finance/yield/defi-optimization'],
         },
-        {}}
+        {
           type: 'category',
           label: 'AI Models',
           items: ['finance/ai/neural-networks'],
         },
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Technical Infrastructure',
       items: [
@@ -91,12 +91,12 @@ Based on the analysis of the existing documentation structure, we've organized c
         'technical/api-infrastructure',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Tokenomics',
       items: [
         'tokenomics/overview',
-        {}}
+        {
           type: 'category',
           label: 'Token Model',
           items: [
@@ -104,12 +104,12 @@ Based on the analysis of the existing documentation structure, we've organized c
             'tokenomics/model/vesting',
           ],
         },
-        {}}
+        {
           type: 'category',
           label: 'Token Utility',
           items: ['tokenomics/utility/diagram'],
         },
-        {}}
+        {
           type: 'category',
           label: 'Token Economics',
           items: [
@@ -122,12 +122,12 @@ Based on the analysis of the existing documentation structure, we've organized c
         'tokenomics/comparison',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Security',
       items: [
         'security/architecture',
-        {}}
+        {
           type: 'category',
           label: 'Security Model',
           items: [
@@ -138,13 +138,13 @@ Based on the analysis of the existing documentation structure, we've organized c
         'security/audit-framework',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Integrations',
       items: [
         'integrations/benefits',
         'integrations/comparison',
-        {}}
+        {
           type: 'category',
           label: 'Data Providers',
           items: [
@@ -157,7 +157,7 @@ Based on the analysis of the existing documentation structure, we've organized c
         'integrations/risk-management',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Governance Framework',
       items: [
@@ -166,7 +166,7 @@ Based on the analysis of the existing documentation structure, we've organized c
         'governance/communication',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Gaming Technologies',
       items: [
@@ -175,7 +175,7 @@ Based on the analysis of the existing documentation structure, we've organized c
         'gaming/technologies',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Implementation Roadmap',
       items: [
@@ -184,7 +184,7 @@ Based on the analysis of the existing documentation structure, we've organized c
         'roadmap/phase-3',
       ],
     },
-    {}}
+    {
       type: 'category',
       label: 'Contributing',
       items: [
@@ -197,7 +197,7 @@ Based on the analysis of the existing documentation structure, we've organized c
     },
   ],
 }
-\`\`\`
+```
 
 ### 2.2 Navigation Principles
 
@@ -213,9 +213,9 @@ Based on the analysis of the existing documentation structure, we've organized c
 
 The URL pattern for Docusaurus will follow this structure:
 
-\`\`\`
+```
 /docs/[category]/[subcategory]/[document]
-\`\`\`
+```
 
 Examples:
 - `/docs/architecture/overview`
@@ -265,34 +265,32 @@ Examples:
 
 ### 3.3 Redirect Configuration
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js redirects
-{}}
+{
   redirects: [
-    {}}
+    {
       from: '/project-overview-section',
       to: '/docs/introduction',
     },
-    {}}
+    {
       from: '/key-benefits-section',
       to: '/docs/key-benefits',
     },
-    {}}
+    {
       from: '/architecture/architecture-section',
       to: '/docs/architecture/overview',
     },
     // ... additional redirects as per the mapping table
   ],
 }
-\`\`\`
+```
 
 ## 4. Document Structure
 
 ### 4.1 Standard Document Template
 
-Each document should follow this standard structure:
-
-\`\`\`md
+```md
 ---
 id: [document-id]
 title: [Document Title]
@@ -317,13 +315,11 @@ Content for section 2.
 
 - [Related Document 1](/docs/path/to/related-doc-1)
 - [Related Document 2](/docs/path/to/related-doc-2)
-\`\`\`
+```
 
 ### 4.2 Hub Page Template
 
-Hub pages (category overview pages) should follow this structure:
-
-\`\`\`md
+```md
 ---
 id: [category-id]
 title: [Category Title] Overview
@@ -358,7 +354,7 @@ Brief explanation of key concepts in this category.
 ## Getting Started
 
 Guidance on where to begin in this category.
-\`\`\`
+```
 
 ## 5. Cross-Reference Strategy
 
@@ -366,9 +362,10 @@ Guidance on where to begin in this category.
 
 Use Docusaurus's built-in linking syntax for cross-references:
 
-\`\`\`md
-[Link to another document](../category/document-id.md)
-\`\`\`
+```md
+<!-- Example of linking to another document (this is just a demonstration, not an actual link) -->
+[Link to another document](./relative-path-to-doc.md)
+```
 
 ### 5.2 Related Content
 
@@ -378,15 +375,15 @@ For each document, maintain the "Related Documents" section to preserve the cros
 
 Configure the next/previous navigation to follow the logical reading order:
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js
-{}}
-  docs: {}}
+{
+  docs: {
     // ...
     nextPrevious: true,
   },
 }
-\`\`\`
+```
 
 ## 6. Component Migration
 
@@ -406,7 +403,7 @@ Create MDX versions of the most commonly reused components:
 
 ### 6.2 Component Library Structure
 
-\`\`\`
+```
 /src
   /components
     /ui
@@ -422,7 +419,7 @@ Create MDX versions of the most commonly reused components:
     /layout
       SectionHeader.js
       RelatedContent.js
-\`\`\`
+```
 
 ## 7. Implementation Plan
 
@@ -453,48 +450,48 @@ Create MDX versions of the most commonly reused components:
 
 If your documentation requires versioning:
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js
-{}}
-  docs: {}}
+{
+  docs: {
     // ...
-    versions: {}}
-      current: {}}
+    versions: {
+      current: {
         label: 'Current',
         path: '',
       },
-      '1.0.0': {}}
+      '1.0.0': {
         label: '1.0.0',
         path: '1.0.0',
       },
     },
   },
 }
-\`\`\`
+```
 
 ### 8.2 Multi-Language Support
 
 If internationalization is required:
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js
-{}}
-  i18n: {}}
+{
+  i18n: {
     defaultLocale: 'en',
     locales: ['en', 'fr', 'es'],
   },
 }
-\`\`\`
+```
 
 ### 8.3 Search Implementation
 
 Implement Algolia DocSearch for optimal search functionality:
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js
-{}}
-  themeConfig: {}}
-    algolia: {}}
+{
+  themeConfig: {
+    algolia: {
       appId: 'YOUR_APP_ID',
       apiKey: 'YOUR_API_KEY',
       indexName: 'YOUR_INDEX_NAME',
@@ -502,22 +499,22 @@ Implement Algolia DocSearch for optimal search functionality:
     },
   },
 }
-\`\`\`
+```
 
 ### 8.4 Analytics Integration
 
 Add Google Analytics or other analytics:
 
-\`\`\`javascript
+```javascript
 // docusaurus.config.js
-{}}
-  themeConfig: {}}
-    googleAnalytics: {}}
+{
+  themeConfig: {
+    googleAnalytics: {
       trackingID: 'UA-XXXXXXXXX-X',
     },
   },
 }
-\`\`\`
+```
 
 ## 9. Migration Checklist
 
@@ -536,4 +533,3 @@ Add Google Analytics or other analytics:
 - [ ] Test interactive components
 - [ ] Optimize for SEO
 - [ ] Perform final review
-\n
