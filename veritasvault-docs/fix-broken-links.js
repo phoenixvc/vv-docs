@@ -19,7 +19,13 @@ const fixLinksInFile = (filePath) => {
   console.log(`Processing ${filePath}...`);
   
   // Read the file content
-  let content = fs.readFileSync(filePath, 'utf8');
+  let content;
+  try {
+    content = fs.readFileSync(filePath, 'utf8');
+  } catch (err) {
+    console.error(`Error reading ${filePath}:`, err);
+    return false;
+  }
   
   // Check if there are any links to fix and replace them
   const originalContent = content;
