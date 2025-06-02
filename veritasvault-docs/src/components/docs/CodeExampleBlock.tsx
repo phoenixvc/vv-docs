@@ -1,38 +1,23 @@
-import React, { JSX, ReactNode } from 'react';
-import CodeBlock from '@theme/CodeBlock';
+import React, { ReactNode } from 'react';
 
 interface CodeExampleBlockProps {
-  title?: string;
+  children: ReactNode;
   language?: string;
-  children: string;
-  showLineNumbers?: boolean;
-  highlight?: string;
-  caption?: string;
+  title?: string;
 }
 
-/**
- * Enhanced code block with title, caption and highlighting
- */
-export default function CodeExampleBlock({
-  title,
-  language = 'typescript',
-  children,
-  showLineNumbers = false,
-  highlight,
-  caption,
-}: CodeExampleBlockProps): JSX.Element {
+export const CodeExampleBlock = ({ 
+  children, 
+  language = "text", 
+  title = "" 
+}: CodeExampleBlockProps) => {
   return (
     <div className="code-example-block">
-      {title && <h4 className="code-example-title">{title}</h4>}
-      <CodeBlock
-        language={language}
-        title={title}
-        showLineNumbers={showLineNumbers}
-        metastring={highlight ? `{${highlight}}` : ''}
-      >
-        {children}
-      </CodeBlock>
-      {caption && <p className="code-example-caption">{caption}</p>}
+      {title && <div className="code-example-title">{title}</div>}
+      <pre className={`language-${language}`}>
+        <code>{children}</code>
+      </pre>
     </div>
   );
-}
+};
+export default CodeExampleBlock;

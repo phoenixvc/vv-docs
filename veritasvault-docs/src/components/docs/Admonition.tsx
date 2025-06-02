@@ -1,16 +1,21 @@
 import React, { ReactNode } from 'react';
-import OriginalAdmonition from '@theme/Admonition';
 
 interface AdmonitionProps {
-  type: 'note' | 'tip' | 'info' | 'caution' | 'danger';
+  type?: "note" | "tip" | "info" | "warning" | "danger";
   title?: string;
   children: ReactNode;
 }
 
-export const Admonition = ({ type, title, children }: AdmonitionProps) => {
+export const Admonition = ({ 
+  type = "note", 
+  title, 
+  children 
+}: AdmonitionProps) => {
   return (
-    <OriginalAdmonition type={type} title={title}>
-      {children}
-    </OriginalAdmonition>
+    <div className={`admonition admonition-${type}`}>
+      {title && <div className="admonition-title">{title}</div>}
+      <div className="admonition-content">{children}</div>
+    </div>
   );
 };
+export default Admonition;
