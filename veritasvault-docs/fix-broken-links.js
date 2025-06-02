@@ -21,11 +21,15 @@ const fixLinksInFile = (filePath) => {
   // Read the file content
   let content = fs.readFileSync(filePath, 'utf8');
   
-  // Check if there are any links to fix
-  if (linkPattern.test(content)) {
-    // Reset the regex lastIndex
-    linkPattern.lastIndex = 0;
-    
+  // Check if there are any links to fix and replace them
+  const originalContent = content;
+  content = content.replace(linkPattern, (match, linkText, linkPath) => {
+    console.log(`  Fixing link: ${match} -> [${linkText}](/docs/architecture/${linkPath})`);
+    return `[${linkText}](/docs/architecture/${linkPath})`;
+  });
+  
+  // Only consider it fixed if content actually changed
+  if (content !== originalContent) {
     // Replace all instances of the pattern
     content = content.replace(linkPattern, (match, linkText, linkPath) => {
       console.log(`  Fixing link: ${match} -> [${linkText}](/docs/architecture/${linkPath})`);
