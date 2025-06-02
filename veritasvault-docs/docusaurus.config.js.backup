@@ -1,6 +1,6 @@
 // Minimal docusaurus.config.js 
 // @ts-check 
-const path = require('path'); // Need to add this for path.resolve
+import path from 'path';
 import { themes as prismThemes } from 'prism-react-renderer';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
