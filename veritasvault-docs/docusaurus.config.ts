@@ -17,7 +17,7 @@ const config: Config = {
   // Set the production url of your site here
   url: "https://your-docusaurus-site.com",
   baseUrl: "/",
-  
+
   // GitHub pages deployment config
   organizationName: "VeritasVault",
   projectName: "veritasvault-docs",
@@ -73,7 +73,7 @@ const config: Config = {
           position: "left",
           items: [
             {
-              to: "/docs/whitepaper/overview",
+              to: "/docs/overview",
               label: "Overview",
             },
             {
@@ -89,11 +89,11 @@ const config: Config = {
               label: "Security",
             },
             {
-              to: "/docs/finance-models",
+              to: "/docs/finmodels/finmodelling-overview",
               label: "Finance Models",
             },
             {
-              to: "/docs/integrations",
+              to: "/docs/integrations/data",
               label: "Integrations",
             },
           ],
@@ -105,21 +105,15 @@ const config: Config = {
           position: "left",
         },
         {
-          to: "/docs/chain-services",
+          to: "/docs/chain-services/overview",
           label: "Chain Services",
           position: "left",
         },
         // Blog
-        { 
-          to: "/blog", 
-          label: "Blog", 
-          position: "left" 
-        },
-        // Version control
         {
-          to: "/docs/versions",
-          label: "Versions",
-          position: "right",
+          to: "/blog",
+          label: "Blog",
+          position: "left"
         },
         // GitHub link
         {
@@ -198,7 +192,7 @@ const config: Config = {
   // Add static directory configuration
   staticDirectories: ["static"],
 
- // Add plugins
+  // Add plugins
   plugins: [
     // Your existing plugins
     function tailwindPlugin(context, options) {
@@ -222,7 +216,7 @@ const config: Config = {
 
 
 
-    // This is a more direct approach to disable webpack caching
+  // This is a more direct approach to disable webpack caching
 
   // Use the jsLoader option directly (this is supported in the type definitions)
   // webpack: {
