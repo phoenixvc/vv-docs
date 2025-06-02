@@ -34,3 +34,6 @@ export function SectionAnchor({ id, className }: SectionAnchorProps) {
     </a>
   )
 }
+
+// Add a default export that points to the named export
+export default SectionAnchor;

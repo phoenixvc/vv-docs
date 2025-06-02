@@ -2,18 +2,32 @@ import React from 'react';
 
 interface SectionAnchorProps {
   id: string;
-  title?: string;
+  className?: string;
 }
 
-/**
- * Creates an anchor point for section links with optional tooltip
- */
-export default function SectionAnchor({ id, title }: SectionAnchorProps) {
+export function SectionAnchor({ id, className = '' }: SectionAnchorProps) {
   return (
-    <span id={id} className="section-anchor" title={title || `Link to this section: #${id}`}>
-      <a href={`#${id}`} className="section-anchor-link">
-        #
-      </a>
-    </span>
+    <a
+      href={`#${id}`}
+      className={`ml-2 opacity-0 group-hover:opacity-100 transition-opacity ${className}`}
+      aria-label={`Link to ${id} section`}
+      onClick={(e) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+          // Update URL without triggering navigation
+          history.pushState({}, "", `#${id}`);
+          // Scroll to element with offset for header
+          const yOffset = -80;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }}
+    >
+      <span className="inline-block w-4 h-4">🔗</span>
+    </a>
   );
 }
+
+// Export the function as default export as well
+export default SectionAnchor;

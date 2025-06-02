@@ -67,4 +67,5 @@ export const DiagramBlock: React.FC<DiagramBlockProps> = ({
   )
 }
 
-export default DiagramBlock
+// Export the component as default as well
+export default DiagramBlock;

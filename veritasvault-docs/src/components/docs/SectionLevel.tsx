@@ -1,4 +1,4 @@
-import React, { JSX, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 interface SectionLevelProps {
   id: string;
@@ -11,23 +11,39 @@ interface SectionLevelProps {
 /**
  * Section level component for document structure
  */
-export default function SectionLevel({
+export const SectionLevel = ({
   id,
   title,
   level = 2,
   children,
   className = '',
-}: SectionLevelProps): JSX.Element {
-  const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
+}: SectionLevelProps) => {
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   
   return (
     <section id={id} className={`section-level section-level-${level} ${className}`}>
-      <HeadingTag>
-        <a href={`#${id}`} className="section-anchor">
+      <Tag>
           {title}
+        <a href={`#${id}`} className="section-anchor ml-2 opacity-0 group-hover:opacity-100">
+          <span className="inline-block w-4 h-4">🔗</span>
         </a>
-      </HeadingTag>
+      </Tag>
       <div className="section-content">{children}</div>
     </section>
   );
+};
+// Export SectionLevel levels as separate named exports
+export function SectionLevelOne(props: Omit<SectionLevelProps, 'level'>) {
+  return SectionLevel({ ...props, level: 1 });
 }
+
+export function SectionLevelTwo(props: Omit<SectionLevelProps, 'level'>) {
+  return SectionLevel({ ...props, level: 2 });
+}
+
+export function SectionLevelThree(props: Omit<SectionLevelProps, 'level'>) {
+  return SectionLevel({ ...props, level: 3 });
+}
+
+// Export default
+export default SectionLevel;
