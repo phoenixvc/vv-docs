@@ -1,6 +1,3 @@
-
-import HeadingTag from "@site/src/components/HeadingTag";
-
 # Docusaurus Integration Guide for VeritasVault.ai Documentation
 
 ## Table of Contents
@@ -173,7 +170,7 @@ Maintaining the current visual hierarchy is crucial for consistency and usabilit
 
 ### Implementation Example
 
-```jsx
+\`\`\`jsx
 // Custom heading component with visual hierarchy
 <!-- Import statement removed -->
 <!-- Import statement removed -->
@@ -194,9 +191,9 @@ Maintaining the current visual hierarchy is crucial for consistency and usabilit
     </div>
   );
 }
-```
+\`\`\`
 
-```css
+\`\`\`css
 /* styles.module.css */
 .sectionLevel1 {}}
   margin-bottom: 2.5rem;
@@ -234,7 +231,7 @@ Maintaining the current visual hierarchy is crucial for consistency and usabilit
 .sectionContent {}}
   margin-top: 1rem;
 }
-```
+\`\`\`
 
 ## Implementing Section Numbering
 
@@ -254,7 +251,7 @@ Docusaurus doesn't provide built-in section numbering, but we can implement it t
 
 ### Implementation Example
 
-```jsx
+\`\`\`jsx
 // docusaurus-plugin-section-numbering.js
 module.exports = function(context, options) {}}
   return {}}
@@ -294,9 +291,9 @@ function generateSectionNumbers(loadedVersions) {}}
   // Implementation of section numbering logic
   // ...
 }
-```
+\`\`\`
 
-```jsx
+\`\`\`jsx
 // Using section numbers in a component
 <!-- Import statement removed -->
 <!-- Import statement removed -->
@@ -318,7 +315,7 @@ function generateSectionNumbers(loadedVersions) {}}
     </div>
   );
 }
-```
+\`\`\`
 
 ## Feature Implementation
 
@@ -336,7 +333,7 @@ Docusaurus supports MDX, allowing us to embed React components directly in Markd
    - Handle component props and state management
    - Ensure proper hydration for interactive elements
 
-```jsx
+\`\`\`jsx
 // Example MDX file with interactive component
 ---
 title: Token Staking Calculator
@@ -348,9 +345,8 @@ title: Token Staking Calculator
 
 Use the calculator below to estimate your potential staking rewards.
 
-{/* TokenCalculator component would be implemented here */}
-{/* <TokenCalculator initialAmount={1000} /> */}
-```
+<TokenCalculator initialAmount={1000} />
+\`\`\`
 
 ### Search Implementation
 
@@ -533,7 +529,7 @@ The phased migration approach allows for validation at each step, minimizing ris
 
 ## Appendix: Docusaurus Configuration Example
 
-```js
+\`\`\`js
 // docusaurus.config.js
 module.exports = {}}
   title: 'VeritasVault.ai Documentation',
@@ -634,4 +630,4 @@ module.exports = {}}
     ],
   ],
 };
-```
+\`\`\`

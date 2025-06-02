@@ -19,13 +19,21 @@ jobs:
         with:
           submodules: true
       
-      # Build Docusaurus site
+      # Build custom docs site
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name: Build Custom Docs
+        run: |
+          cd custom-docs
+          npm install
+          npm run build
+      
+      # Build Docusaurus site
       - name: Build Docusaurus
         run: |
+          cd docusaurus-site
           npm install
           npm run build
       

@@ -1,7 +1,3 @@
-import SectionLevelOne from "@site/src/components/section-templates/section-level-one";
-import { SectionLevelTwo } from "@site/src/components/section-templates/section-level-two";
-import { SectionLevelThree } from "@site/src/components/section-templates/section-level-three";
-
 # Visual Hierarchy Requirements
 
 ## Introduction

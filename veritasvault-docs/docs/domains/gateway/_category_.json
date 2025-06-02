@@ -1,8 +1,0 @@
-{
-  "label": "Gateway",
-  "position": 7,
-  "link": {
-    "type": "generated-index",
-    "description": "Integration gateway and external API management."
-  }
-}

@@ -52,5 +52,8 @@ export function SectionLevelOne({
   )
 }
 
+// Named export for import in MDX files
+export { SectionLevelOne }
+
 // Default export for import in other components
 export default SectionLevelOne

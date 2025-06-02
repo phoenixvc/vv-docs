@@ -66,28 +66,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'finmodels/finmodelling-overview', 
         'finmodels/finmodelling-first-phase',
-
         'finance/index',
         'finance/monte-carlo/monte-carlo-simulation',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Domain Documentation',
-      items: [
-        'domains/README',
-        'domains/architecture',
-        'domains/security',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Migration Guides',
-      items: [
-        'migration/docusaurus/docsaurus-integration-guide',
-        'migration/visual-hierarchy-requirements',
-        'migration/template-usage-guidelines',
-        'migration/style-guide',
       ],
     },
     {
