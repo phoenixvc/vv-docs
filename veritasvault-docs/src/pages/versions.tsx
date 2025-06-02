@@ -2,7 +2,7 @@ import Layout from "@theme/Layout"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 
 function VersionsPage() {
-  const { siteConfig } = useDocusaurusContext()
+  const {} = useDocusaurusContext()
 
   return (
     <Layout title="Documentation Versions" description="Veritas Vault Documentation Versions">
