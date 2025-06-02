@@ -2,7 +2,7 @@
   "routes": [
     {
       "route": "/*",
-      "serve": "/veritasvault-docs/build/*"
+      "serve": "/*"
     }
   ],
   "navigationFallback": {
