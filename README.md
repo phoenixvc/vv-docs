@@ -8,10 +8,14 @@ Welcome to the official documentation repository for the VeritasVault.ai platfor
 
 This repository contains the source for our documentation portal built with Docusaurus, as well as our interactive demo documentation application. It aggregates and organizes documentation across all VeritasVault repositories:
 
-- [vv-chain-services](https://github.com/veritasvault/vv-chain-services) - Blockchain integration and event processing services
-- [vv-infra](https://github.com/veritasvault/vv-infra) - Infrastructure as Code and deployment configurations
-- [vv-gamification](https://github.com/veritasvault/vv-gamification) - Engagement and gamification systems
-- [vv-frontend](https://github.com/veritasvault/vv-frontend) - User interface and experience components
+- [vv-chain-services](https://github.com/phoenixvc/vv-chain-services) - Blockchain integration, Event processing, ML models
+- [vv-iac](https://github.com/phoenixvc/vv-iac) - Infrastructure as Code and deployment configurations
+- [vv-gamification](https://github.com/phoenixvc/vv-gamification) - Engagement and gamification systems
+- [vv-frontend](https://github.com/phoenixvc/vv-frontend) - User interface and experience components
+- [vv](https://github.com/phoenixvc/vv) - Domain, Core, Infrastructure, Application, Api layers
+- [vv-chain](https://github.com/phoenixvc/vv-chain) - Smart cotracts
+- [vv-dev-tools](https://github.com/phoenixvc/vv-dev-tools) - Dev tools and scripts
+- [cognitive-mesh](https://github.com/phoenixvc/cognitive-mesh) - Agentic AI swarm
 
 ## 📚 Documentation Structure
 
