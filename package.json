@@ -15,7 +15,7 @@
     "typecheck": "tsc -p veritasvault-docs/tsconfig.json"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.0",
+    "@docusaurus/core": "^3.8.1",
     "@docusaurus/plugin-ideal-image": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
     "@docusaurus/theme-mermaid": "^3.8.0",
